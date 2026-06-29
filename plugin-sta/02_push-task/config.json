@@ -1,0 +1,12 @@
+[
+  {
+    "name": "STA数据集模拟发送",
+    "description": "基于深信服STA（基于流量监测的威胁探针）对外推送的数据集定义，实现模拟发送，默认每隔一分钟随机选择一条数据发送到kafka队列中。",
+    "config": "sta-dataset.toml"
+  },
+  {
+    "name": "STA日志入库",
+    "description": "接收深信服STA（基于流量监测的威胁探针）上报的数据，经过数据处理后入库。",
+    "config": "sta-import.toml"
+  }
+]

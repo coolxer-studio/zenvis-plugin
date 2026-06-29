@@ -1,0 +1,754 @@
+# 输入源配置
+[sources.source_kafka_msg]
+type = "kafka"
+bootstrap_servers = "kafka-service:9092"
+auto_offset_reset = "earliest"
+group_id = "kafka_source"
+topics = [ "sta-log" ]
+
+[transforms.parse_json]
+type = "remap"
+inputs = ["source_kafka_msg"]
+drop_on_error = false
+source = '''
+. = parse_json!(.message)
+.insert_time = format_timestamp!(now(), format: "%Y-%m-%d %H:%M:%S")
+'''
+
+[transforms.parse_key_downcase]
+type = "remap"
+inputs = ["parse_json"]
+drop_on_error = false
+source = '''
+. = map_keys(.) -> |k| { downcase(k) }
+if .logtype == "utm" {
+  .level = .nlevel
+  del(.nlevel)
+}
+'''
+
+[transforms.logtype_route]
+type = "route"
+inputs = [ "parse_key_downcase" ]
+  [transforms.logtype_route.route]
+  netflow = '.logtype == "netflow"'
+  ip_stat = '.logtype == "ip_stat"'
+  tcp_flow = '.logtype == "tcp_flow"'
+  udp_flow = '.logtype == "udp_flow"'
+  arp = '.logtype == "arp"'
+  db2 = '.logtype == "db2"'
+  dce_rpc = '.logtype == "dce_rpc"'
+  dhcp = '.logtype == "dhcp"'
+  dns_request = '.logtype == "dns_request"'
+  dns_response = '.logtype == "dns_response"'
+  ftp = '.logtype == "ftp"'
+  ftp_file = '.logtype == "ftp_file"'
+  ftp_login = '.logtype == "ftp_login"'
+  http_file = '.logtype == "http_file"'
+  http_login = '.logtype == "http_login"'
+  http_session = '.logtype == "http_session"'
+  icmp = '.logtype == "icmp"'
+  imap = '.logtype == "imap"'
+  imap_file = '.logtype == "imap_file"'
+  imap_login = '.logtype == "imap_login"'
+  kerberos = '.logtype == "kerberos"'
+  ldap = '.logtype == "ldap"'
+  mysql = '.logtype == "mysql"'
+  mysql_login = '.logtype == "mysql_login"'
+  netbios_nbns = '.logtype == "netbios_nbns"'
+  nfs = '.logtype == "nfs"'
+  onvif = '.logtype == "onvif"'
+  oracle = '.logtype == "oracle"'
+  oracle_login = '.logtype == "oracle_login"'
+  pop3 = '.logtype == "pop3"'
+  pop3_file = '.logtype == "pop3_file"'
+  pop3_login = '.logtype == "pop3_login"'
+  radius = '.logtype == "radius"'
+  rdp = '.logtype == "rdp"'
+  rdp_burst = '.logtype == "rdp_burst"'
+  sip = '.logtype == "sip"'
+  smb = '.logtype == "smb"'
+  smb_file = '.logtype == "smb_file"'
+  smb_login = '.logtype == "smb_login"'
+  smtp = '.logtype == "smtp"'
+  smtp_file = '.logtype == "smtp_file"'
+  smtp_login = '.logtype == "smtp_login"'
+  snmp = '.logtype == "snmp"'
+  sql_server = '.logtype == "sql_server"'
+  ssh = '.logtype == "ssh"'
+  ssl = '.logtype == "ssl"'
+  sybase = '.logtype == "sybase"'
+  sybase_login = '.logtype == "sybase_login"'
+  telnet = '.logtype == "telnet"'
+  telnet_login = '.logtype == "telnet_login"'
+  telnet_option = '.logtype == "telnet_option"'
+  waf = '.logtype == "waf"'
+  ips = '.logtype == "ips"'
+  utm = '.logtype == "utm"'
+  pvs = '.logtype == "pvs"'
+
+# 输出目标配置netflow
+[sinks.my_clickhouse_sink_netflow]
+type = "clickhouse"
+inputs = ["logtype_route.netflow"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_netflow"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置ip_stat
+[sinks.my_clickhouse_sink_ip_stat]
+type = "clickhouse"
+inputs = ["logtype_route.ip_stat"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_ip_stat"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置tcp_flow
+[sinks.my_clickhouse_sink_tcp_flow]
+type = "clickhouse"
+inputs = ["logtype_route.tcp_flow"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_tcp_flow"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置udp_flow
+[sinks.my_clickhouse_sink_udp_flow]
+type = "clickhouse"
+inputs = ["logtype_route.udp_flow"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_udp_flow"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置arp
+[sinks.my_clickhouse_sink_arp]
+type = "clickhouse"
+inputs = ["logtype_route.arp"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_arp"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置db2
+[sinks.my_clickhouse_sink_db2]
+type = "clickhouse"
+inputs = ["logtype_route.db2"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_db2"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置dce_rpc
+[sinks.my_clickhouse_sink_dce_rpc]
+type = "clickhouse"
+inputs = ["logtype_route.dce_rpc"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_dce_rpc"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置dhcp
+[sinks.my_clickhouse_sink_dhcp]
+type = "clickhouse"
+inputs = ["logtype_route.dhcp"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_dhcp"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置dns_request
+[sinks.my_clickhouse_sink_dns_request]
+type = "clickhouse"
+inputs = ["logtype_route.dns_request"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_dns_request"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置dns_response
+[sinks.my_clickhouse_sink_dns_response]
+type = "clickhouse"
+inputs = ["logtype_route.dns_response"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_dns_response"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置ftp
+[sinks.my_clickhouse_sink_ftp]
+type = "clickhouse"
+inputs = ["logtype_route.ftp"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_ftp"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置ftp_file
+[sinks.my_clickhouse_sink_ftp_file]
+type = "clickhouse"
+inputs = ["logtype_route.ftp_file"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_ftp_file"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置ftp_login
+[sinks.my_clickhouse_sink_ftp_login]
+type = "clickhouse"
+inputs = ["logtype_route.ftp_login"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_ftp_login"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置http_file
+[sinks.my_clickhouse_sink_http_file]
+type = "clickhouse"
+inputs = ["logtype_route.http_file"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_http_file"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置http_login
+[sinks.my_clickhouse_sink_http_login]
+type = "clickhouse"
+inputs = ["logtype_route.http_login"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_http_login"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置http_session
+[sinks.my_clickhouse_sink_http_session]
+type = "clickhouse"
+inputs = ["logtype_route.http_session"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_http_session"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置icmp
+[sinks.my_clickhouse_sink_icmp]
+type = "clickhouse"
+inputs = ["logtype_route.icmp"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_icmp"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置imap
+[sinks.my_clickhouse_sink_imap]
+type = "clickhouse"
+inputs = ["logtype_route.imap"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_imap"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置imap_file
+[sinks.my_clickhouse_sink_imap_file]
+type = "clickhouse"
+inputs = ["logtype_route.imap_file"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_imap_file"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置imap_login
+[sinks.my_clickhouse_sink_imap_login]
+type = "clickhouse"
+inputs = ["logtype_route.imap_login"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_imap_login"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置kerberos
+[sinks.my_clickhouse_sink_kerberos]
+type = "clickhouse"
+inputs = ["logtype_route.kerberos"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_kerberos"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置ldap
+[sinks.my_clickhouse_sink_ldap]
+type = "clickhouse"
+inputs = ["logtype_route.ldap"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_ldap"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置mysql
+[sinks.my_clickhouse_sink_mysql]
+type = "clickhouse"
+inputs = ["logtype_route.mysql"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_mysql"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置mysql_login
+[sinks.my_clickhouse_sink_mysql_login]
+type = "clickhouse"
+inputs = ["logtype_route.mysql_login"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_mysql_login"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置netbios_nbns
+[sinks.my_clickhouse_sink_netbios_nbns]
+type = "clickhouse"
+inputs = ["logtype_route.netbios_nbns"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_netbios_nbns"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置nfs
+[sinks.my_clickhouse_sink_nfs]
+type = "clickhouse"
+inputs = ["logtype_route.nfs"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_nfs"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置onvif
+[sinks.my_clickhouse_sink_onvif]
+type = "clickhouse"
+inputs = ["logtype_route.onvif"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_onvif"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置oracle
+[sinks.my_clickhouse_sink_oracle]
+type = "clickhouse"
+inputs = ["logtype_route.oracle"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_oracle"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置oracle_login
+[sinks.my_clickhouse_sink_oracle_login]
+type = "clickhouse"
+inputs = ["logtype_route.oracle_login"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_oracle_login"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置pop3
+[sinks.my_clickhouse_sink_pop3]
+type = "clickhouse"
+inputs = ["logtype_route.pop3"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_pop3"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置pop3_file
+[sinks.my_clickhouse_sink_pop3_file]
+type = "clickhouse"
+inputs = ["logtype_route.pop3_file"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_pop3_file"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置pop3_login
+[sinks.my_clickhouse_sink_pop3_login]
+type = "clickhouse"
+inputs = ["logtype_route.pop3_login"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_pop3_login"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置radius
+[sinks.my_clickhouse_sink_radius]
+type = "clickhouse"
+inputs = ["logtype_route.radius"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_radius"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置rdp
+[sinks.my_clickhouse_sink_rdp]
+type = "clickhouse"
+inputs = ["logtype_route.rdp"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_rdp"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置rdp_burst
+[sinks.my_clickhouse_sink_rdp_burst]
+type = "clickhouse"
+inputs = ["logtype_route.rdp_burst"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_rdp_burst"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置sip
+[sinks.my_clickhouse_sink_sip]
+type = "clickhouse"
+inputs = ["logtype_route.sip"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_sip"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置smb
+[sinks.my_clickhouse_sink_smb]
+type = "clickhouse"
+inputs = ["logtype_route.smb"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_smb"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置smb_file
+[sinks.my_clickhouse_sink_smb_file]
+type = "clickhouse"
+inputs = ["logtype_route.smb_file"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_smb_file"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置smb_login
+[sinks.my_clickhouse_sink_smb_login]
+type = "clickhouse"
+inputs = ["logtype_route.smb_login"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_smb_login"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置smtp
+[sinks.my_clickhouse_sink_smtp]
+type = "clickhouse"
+inputs = ["logtype_route.smtp"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_smtp"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置smtp_file
+[sinks.my_clickhouse_sink_smtp_file]
+type = "clickhouse"
+inputs = ["logtype_route.smtp_file"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_smtp_file"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置smtp_login
+[sinks.my_clickhouse_sink_smtp_login]
+type = "clickhouse"
+inputs = ["logtype_route.smtp_login"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_smtp_login"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置snmp
+[sinks.my_clickhouse_sink_snmp]
+type = "clickhouse"
+inputs = ["logtype_route.snmp"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_snmp"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置sql_server
+[sinks.my_clickhouse_sink_sql_server]
+type = "clickhouse"
+inputs = ["logtype_route.sql_server"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_sql_server"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置ssh
+[sinks.my_clickhouse_sink_ssh]
+type = "clickhouse"
+inputs = ["logtype_route.ssh"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_ssh"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置ssl
+[sinks.my_clickhouse_sink_ssl]
+type = "clickhouse"
+inputs = ["logtype_route.ssl"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_ssl"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置sybase
+[sinks.my_clickhouse_sink_sybase]
+type = "clickhouse"
+inputs = ["logtype_route.sybase"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_sybase"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置sybase_login
+[sinks.my_clickhouse_sink_sybase_login]
+type = "clickhouse"
+inputs = ["logtype_route.sybase_login"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_sybase_login"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置telnet
+[sinks.my_clickhouse_sink_telnet]
+type = "clickhouse"
+inputs = ["logtype_route.telnet"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_telnet"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置telnet_login
+[sinks.my_clickhouse_sink_telnet_login]
+type = "clickhouse"
+inputs = ["logtype_route.telnet_login"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_telnet_login"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置telnet_option
+[sinks.my_clickhouse_sink_telnet_option]
+type = "clickhouse"
+inputs = ["logtype_route.telnet_option"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_telnet_option"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置waf
+[sinks.my_clickhouse_sink_waf]
+type = "clickhouse"
+inputs = ["logtype_route.waf"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_waf"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置ips
+[sinks.my_clickhouse_sink_ips]
+type = "clickhouse"
+inputs = ["logtype_route.ips"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_ips"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置utm
+[sinks.my_clickhouse_sink_utm]
+type = "clickhouse"
+inputs = ["logtype_route.utm"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_utm"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出目标配置pvs
+[sinks.my_clickhouse_sink_pvs]
+type = "clickhouse"
+inputs = ["logtype_route.pvs"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "t_sta_pvs"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出数据到日志
+[sinks.console]
+inputs = ["parse_json"]
+type = "console"
+encoding.codec = "json"

@@ -1,0 +1,12 @@
+[
+    {
+    "name": "STA数据可视化配置",
+    "type": "POLICY_CONFIG",
+    "params": "com.coolxer.plugin.sta"
+  },
+  {
+    "name": "STA数据总览",
+    "type": "LOW_CODE_APP",
+    "params": "com.coolxer.plugin.sta"
+  }
+]
