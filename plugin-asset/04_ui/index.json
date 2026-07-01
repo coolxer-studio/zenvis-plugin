@@ -1,0 +1,536 @@
+{
+  "type": "page",
+  "title": "概览",
+  "body": [
+    {
+      "type": "service",
+      "api": "/zenvis/api/v1/entity/count-increase?entities=asset_host,asset_pc,asset_iot,asset_mobile,asset_probe,asset_app,asset_service,asset_api,asset_log,asset_file",
+      "body": {
+        "type": "panel",
+        "body": {
+          "type": "flex",
+          "justify": "space-evenly",
+          "items": [
+            {
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'><i class='fa-solid fa-server'></i></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='text-align: right;color: #708090; font-weight: bold;font-size: 8px;'>近增:${asset_host_increase}</div><div style='font-weight: bold;font-size: 12px;'>服务器设备</div><div style='text-align: center; font-size: 20px; color: #B0E0E6; font-weight: bold;'>${asset_host}</div></div>"
+            },
+            {
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'><i class='fa-solid fa-mobile'></i></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='text-align: right;color: #708090; font-weight: bold;font-size: 8px;'>近增:${asset_mobile_increase}</div><div style='font-weight: bold;font-size: 12px;'>移动端设备</div><div style='text-align: center; font-size: 20px; color: #B0E0E6; font-weight: bold;'>${asset_mobile}</div></div>"
+            },
+            {
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'><i class='fa-solid fa-laptop'></i></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='text-align: right;color: #708090; font-weight: bold;font-size: 8px;'>近增:${asset_pc_increase}</div><div style='font-weight: bold;font-size: 12px;'>PC端设备</div><div style='text-align: center; font-size: 20px; color: #87CEEB; font-weight: bold;'>${asset_pc}</div></div>"
+            },
+            {
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'><i class='fa-solid fa-vector-square'></i></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='text-align: right;color: #708090; font-weight: bold;font-size: 8px;'>近增:${asset_iot_increase}</div><div style='font-weight: bold;font-size: 12px;'>IOT设备</div><div style='text-align: center; font-size: 20px; color: #87CEEB; font-weight: bold;'>${asset_iot}</div></div>"
+            },
+            {
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'><i class='fa-solid fa-atom'></i></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='text-align: right;color: #708090; font-weight: bold;font-size: 8px;'>近增:${asset_probe_increase}</div><div style='font-weight: bold;font-size: 12px;'>探针资产</div><div style='text-align: center; font-size: 20px; color: #4682B4; font-weight: bold;'>${asset_probe}</div></div>"
+            },
+            {
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'><i class='fa-brands fa-dropbox'></i></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='text-align: right;color: #708090; font-weight: bold;font-size: 8px;'>近增:${asset_app_increase}</div><div style='font-weight: bold;font-size: 12px;'>应用资产</div><div style='text-align: center; font-size: 20px; color: #4682B4; font-weight: bold;'>${asset_app}</div></div>"
+            },
+            {
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'><i class='fa-solid fa-layer-group'></i></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='text-align: right;color: #708090; font-weight: bold;font-size: 8px;'>近增:${asset_service_increase}</div><div style='font-weight: bold;font-size: 12px;'>服务资产</div><div style='text-align: center; font-size: 20px; color: #48D1CC; font-weight: bold;'>${asset_service}</div></div>"
+            },
+            {
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'><i class='fa-solid fa-shuffle'></i></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='text-align: right;color: #708090; font-weight: bold;font-size: 8px;'>近增:${asset_api_increase}</div><div style='font-weight: bold;font-size: 12px;'>API资产</div><div style='text-align: center; font-size: 20px; color: #48D1CC; font-weight: bold;'>${asset_api}</div></div>"
+            },
+            {
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'><i class='fa-regular fa-file-lines'></i></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='text-align: right;color: #708090; font-weight: bold;font-size: 8px;'>近增:${asset_log_increase}</div><div style='font-weight: bold;font-size: 12px;'>日志数据</div><div style='text-align: center; font-size: 20px; color: #B0C4DE; font-weight: bold;'>${asset_log}</div></div>"
+            },
+            {
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'><i class='fa-regular fa-file'></i></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='text-align: right;color: #708090; font-weight: bold;font-size: 8px;'>近增:${asset_file_increase}</div><div style='font-weight: bold;font-size: 12px;'>文件数据</div><div style='text-align: center; font-size: 20px; color: #B0C4DE; font-weight: bold;'>${asset_file}</div></div>"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "panel",
+      "body": [
+        {
+          "type": "chart",
+          "api": "/zenvis/api/v1/entity/trend?entities=asset_host,asset_pc,asset_iot,asset_mobile,asset_probe,asset_app,asset_service,asset_api,asset_log,asset_file",
+          "style": {
+            "margin": "5px",
+            "backgroundColor": "#f5f5f5"
+          },
+          "config": {
+            "title": {
+              "text": "活跃资产趋势",
+              "textStyle": {
+                "fontSize": 14
+              }
+            },
+            "tooltip": {
+              "trigger": "axis",
+              "axisPointer": {
+                "type": "cross",
+                "label": {
+                  "backgroundColor": "#6a7985"
+                }
+              }
+            },
+            "legend": {
+              "data": "${legend_data || []}"
+            },
+            "toolbox": {
+              "feature": {
+                "saveAsImage": {}
+              }
+            },
+            "grid": {
+              "left": "3%",
+              "right": "4%",
+              "bottom": "3%",
+              "containLabel": true
+            },
+            "xAxis": [
+              {
+                "type": "category",
+                "boundaryGap": false,
+                "data": "${xaxis_data || []}"
+              }
+            ],
+            "yAxis": [
+              {
+                "type": "value"
+              }
+            ],
+            "series": [
+              {
+                "name": "服务器设备",
+                "type": "line",
+                "stack": "Total",
+                "areaStyle": {},
+                "emphasis": {
+                  "focus": "series"
+                },
+                "data": "${series_data_asset_host || []}"
+              },
+              {
+                "name": "移动端设备",
+                "type": "line",
+                "stack": "Total",
+                "areaStyle": {},
+                "emphasis": {
+                  "focus": "series"
+                },
+                "data": "${series_data_asset_mobile || []}"
+              },
+              {
+                "name": "PC端设备",
+                "type": "line",
+                "stack": "Total",
+                "areaStyle": {},
+                "emphasis": {
+                  "focus": "series"
+                },
+                "data": "${series_data_asset_pc || []}"
+              },
+              {
+                "name": "IOT设备",
+                "type": "line",
+                "stack": "Total",
+                "areaStyle": {},
+                "emphasis": {
+                  "focus": "series"
+                },
+                "data": "${series_data_asset_iot || []}"
+              },
+              {
+                "name": "探针资产",
+                "type": "line",
+                "stack": "Total",
+                "label": {
+                  "show": true,
+                  "position": "top"
+                },
+                "areaStyle": {},
+                "emphasis": {
+                  "focus": "series"
+                },
+                "data": "${series_data_asset_probe || []}"  
+              },
+              {
+                "name": "应用资产",
+                "type": "line",
+                "stack": "Total",
+                "label": {
+                  "show": true,
+                  "position": "top"
+                },
+                "areaStyle": {},
+                "emphasis": {
+                  "focus": "series"
+                },
+                "data": "${series_data_asset_app || []}"
+              },
+              {
+                "name": "服务资产",
+                "type": "line",
+                "stack": "Total",
+                "label": {
+                  "show": true,
+                  "position": "top"
+                },
+                "areaStyle": {},
+                "emphasis": {
+                  "focus": "series"
+                },
+                "data": "${series_data_asset_service || []}"
+              },
+              {
+                "name": "API资产",
+                "type": "line",
+                "stack": "Total",
+                "label": {
+                  "show": true,
+                  "position": "top"
+                },
+                "areaStyle": {},
+                "emphasis": {
+                  "focus": "series"
+                },
+                "data": "${series_data_asset_api || []}"
+              },
+              {
+                "name": "日志",
+                "type": "line",
+                "stack": "Total",
+                "label": {
+                  "show": true,
+                  "position": "top"
+                },
+                "areaStyle": {},
+                "emphasis": {
+                  "focus": "series"
+                },
+                "data": "${series_data_asset_log || []}"
+              },
+              {
+                "name": "文件",
+                "type": "line",
+                "stack": "Total",
+                "label": {
+                  "show": true,
+                  "position": "top"
+                },
+                "areaStyle": {},
+                "emphasis": {
+                  "focus": "series"
+                },
+                "data": "${series_data_asset_file || []}"
+              }
+            ]
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "flex",
+          "justify": "space-evenly",
+          "items": [
+            {
+              "type": "page",
+              "style": {
+                "margin": "5px",
+                "backgroundColor": "#f5f5f5"
+              },
+              "body": [
+                {
+                  "type": "chart",
+                  "api": "/zenvis/api/v1/entity/statistics?entities=asset_host,asset_pc,asset_iot,asset_mobile,asset_probe,asset_app,asset_service,asset_api,asset_log,asset_file&field=level",
+                  "config": {
+                    "title": {
+                      "text": "资产等级总览",
+                      "textStyle": {
+                        "fontSize": 14
+                      }
+                    },
+                    "tooltip": {
+                      "trigger": "axis",
+                      "axisPointer": {
+                        "type": "shadow"
+                      }
+                    },
+                    "legend": {},
+                    "toolbox": {
+                      "feature": {
+                        "saveAsImage": {}
+                      }
+                    },
+                    "grid": {
+                      "left": "3%",
+                      "right": "4%",
+                      "bottom": "3%",
+                      "containLabel": true
+                    },
+                    "xAxis": {
+                      "type": "value"
+                    },
+                    "yAxis": {
+                      "type": "category",
+                      "data": "${yaxis_data || []}"
+                    },
+                    "series": [
+                      {
+                        "name": "辅助资产",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_AUXILIARY || []}"
+                      },
+                      {
+                        "name": "一般资产",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_GENERAL || []}"
+                      },
+                      {
+                        "name": "次要资产",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_MINOR || []}"
+                      },
+                      {
+                        "name": "重要资产",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_IMPORTANT || []}"
+                      },
+                      {
+                        "name": "关键资产",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_CRITICAL || []}"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "page",
+              "style": {
+                "margin": "5px",
+                "backgroundColor": "#f5f5f5"
+              },
+              "body": [
+                {
+                  "type": "chart",
+                  "api": "/zenvis/api/v1/entity/statistics?entities=asset_host,asset_pc,asset_iot,asset_mobile,asset_probe,asset_app,asset_service,asset_api,asset_log,asset_file&field=risk",
+                  "config": {
+                    "title": {
+                      "text": "资产风险总览",
+                      "textStyle": {
+                        "fontSize": 14
+                      }
+                    },
+                    "tooltip": {
+                      "trigger": "axis",
+                      "axisPointer": {
+                        "type": "shadow"
+                      }
+                    },
+                    "legend": {},
+                    "toolbox": {
+                      "feature": {
+                        "saveAsImage": {}
+                      }
+                    },
+                    "grid": {
+                      "left": "3%",
+                      "right": "4%",
+                      "bottom": "3%",
+                      "containLabel": true
+                    },
+                    "xAxis": {
+                      "type": "value"
+                    },
+                    "yAxis": {
+                      "type": "category",
+                      "data": "${yaxis_data || []}"
+                    },
+                    "series": [
+                      {
+                        "name": "无风险",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_NONE || []}"
+                      },
+                      {
+                        "name": "低风险",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_LOW || []}"
+                      },
+                      {
+                        "name": "中风险",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_MEDIUM || []}"
+                      },
+                      {
+                        "name": "高风险",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_HIGH || []}"
+                      },
+                      {
+                        "name": "极高风险",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_EXTREME || []}"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

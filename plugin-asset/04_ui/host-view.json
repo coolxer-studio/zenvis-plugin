@@ -1,0 +1,328 @@
+{
+  "type": "page",
+  "title": "ID:${params.id}",
+  "initApi": "/zenvis/api/v1/asset/host/${params.id}/detail",
+  "remark": null,
+  "toolbar": [
+    {
+      "type": "button",
+      "label": "导出设备报告",
+      "actionType": "toast",
+      "toast": {
+        "items": [
+          {
+            "body": "权限不足，请联系管理员"
+          }
+        ]
+      }
+    },
+    {
+      "type": "button",
+      "actionType": "link",
+      "link": "/hardware/host/list",
+      "label": "返回设备列表"
+    }
+  ],
+  "body": [
+    [
+      {
+        "type": "grid",
+        "className": "m-t",
+        "columns": [
+          {
+            "type": "page",
+            "body": [
+              {
+                "type": "text",
+                "value": "${boot_time}"
+              },
+              {
+                "type": "status",
+                "className": "mx-2",
+                "source": {
+                  "normal": {
+                    "label": "正常",
+                    "icon": "fa fa-times-circle",
+                    "color": "#0f0"
+                  },
+                  "unusual": {
+                    "label": "异常",
+                    "icon": "fa fa-times-circle",
+                    "color": "#f00"
+                  }
+                },
+                "value": "${running_status}"
+              },
+              {
+                "type": "divider"
+              }
+            ]
+          },
+          {
+            "type": "chart",
+            "api": "/zenvis/api/v1/asset/host/${params.id}/health/trend",
+            "style": {
+              "margin": "5px",
+              "backgroundColor": "#f5f5f5"
+            },
+            "config": {
+              "visualMap": [
+                  {
+                      "show": false,
+                      "type": "continuous",
+                      "seriesIndex": 0,
+                      "min": 0,
+                      "max": 400
+                  }
+              ],
+              "tooltip": {
+                  "trigger": "axis"
+              },
+              "xAxis": [
+                  {
+                      "data": "${health_trend.date_list || []}"
+                  }
+              ],
+              "yAxis": [
+                  {}
+              ],
+              "series": [
+                  {
+                      "type": "line",
+                      "showSymbol": false,
+                      "data": "${health_trend.value_list || []}"
+                  }
+              ]
+          }
+          },
+          {
+            "type": "progress",
+            "value": "${memory_ratio}",
+            "valueTpl": "内存<br>${memory_used}",
+            "map": [
+              {
+                "value": 50,
+                "color": "#007bff"
+              },
+              {
+                "value": 60,
+                "color": "#fad733"
+              }
+            ],
+            "mode": "circle"
+          },
+          {
+            "type": "progress",
+            "value": "${cpu_ratio}",
+            "valueTpl": "CPU<br>${cpu_used}",
+            "map": [
+              {
+                "value": 50,
+                "color": "#007bff"
+              },
+              {
+                "value": 60,
+                "color": "#fad733"
+              }
+            ],
+            "mode": "circle"
+          },
+          {
+            "type": "progress",
+            "value": "${disk_ratio}",
+            "valueTpl": "磁盘<br>${disk_used}",
+            "map": [
+              {
+                "value": 50,
+                "color": "#007bff"
+              },
+              {
+                "value": 60,
+                "color": "#fad733"
+              }
+            ],
+            "mode": "circle"
+          }
+        ]
+      },
+      {
+        "type": "table",
+        "source": "${file_disk_list}",
+        "columns": [
+          {
+            "name": "name",
+            "label": "分区"
+          },
+          {
+            "name": "ratio",
+            "label": "使用率",
+            "type": "progress",
+            "valueTpl": "${ratio}%（${used}/${total})"
+          }
+        ]
+      },
+      {
+        "type": "divider",
+        "title": "基础信息",
+        "color": "#60a5fa",
+        "titleClassName": "border border-solid rounded-2xl border-blue-400 py-1 px-2",
+        "titlePosition": "center"
+      },
+      {
+        "type": "property",
+        "title": "设备软件信息",
+        "column": 4,
+        "items": [
+          {
+            "label": "hdf程序版本",
+            "content": "build12",
+            "span": 2
+          },
+          {
+            "label": "agent程序版本",
+            "content": "build12",
+            "span": 2
+          },
+          {
+            "label": "dpi引擎名",
+            "content": "sniper"
+          },
+          {
+            "label": "dpi版本",
+            "content": "1.2.2"
+          },
+          {
+            "label": "klp版本",
+            "content": "1.2.2"
+          },
+          {
+            "label": "dpi状态",
+            "content": "开启"
+          },
+          {
+            "label": "IPS引擎版本",
+            "content": "XXXips"
+          },
+          {
+            "label": "IPS规则数",
+            "content": "1.2.2"
+          },
+          {
+            "label": "IPS规则更新时间",
+            "content": "2024-08-12 12:22:22",
+            "span": 2
+          }
+        ]
+      },
+      {
+        "type": "divider",
+        "title": "更多信息",
+        "color": "#60a5fa",
+        "titleClassName": "border border-solid rounded-2xl border-blue-400 py-1 px-2",
+        "titlePosition": "center"
+      },
+      {
+        "type": "service",
+        "api": "/zenvis/api/v1/asset/host/${params.id}/detail_more",
+        "body": {
+          "type": "property",
+          "title": "设备软件信息",
+          "column": 4,
+          "items": [
+            {
+              "label": "hdf程序版本",
+              "content": "build12",
+              "span": 2
+            },
+            {
+              "label": "agent程序版本",
+              "content": "build12",
+              "span": 2
+            },
+            {
+              "label": "dpi引擎名",
+              "content": "sniper"
+            },
+            {
+              "label": "dpi版本",
+              "content": "1.2.2"
+            },
+            {
+              "label": "klp版本",
+              "content": "1.2.2"
+            },
+            {
+              "label": "dpi状态",
+              "content": "开启"
+            },
+            {
+              "label": "IPS引擎版本",
+              "content": "XXXips"
+            },
+            {
+              "label": "IPS规则数",
+              "content": "1.2.2"
+            },
+            {
+              "label": "IPS规则更新时间",
+              "content": "2024-08-12 12:22:22",
+              "span": 2
+            }
+          ]
+        }
+      },
+      
+      {
+        "type": "divider",
+        "title": "应用服务列表",
+        "color": "#60a5fa",
+        "titleClassName": "border border-solid rounded-2xl border-blue-400 py-1 px-2",
+        "titlePosition": "center"
+      },
+      {
+        "type": "crud",
+        "syncLocation": false,
+        "api": "/zenvis/api/v1/asset/host/${params.id}/service/all",
+        "loadDataOnce": true,
+        "columns": [
+          {
+            "name": "service_name",
+            "label": "服务名称",
+            "searchable":true,
+            "sortable": true
+          },
+          {
+            "name": "service_version",
+            "label": "版本",
+            "searchable":true,
+            "sortable": true
+          },
+          {
+            "name": "service_status",
+            "label": "状态",
+            "searchable":true,
+            "sortable": true
+          },
+          {
+            "name": "process_id",
+            "label": "进程ID",
+            "searchable":true,
+            "sortable": true
+          },
+          {
+            "name": "process_name",
+            "label": "进程名称",
+            "searchable":true,
+            "sortable": true
+          },
+          {
+            "name": "port",
+            "label": "开放端口",
+            "searchable":true,
+            "sortable": true
+          }
+        ]
+      }
+    ]
+  ]
+}
