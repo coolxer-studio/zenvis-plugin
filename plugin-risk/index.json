@@ -1,0 +1,8 @@
+{
+	"name":"风险监控",
+	"package_name":"com.coolxer.plugin.risk",
+	"version":"1.0.0",
+	"description":"通过收集外部威胁以及脆弱性等问题，综合分析安全风险事件。",
+	"author":"CoolXer",
+	"icon":"icon.png"
+}

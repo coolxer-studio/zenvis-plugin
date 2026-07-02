@@ -1,0 +1,149 @@
+{
+  "status": 0,
+  "msg": "",
+  "data": {
+    "pages": [
+      {
+        "label": "Home",
+        "url": "/",
+        "redirect": "/index"
+      },
+      {
+        "children": [
+          {
+            "label": "安全风险总览",
+            "url": "index",
+            "icon": "fa-solid fa-house",
+            "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=index.json"
+          },
+          {
+            "label": "脆弱性检测",
+            "icon": "fas fa-bug",
+            "children": [
+              {
+                "label": "漏洞",
+                "url": "/risk/vulnerability/list",
+                "icon": "fa-solid fa-cookie-bite",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=vulnerability-list.json"
+              },
+              {
+                "label": "查看",
+                "url": "/vulnerability/:id",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=vulnerability-view.json"
+              },
+              {
+                "label": "弱口令",
+                "url": "/risk/weak/list",
+                "icon": "fa-solid fa-ghost",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=weak-list.json"
+              },
+              {
+                "label": "查看",
+                "url": "/weak/:id",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=weak-view.json"
+              },
+              {
+                "label": "基线配置",
+                "url": "/risk/baseline/list",
+                "icon": "fa-solid fa-briefcase",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=baseline-list.json"
+              },
+              {
+                "label": "查看",
+                "url": "/baseline/:id",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=baseline-view.json"
+              }
+            ]
+          },
+          {
+            "label": "威胁监测",
+            "icon": "fas fa-user-secret",
+            "children": [
+              {
+                "label": "数据窃改",
+                "url": "/risk/datarisk/list",
+                "icon": "fa-solid fa-file-shield",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=datarisk-list.json"
+              },
+              {
+                "label": "查看",
+                "url": "/datarisk/:id",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=datarisk-view.json"
+              },
+              {
+                "label": "修改",
+                "url": "/datarisk/:id/edit",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=datarisk-edit.json"
+              },
+              {
+                "label": "恶意攻击",
+                "url": "/risk/attackrisk/list",
+                "icon": "fa-solid fa-bomb",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=attackrisk-list.json"
+              },
+              {
+                "label": "查看",
+                "url": "/attackrisk/:id",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=attackrisk-view.json"
+              }
+            ]
+          },
+          {
+            "label": "风险管理",
+            "icon": "fas fa-user-shield",
+            "children": [
+              {
+                "label": "风险管理",
+                "url": "/risk/event/list",
+                "icon": "fa-solid fa-triangle-exclamation",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=event-list.json"
+              },
+              {
+                "label": "查看",
+                "url": "/event/:id",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=event-view.json"
+              },
+              {
+                "label": "修改",
+                "url": "/event/:id/edit",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=event-edit.json"
+              },
+              {
+                "label": "工单管理",
+                "url": "/risk/order/list",
+                "icon": "fa-solid fa-bars-staggered",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=device-list.json"
+              },
+              {
+                "label": "查看",
+                "url": "/file/:id",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=file-view.json"
+              },
+              {
+                "label": "修改",
+                "url": "/file/:id/edit",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=file-edit.json"
+              },
+              {
+                "label": "报告管理",
+                "url": "/risk/report/list",
+                "icon": "fas fa-file-word",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=device-list.json"
+              },
+              {
+                "label": "查看",
+                "url": "/file/:id",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=file-view.json"
+              },
+              {
+                "label": "修改",
+                "url": "/file/:id/edit",
+                "schemaApi": "get:/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=file-edit.json"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

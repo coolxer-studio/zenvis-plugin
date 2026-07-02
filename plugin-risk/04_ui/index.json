@@ -1,0 +1,159 @@
+{
+  "type": "page",
+  "title": "安全风险总览",
+  "body": [
+    {
+      "type": "chart",
+      "height":"100%",
+      "api": "/zenvis/api/v1/config/com.coolxer.plugin.risk/get?file_name=sankey.json",
+      "onEvent": {
+        "click": {
+          "actions": [
+            {
+              "actionType": "ajax",
+              "api": {
+                "url": "/zenvis/api/v1/risk/timeline?name=${event.data.name}",
+                "method": "get",
+                "responseData": {
+                  "title_name": "${title_name}",
+                  "x_axis": "${x_axis}",
+                  "series": "${series}"
+                },
+                "messages": {
+                  "failed": "请求失败！"
+                }
+              }
+            },
+            {
+              "actionType": "dialog",
+              "dialog": {
+                  "size": "full",
+                  "title": "详情",
+                  "actions": [],
+                  "body": {
+                    "type": "chart",
+                    "height":"100%",
+                    "config": {
+                      "title": {
+                        "text": "${title_name}",
+                        "left": "1%"
+                      },
+                      "tooltip": {
+                        "trigger": "axis"
+                      },
+                      "grid": {
+                        "left": "5%",
+                        "right": "15%",
+                        "bottom": "10%"
+                      },
+                      "xAxis": {
+                        "data": "${x_axis || []}"
+                      },
+                      "yAxis": {},
+                      "dataZoom": [
+                        {
+                          "startValue": "2014-06-01"
+                        },
+                        {
+                          "type": "inside"
+                        }
+                      ],
+                      "visualMap": {
+                        "top": 50,
+                        "right": 10,
+                        "pieces": [
+                          {
+                            "gt": 0,
+                            "lte": 50,
+                            "color": "#93CE07"
+                          },
+                          {
+                            "gt": 50,
+                            "lte": 100,
+                            "color": "#FBDB0F"
+                          },
+                          {
+                            "gt": 100,
+                            "lte": 150,
+                            "color": "#FC7D02"
+                          },
+                          {
+                            "gt": 150,
+                            "lte": 200,
+                            "color": "#FD0100"
+                          },
+                          {
+                            "gt": 200,
+                            "lte": 300,
+                            "color": "#AA069F"
+                          },
+                          {
+                            "gt": 300,
+                            "color": "#AC3B2A"
+                          }
+                        ],
+                        "outOfRange": {
+                          "color": "#999"
+                        }
+                      },
+                      "series": {
+                        "name": "${title_name}",
+                        "type": "line",
+                        "data": "${series || []}",
+                        "markLine": {
+                          "silent": true,
+                          "lineStyle": {
+                            "color": "#333"
+                          },
+                          "data": [
+                            {
+                              "yAxis": 50
+                            },
+                            {
+                              "yAxis": 100
+                            },
+                            {
+                              "yAxis": 150
+                            },
+                            {
+                              "yAxis": 200
+                            },
+                            {
+                              "yAxis": 300
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+            }
+          ]
+        }
+      },
+      "config": {
+        "title": {
+          "text": ""
+        },
+        "tooltip": {
+          "trigger": "item",
+          "triggerOn": "mousemove"
+        },
+        "series": [
+          {
+            "type": "sankey",
+            "data": "${data || []}",
+            "links": "${links || []}",
+            "emphasis": {
+              "focus": "adjacency"
+            },
+            "lineStyle": {
+              "color": "gradient",
+              "curveness": 0.5
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
