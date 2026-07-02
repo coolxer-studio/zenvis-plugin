@@ -1,0 +1,40 @@
+# syslog数据源接收，配置监听11080端口，nginx log可以发送过来了
+[sources.api_gateway_syslog]
+type = "syslog"
+address = "0.0.0.0:11080"
+max_length = 102400
+mode = "udp"
+
+[transforms.parse_json]
+  inputs        = ["api_gateway_syslog"]
+  type          = "remap"
+  drop_on_error = false
+  source        = '''
+      .fact = del(.)
+      .fact.message = parse_json!(string!(.fact.message))
+      .header_code_array, err = split(.fact.message.request_headers, "-")
+      .app_id = .header_code_array[0]
+      .guid = .header_code_array[1]
+      .start_id = .header_code_array[2]
+      .platform = .header_code_array[3]
+      .fact_type = "api_gateway_log"
+      del(.header_code_array)
+  '''
+
+# 输出目标配置
+[sinks.my_clickhouse_sink]
+type = "clickhouse"
+inputs = ["parse_json"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "msg"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出数据到日志
+[sinks.console]
+inputs = ["parse_json"]
+type = "console"
+encoding.codec = "json"

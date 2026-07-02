@@ -1,0 +1,22 @@
+[
+  {
+    "name": "探针信息配置",
+    "type": "POLICY_CONFIG",
+    "params": "agent"
+  },
+  {
+    "name": "探针采集策略",
+    "type": "POLICY_CONFIG",
+    "params": "checker"
+  },
+  {
+    "name": "识别标记策略",
+    "type": "POLICY_CONFIG",
+    "params": "identify"
+  },
+  {
+    "name": "响应处置策略",
+    "type": "POLICY_CONFIG",
+    "params": "punish"
+  }
+]

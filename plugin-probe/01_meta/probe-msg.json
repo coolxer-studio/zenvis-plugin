@@ -1,0 +1,411 @@
+{
+  "entity": [{
+    "id": 1,
+    "name": "msg",
+    "label": "原始消息",
+    "description": "探针上报的原始消息",
+    "table_name": "msg",
+    "data_source": "clickhouse",
+    "sort_column": "client_time",
+    "selected": true
+  }],
+  "attribute": [{
+    "id": 101,
+    "entity": "msg",
+    "name": "guid",
+    "label": "设备id",
+    "description": "设备id",
+    "column_name": "guid",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in", "match"],
+    "display_selected": true,
+    "must_candidate": false,
+    "aggregate_link": true
+  }, {
+    "id": 102,
+    "entity": "msg",
+    "name": "start_id",
+    "label": "启动id",
+    "description": "启动id",
+    "column_name": "start_id",
+    "column_type": "Uint64",
+    "operators": ["greatthan", "lessthan", "greatequalthan", "lessequalthan", "between"],
+    "display_selected": true,
+    "must_candidate": false,
+    "aggregate_link": true
+  }, {
+    "id": 103,
+    "entity": "msg",
+    "name": "user_id",
+    "label": "用户id",
+    "description": "用户id",
+    "column_name": "user_id",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "must_candidate": false
+  }, {
+    "id": 104,
+    "entity": "msg",
+    "name": "platform",
+    "label": "平台",
+    "description": "平台",
+    "column_name": "platform",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "must_candidate": false
+  }, {
+    "id": 105,
+    "entity": "msg",
+    "name": "sdk_version",
+    "label": "sdk版本",
+    "description": "sdk版本",
+    "column_name": "sdk_version",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "must_candidate": false
+  }, {
+    "id": 106,
+    "entity": "msg",
+    "name": "app_name",
+    "label": "应用名称",
+    "description": "应用名称",
+    "column_name": "app_name",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 107,
+    "entity": "msg",
+    "name": "app_version",
+    "label": "应用版本",
+    "description": "应用版本",
+    "column_name": "app_version",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "must_candidate": false
+  }, {
+    "id": 108,
+    "entity": "msg",
+    "name": "app_id",
+    "label": "应用id",
+    "description": "应用id",
+    "column_name": "app_id",
+    "column_type": "UInt16",
+    "operators": ["equal", "notequal", "in"],
+    "must_candidate": false
+  }, {
+    "id": 109,
+    "entity": "msg",
+    "name": "app_package",
+    "label": "应用标识",
+    "description": "应用标识",
+    "column_name": "app_package",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "must_candidate": false
+  }, {
+    "id": 110,
+    "entity": "msg",
+    "name": "manufacturer",
+    "label": "厂商",
+    "description": "厂商",
+    "column_name": "manufacturer",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 111,
+    "entity": "msg",
+    "name": "model",
+    "label": "型号",
+    "description": "型号",
+    "column_name": "model",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 112,
+    "entity": "msg",
+    "name": "system_name",
+    "label": "系统名称",
+    "description": "系统名称",
+    "column_name": "system_name",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 113,
+    "entity": "msg",
+    "name": "system_version",
+    "label": "系统版本",
+    "description": "系统版本",
+    "column_name": "system_version",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 114,
+    "entity": "msg",
+    "name": "fact_type",
+    "label": "数据类型",
+    "description": "数据类型",
+    "column_name": "fact_type",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 115,
+    "entity": "msg",
+    "name": "agenda_tags",
+    "label": "标记",
+    "description": "标记",
+    "column_name": "agenda_tags",
+    "column_type": "Array(String)",
+    "display_type": "array",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 116,
+    "entity": "msg",
+    "name": "punish_types",
+    "label": "处置",
+    "description": "处置",
+    "column_name": "punish_types",
+    "column_type": "Array(UInt8)",
+    "display_type": "array",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 117,
+    "entity": "msg",
+    "name": "net_type",
+    "label": "网络类型",
+    "description": "网络类型",
+    "column_name": "net_type",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "must_candidate": false
+  }, {
+    "id": 118,
+    "entity": "msg",
+    "name": "lan_ip",
+    "label": "内网ip",
+    "description": "内网ip",
+    "column_name": "lan_ip",
+    "column_type": "IPv4",
+    "operators": ["equal", "notequal", "in"],
+    "must_candidate": false
+  }, {
+    "id": 119,
+    "entity": "msg",
+    "name": "wan_ip",
+    "label": "外网ip",
+    "description": "外网ip",
+    "column_name": "wan_ip",
+    "column_type": "IPv4",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 120,
+    "entity": "msg",
+    "name": "latitude",
+    "label": "经度",
+    "description": "经度",
+    "column_name": "latitude",
+    "column_type": "Float64",
+    "operators": ["equal", "notequal", "in"],
+    "must_candidate": false
+  }, {
+    "id": 121,
+    "entity": "msg",
+    "name": "longitude",
+    "label": "纬度",
+    "description": "纬度",
+    "column_name": "longitude",
+    "column_type": "Float64",
+    "operators": ["equal", "notequal", "in"],
+    "must_candidate": false
+  }, {
+    "id": 122,
+    "entity": "msg",
+    "name": "country",
+    "label": "国家",
+    "description": "位置",
+    "column_name": "country",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  },{
+    "id": 123,
+    "entity": "msg",
+    "name": "province",
+    "label": "省份",
+    "description": "位置",
+    "column_name": "province",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  },{
+    "id": 124,
+    "entity": "msg",
+    "name": "city",
+    "label": "区市",
+    "description": "位置",
+    "column_name": "city",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  },{
+    "id": 125,
+    "entity": "msg",
+    "name": "county",
+    "label": "县区",
+    "description": "位置",
+    "column_name": "county",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  },{
+    "id": 126,
+    "entity": "msg",
+    "name": "thoroughfare",
+    "label": "街道",
+    "description": "位置",
+    "column_name": "thoroughfare",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 127,
+    "entity": "msg",
+    "name": "rule",
+    "label": "规则id",
+    "description": "规则id",
+    "column_name": "rule",
+    "column_type": "String",
+    "operators": ["equal", "notequal", "in"],
+    "must_candidate": false
+  }, {
+    "id": 128,
+    "entity": "msg",
+    "name": "fact",
+    "label": "数据详情",
+    "description": "数据详情",
+    "column_name": "fact",
+    "column_type": "json",
+    "display_type": "json",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 129,
+    "entity": "msg",
+    "name": "agendas",
+    "label": "标签详情",
+    "description": "标签详情",
+    "column_name": "agendas",
+    "column_type": "json",
+    "display_type": "json",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 130,
+    "entity": "msg",
+    "name": "punishes",
+    "label": "处置详情",
+    "description": "处置详情",
+    "column_name": "punishes",
+    "column_type": "json",
+    "display_type": "json",
+    "operators": ["equal", "notequal", "in"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 131,
+    "entity": "msg",
+    "name": "client_time",
+    "label": "采集时间",
+    "description": "采集时间",
+    "column_name": "client_time",
+    "column_type": "DateTime",
+    "retrieval_type": "date",
+    "operators": ["greatthan", "lessthan", "greatequalthan", "lessequalthan", "between"],
+    "display_selected": true,
+    "must_candidate": false
+  }, {
+    "id": 132,
+    "entity": "msg",
+    "name": "server_time",
+    "label": "接收时间",
+    "description": "接收时间",
+    "column_name": "server_time",
+    "column_type": "DateTime",
+    "retrieval_type": "date",
+    "operators": ["greatthan", "lessthan", "greatequalthan", "lessequalthan", "between"],
+    "must_candidate": false
+  }, {
+    "id": 133,
+    "entity": "msg",
+    "name": "insert_time",
+    "label": "入库时间",
+    "description": "入库时间",
+    "column_name": "insert_time",
+    "column_type": "DateTime",
+    "retrieval_type": "date",
+    "operators": ["greatthan", "lessthan", "greatequalthan", "lessequalthan", "between"],
+    "must_candidate": false
+  }
+  ],
+  "operator": [{
+    "id": 1,
+    "name": "equal",
+    "label": "等于"
+  }, {
+    "id": 2,
+    "name": "notequal",
+    "label": "不等于"
+  }, {
+    "id": 3,
+    "name": "greatthan",
+    "label": "大于"
+  }, {
+    "id": 4,
+    "name": "lessthan",
+    "label": "小于"
+  }, {
+    "id": 5,
+    "name": "greatequalthan",
+    "label": "大于等于"
+  }, {
+    "id": 6,
+    "name": "lessequalthan",
+    "label": "小于等于"
+  }, {
+    "id": 7,
+    "name": "between",
+    "label": "之间"
+  }, {
+    "id": 8,
+    "name": "in",
+    "label": "包扩"
+  }, {
+    "id": 9,
+    "name": "match",
+    "label": "匹配"
+  }]
+}
