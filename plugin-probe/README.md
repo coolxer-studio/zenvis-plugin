@@ -9,7 +9,7 @@
 ## 基本信息
 
 - **插件名称**: 数据采集插件
-- **包名**: com.coolxer.plugin.user.probe
+- **包名**: com.coolxer.plugin.probe
 - **版本**: 1.0.0
 - **作者**: CoolXer
 - **描述**: 用于接收多源异构数据，当前数据源包含探针（agent）、网关（syslog）、日志文件等，接收结果存储到数据库。
@@ -185,3 +185,19 @@ ORDER BY
 6. 卸载插件：插件列表找到已经安装的插件->点击卸载
 7. 删除插件：插件列表找到已经安装的插件->点击删除
 --- 
+
+## 插件包结构
+
+本插件按 ZenVis 首个正式版本插件包结构组织：
+
+```text
+00_doc/          文档与 RAG 资料
+01_meta/         检索元数据与 ClickHouse 表结构
+02_push-task/    数推任务配置
+03_api/          API Jar，可为空
+04_ui/           低代码 UI 配置
+05_dashboard/    数据看板配置，当前 config.json 为空数组
+06_mcp/          MCP 服务配置，当前 config.json 为空数组
+07_skill/        Skill 目录，当前为空能力占位
+08_menu/         菜单配置，安装流程最后写入
+```

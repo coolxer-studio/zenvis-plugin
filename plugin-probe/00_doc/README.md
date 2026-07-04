@@ -9,7 +9,7 @@
 ## 基本信息
 
 - **插件名称**: 数据采集插件
-- **包名**: com.coolxer.plugin.user.probe
+- **包名**: com.coolxer.plugin.probe
 - **版本**: 1.0.0
 - **作者**: CoolXer
 - **描述**: 用于接收多源异构数据，当前数据源包含探针（agent）、网关（syslog）、日志文件等，接收结果存储到数据库。

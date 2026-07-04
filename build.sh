@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source ~/.bashrc
+if [ -f ~/.bashrc ]; then
+    source ~/.bashrc
+fi
 
 CURRENT_DIR=$(
    cd "$(dirname "$0")"
@@ -26,13 +28,12 @@ function tar_package() {
     package_name=$(grep '"package_name"' ${plugin_root}/index.json | awk -F '"' '{print $4}')
     package_name=${package_name//./-}
     log "开始打包插件：${package_name}"
-    chmod -R 777 ${plugin_root}
     cd ${plugin_root}
     if [[ $(uname -s) == "Darwin" ]]; then
         # mac下建议使用gtar，避免在linux上解压提示未知头的警告
-        gtar zcvf ${CURRENT_DIR}/${package_name}.tar.gz *
+        gtar --exclude='.DS_Store' --exclude='*.tar' --exclude='*.tar.gz' --exclude='build.log' -zcvf ${CURRENT_DIR}/${package_name}.tar.gz *
     elif [[ $(uname -s) == "Linux" ]]; then
-        tar zcvf ${CURRENT_DIR}/${package_name}.tar.gz *
+        tar --exclude='.DS_Store' --exclude='*.tar' --exclude='*.tar.gz' --exclude='build.log' -zcvf ${CURRENT_DIR}/${package_name}.tar.gz *
     fi
     cd ${CURRENT_DIR}
     log "打包完成..."

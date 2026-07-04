@@ -76,7 +76,7 @@ function Tar-Package {
     Push-Location $pluginPath
     try {
         # Use tar with -z to create gzip compressed archive directly
-        tar -zcvf $outputTarGz --exclude="*.tar.gz" --exclude="build.log" .
+        tar -zcvf $outputTarGz --exclude=".DS_Store" --exclude="*.tar" --exclude="*.tar.gz" --exclude="build.log" .
         if ($LASTEXITCODE -ne 0) {
             Write-Log "错误：tar 创建失败"
             return
