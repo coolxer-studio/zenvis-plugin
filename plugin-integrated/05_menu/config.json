@@ -1,0 +1,8 @@
+[
+  {
+    "name": "探针集成",
+    "type": "EXTERNAL_APP",
+    "params": "http://sdk.genie.coolxer.com/build_info",
+    "superscript": "X-Sorcerer"
+  }
+]
