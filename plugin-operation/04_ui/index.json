@@ -1,0 +1,993 @@
+{
+  "type": "page",
+  "title": "运营分析",
+  "id": "page_of_operation",
+  "toolbar": [
+    {
+      "name": "view_mode",
+      "type": "switch",
+      "onText": "编辑模式",
+      "offText": "视图模式"
+    }
+  ],
+  "body": [
+    {
+      "type": "service",
+      "name": "dashboard_index",
+      "api": "/zenvis/api/v1/operation/dashboard",
+      "body": {
+        "type": "each",
+        "source": "${panel_list}",
+        "items": {
+          "type": "each",
+          "style": {
+            "display": "flex",
+            "justify-content": "space-between",
+            "flex": "1",
+            "text-align": "center",
+            "margin": "0 5px"
+          },
+          "source": "${item}",
+          "items": {
+            "type": "panel",
+            "style": {
+              "width": "100%",
+              "margin": "5px"
+            },
+            "header": {
+              "type": "flex",
+              "justify": "space-between",
+              "items": [
+                {
+                  "type": "tpl",
+                  "tpl": "${item.panel_title}"
+                },
+                {
+                  "type": "icon",
+                  "icon": "${item.panel_icon}"
+                },
+                {
+                  "type": "flex",
+                  "hiddenOn": "!this.view_mode",
+                  "items": [
+                    {
+                      "type": "button",
+                      "icon": "fa fa-pencil",
+                      "className": "mr-2",
+                      "tooltip": "编辑",
+                      "size": "xs",
+                      "disabled": true,
+                      "disabledTip": "不支持操作"
+                    },
+                    {
+                      "type": "button",
+                      "icon": "fa fa-times text-danger",
+                      "className": "mr-2",
+                      "actionType": "ajax",
+                      "reload": "dashboard_index",
+                      "tooltip": "删除",
+                      "size": "xs",
+                      "confirmText": "您确认要删除?",
+                      "api": "delete:/zenvis/api/v1/operation/${id}"
+                    },
+                    {
+                      "type": "button",
+                      "icon": "fa-solid fa-right-from-bracket",
+                      "tooltip": "右侧增加面板",
+                      "size": "xs",
+                      "onEvent": {
+                        "click": {
+                          "actions": [
+                            {
+                              "componentId": "page_of_operation",
+                              "actionType": "setValue",
+                              "args": {
+                                "value": {
+                                  "last_board": "${id}"
+                                }
+                              }
+                            },
+                            {
+                              "actionType": "custom",
+                              "script": "const button = document.querySelector('button.cxd-Button.cxd-Button--default.cxd-Button--size-default.cxd-Button--iconOnly');if (button) {button.click();}"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "body": [{
+              "type": "chart",
+              "hiddenOn": "panel_view == '地图分布'",
+              "api": "/zenvis/api/v1/operation/dashboard/${id}/chart"
+            },
+            {
+              "type": "chart",
+              "hiddenOn": "panel_view != '地图分布'",
+              "mapURL": "/zenvis/api/v1/config/operation/get?file_name=china.json",
+              "mapName": "china",
+              "height": 600,
+              "api": "/zenvis/api/v1/operation/dashboard/${id}/chart"
+            }
+          ]
+          }
+        }
+      }
+    },
+    {
+      "type": "flex",
+      "hiddenOn": "!this.view_mode",
+      "items": [
+        {
+          "label": "",
+          "type": "button",
+          "id": "wizard_open_button",
+          "name": "wizard_open_buttonxxx",
+          "actionType": "dialog",
+          "icon": "fa fa-plus",
+          "onEvent": {
+            "click": {
+              "actions": [
+                {
+                  "componentId": "page_of_operation",
+                  "actionType": "setValue",
+                  "args": {
+                    "value": {
+                      "last_board": "-1"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "dialog": {
+            "size": "full",
+            "title": "全屏弹框",
+            "actions": [],
+            "body": {
+              "type": "wizard",
+              "api": "/zenvis/api/v1/operation/dashboard/add",
+              "reload": "dashboard_index",
+              "steps": [
+                {
+                  "title": "分析方法",
+                  "body": [
+                    {
+                      "type": "hidden",
+                      "name": "last_board"
+                    },
+                    {
+                      "label": "分析策略",
+                      "type": "select",
+                      "required": true,
+                      "name": "policy",
+                      "options": [
+                        {
+                          "label": "事件分析",
+                          "value": "analysis_event"
+                        },
+                        {
+                          "label": "漏斗分析",
+                          "value": "analysis_funnel"
+                        },
+                        {
+                          "label": "分布分析",
+                          "value": "analysis_distribution"
+                        },
+                        {
+                          "label": "路径分析",
+                          "value": "analysis_path"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "wrapper",
+                      "className": "b",
+                      "hiddenOn": "data.policy != 'analysis_event'",
+                      "body": [
+                        {
+                          "type": "tpl",
+                          "tpl": "<div style='text-align: center'> <i style='font-size: 24px;color: #28a745;' class='fa-solid fa-arrow-trend-up'></i><h1 style='font-size: 24px;margin: 20px 0;color: #333;'>事件分析</h1><div>"
+                        },
+                        {
+                          "type": "markdown",
+                          "value": "- **定义**：事件分析是一种用于研究用户在产品或应用中发生的特定事件（如点击按钮、提交表单、观看视频等）的方法。通过分析事件的频率、时间、用户路径等，可以深入了解用户行为。\n- **应用场景**：\n  - 监控关键功能的使用情况。\n  - 评估营销活动的效果。\n  - 优化用户体验。\n- **示例**：\n  - 分析用户点击“购买”按钮的次数和时间。\n  - 跟踪用户完成注册流程的步骤。\n- **优势**：\n  - 能够提供详细的用户行为数据。\n  - 可以快速发现问题和机会点。"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "wrapper",
+                      "className": "b",
+                      "hiddenOn": "data.policy != 'analysis_funnel'",
+                      "body": [
+                        {
+                          "type": "tpl",
+                          "tpl": "<div style='text-align: center'> <i style='font-size: 24px;color: #28a745;' class='fa-solid fa-filter'></i><h1 style='font-size: 24px;margin: 20px 0;color: #333;'>漏斗分析</h1><div>"
+                        },
+                        {
+                          "type": "markdown",
+                          "value": "- **定义**：漏斗分析是一种用于评估用户在多步骤流程中转化率的方法。它通过将用户行为路径分解为多个阶段，展示用户在每个阶段的流失情况，从而帮助识别转化瓶颈。\n- **应用场景**：\n  - 电商购物流程分析（从浏览商品到完成支付）。\n  - 营销漏斗分析（从潜在客户到付费客户）。\n  - 用户注册流程分析。\n- **示例**：\n  - 分析用户在购物车页面的流失率。\n  - 评估用户在注册流程中放弃的环节。\n- **优势**：\n  - 直观展示转化路径和流失点。\n  - 有助于优化关键环节，提高转化率。"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "wrapper",
+                      "className": "b",
+                      "hiddenOn": "data.policy != 'analysis_distribution'",
+                      "body": [
+                        {
+                          "type": "tpl",
+                          "tpl": "<div style='text-align: center'> <i style='font-size: 24px;color: #28a745;' class='fa-solid fa-chart-column'></i><h1 style='font-size: 24px;margin: 20px 0;color: #333;'>分布分析</h1><div>"
+                        },
+                        {
+                          "type": "markdown",
+                          "value": "- **定义**：分布分析用于研究用户行为或数据在不同维度上的分布情况。它可以揭示数据的集中趋势、离散程度和异常值，帮助理解用户行为的多样性。\n- **应用场景**：\n  - 分析用户在不同时间段的活跃度。\n  - 研究用户在不同设备上的使用情况。\n  - 评估用户行为的地理分布。\n- **示例**：\n  - 统计用户在一天中不同时间段的登录次数。\n  - 分析用户在不同城市或地区的活跃度。\n- **优势**：\n  - 提供全面的用户行为视角。\n  - 有助于发现隐藏的模式和趋势。"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "wrapper",
+                      "className": "b",
+                      "hiddenOn": "data.policy != 'analysis_path'",
+                      "body": [
+                        {
+                          "type": "tpl",
+                          "tpl": "<div style='text-align: center'> <i style='font-size: 24px;color: #28a745;' class='fa-solid fa-draw-polygon'></i><h1 style='font-size: 24px;margin: 20px 0;color: #333;'>路径分析</h1><div>"
+                        },
+                        {
+                          "type": "markdown",
+                          "value": "- **定义**：分布分析用于研究用户行为或数据在不同维度上的分布情况。它可以揭示数据的集中趋势、离散程度和异常值，帮助理解用户行为的多样性。\n- **应用场景**：\n  - 分析用户在不同时间段的活跃度。\n  - 研究用户在不同设备上的使用情况。\n  - 评估用户行为的地理分布。\n- **示例**：\n  - 统计用户在一天中不同时间段的登录次数。\n  - 分析用户在不同城市或地区的活跃度。\n- **优势**：\n  - 提供全面的用户行为视角。\n  - 有助于发现隐藏的模式和趋势。"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "指标",
+                  "body": [
+                    {
+                      "type": "grid",
+                      "className": "m-3",
+                      "columns": [
+                        {
+                          "md": 0,
+                          "body": [
+                            {
+                              "type": "plain",
+                              "text": "事件为："
+                            }
+                          ]
+                        },
+                        {
+                          "md": 10,
+                          "body": [
+                            {
+                              "type": "select",
+                              "name": "event",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "用户注册",
+                                  "value": "user_register"
+                                },
+                                {
+                                  "label": "浏览商品",
+                                  "value": "view_product"
+                                },
+                                {
+                                  "label": "添加购物车",
+                                  "value": "add_to_cart"
+                                },
+                                {
+                                  "label": "支付订单",
+                                  "value": "pay_order"
+                                },
+                                {
+                                  "label": "启动应用",
+                                  "value": "app_launch"
+                                },
+                                {
+                                  "label": "提交表单",
+                                  "value": "submit_form"
+                                },
+                                {
+                                  "label": "观看视频",
+                                  "value": "watch_video"
+                                },
+                                {
+                                  "label": "点击按钮",
+                                  "value": "click_button"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "grid",
+                      "className": "m-3",
+                      "columns": [
+                        {
+                          "md": 0,
+                          "body": []
+                        },
+                        {
+                          "md": 10,
+                          "body": [
+                            {
+                              "type": "plain",
+                              "text": "的"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "grid",
+                      "className": "m-3",
+                      "columns": [
+                        {
+                          "md": 0,
+                          "body": [
+                            {
+                              "type": "plain",
+                              "text": "指标："
+                            }
+                          ]
+                        },
+                        {
+                          "md": 10,
+                          "body": [
+                            {
+                              "type": "select",
+                              "name": "metrics",
+                              "required": true,
+                              "options": [
+                                {
+                                  "label": "事件次数",
+                                  "value": "event_count"
+                                },
+                                {
+                                  "label": "独立用户数",
+                                  "value": "unique_users"
+                                },
+                                {
+                                  "label": "人均次数",
+                                  "value": "per_user_count"
+                                },
+                                {
+                                  "label": "转化率",
+                                  "value": "conversion_rate"
+                                },
+                                {
+                                  "label": "总和",
+                                  "value": "sum"
+                                },
+                                {
+                                  "label": "均值",
+                                  "value": "average"
+                                },
+                                {
+                                  "label": "最大值",
+                                  "value": "max"
+                                },
+                                {
+                                  "label": "最小值",
+                                  "value": "min"
+                                },
+                                {
+                                  "label": "去重数",
+                                  "value": "unique_count"
+                                },
+                                {
+                                  "label": "留存率",
+                                  "value": "retention_rate"
+                                },
+                                {
+                                  "label": "Session 数",
+                                  "value": "session_count"
+                                },
+                                {
+                                  "label": "跳出率",
+                                  "value": "bounce_rate"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "数据范围",
+                  "body": [
+                    {
+                      "type": "condition-builder",
+                      "label": "筛选规则",
+                      "name": "conditions",
+                      "required": true,
+                      "searchable": true,
+                      "fields": [
+                        {
+                          "label": "用户标识",
+                          "type": "text",
+                          "name": "text"
+                        },
+                        {
+                          "label": "指标值",
+                          "type": "number",
+                          "name": "number"
+                        },
+                        {
+                          "label": "设备类型",
+                          "type": "text",
+                          "name": "device_type"
+                        },
+                        {
+                          "label": "地理位置",
+                          "type": "text",
+                          "name": "location"
+                        },
+                        {
+                          "label": "渠道来源",
+                          "type": "text",
+                          "name": "channel"
+                        },
+                        {
+                          "label": "用户属性",
+                          "type": "text",
+                          "name": "user_property"
+                        },
+                        {
+                          "label": "事件属性",
+                          "type": "text",
+                          "name": "event_property"
+                        },
+                        {
+                          "label": "留存周期",
+                          "type": "number",
+                          "name": "retention_period"
+                        },
+                        {
+                          "label": "转化时间",
+                          "type": "number",
+                          "name": "conversion_time"
+                        },
+                        {
+                          "label": "日期",
+                          "children": [
+                            {
+                              "label": "发生时间",
+                              "type": "datetime",
+                              "name": "datetime"
+                            },
+                            {
+                              "label": "上报时间",
+                              "type": "datetime",
+                              "name": "datetime"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "展示形式",
+                  "body": [
+                    {
+                      "name": "panel_title",
+                      "type": "input-text",
+                      "required": true,
+                      "label": "标题名称"
+                    },
+                    {
+                      "type": "tabs",
+                      "swipeable": true,
+                      "name": "panel_view",
+                      "tabs": [
+                        {
+                          "title": "饼图",
+                          "icon": "fas fa-chart-pie",
+                          "tab": [
+                            {
+                              "type": "chart",
+                              "config": {
+                                "title": {
+                                  "text": "营销渠道分布",
+                                  "left": "center"
+                                },
+                                "tooltip": {
+                                  "trigger": "item",
+                                  "formatter": "{a} <br/>{b}: {c} ({d}%)"
+                                },
+                                "legend": {
+                                  "orient": "vertical",
+                                  "left": "left",
+                                  "data": [
+                                    "社交媒体",
+                                    "搜索引擎",
+                                    "电子邮件",
+                                    "线下活动",
+                                    "合作伙伴"
+                                  ]
+                                },
+                                "series": [
+                                  {
+                                    "name": "渠道",
+                                    "type": "pie",
+                                    "radius": "50%",
+                                    "data": [
+                                      {
+                                        "value": 335,
+                                        "name": "社交媒体"
+                                      },
+                                      {
+                                        "value": 310,
+                                        "name": "搜索引擎"
+                                      },
+                                      {
+                                        "value": 234,
+                                        "name": "电子邮件"
+                                      },
+                                      {
+                                        "value": 135,
+                                        "name": "线下活动"
+                                      },
+                                      {
+                                        "value": 154,
+                                        "name": "合作伙伴"
+                                      }
+                                    ],
+                                    "emphasis": {
+                                      "itemStyle": {
+                                        "shadowBlur": 10,
+                                        "shadowOffsetX": 0,
+                                        "shadowColor": "rgba(0, 0, 0, 0.5)"
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "title": "柱状图",
+                          "value": "bar",
+                          "icon": "fas fa-chart-bar",
+                          "tab": [
+                            {
+                              "type": "chart",
+                              "config": {
+                                "title": {
+                                  "text": "月度营销活动效果",
+                                  "left": "center"
+                                },
+                                "tooltip": {
+                                  "trigger": "axis",
+                                  "axisPointer": {
+                                    "type": "shadow"
+                                  }
+                                },
+                                "legend": {
+                                  "orient": "vertical",
+                                  "left": "left",
+                                  "data": [
+                                    "销售额",
+                                    "参与人数"
+                                  ]
+                                },
+                                "xAxis": {
+                                  "type": "category",
+                                  "data": [
+                                    "1月",
+                                    "2月",
+                                    "3月",
+                                    "4月",
+                                    "5月",
+                                    "6月",
+                                    "7月",
+                                    "8月",
+                                    "9月",
+                                    "10月",
+                                    "11月",
+                                    "12月"
+                                  ]
+                                },
+                                "yAxis": [
+                                  {
+                                    "type": "value",
+                                    "name": "销售额（万元）"
+                                  },
+                                  {
+                                    "type": "value",
+                                    "name": "参与人数（人）"
+                                  }
+                                ],
+                                "series": [
+                                  {
+                                    "name": "销售额",
+                                    "type": "bar",
+                                    "yAxisIndex": 0,
+                                    "data": [
+                                      230,
+                                      340,
+                                      450,
+                                      560,
+                                      670,
+                                      780,
+                                      890,
+                                      900,
+                                      1000,
+                                      1100,
+                                      1200,
+                                      1300
+                                    ]
+                                  },
+                                  {
+                                    "name": "参与人数",
+                                    "type": "bar",
+                                    "yAxisIndex": 1,
+                                    "data": [
+                                      1200,
+                                      1300,
+                                      1400,
+                                      1500,
+                                      1600,
+                                      1700,
+                                      1800,
+                                      1900,
+                                      2000,
+                                      2100,
+                                      2200,
+                                      2300
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "title": "折线图",
+                          "icon": "fas fa-chart-line",
+                          "tab": [
+                            {
+                              "type": "chart",
+                              "config": {
+                                "title": {
+                                  "text": "用户活跃度趋势",
+                                  "left": "center"
+                                },
+                                "tooltip": {
+                                  "trigger": "axis"
+                                },
+                                "legend": {
+                                  "orient": "vertical",
+                                  "left": "left",
+                                  "data": [
+                                    "日活跃用户",
+                                    "周活跃用户"
+                                  ]
+                                },
+                                "xAxis": {
+                                  "type": "category",
+                                  "boundaryGap": false,
+                                  "data": [
+                                    "1月",
+                                    "2月",
+                                    "3月",
+                                    "4月",
+                                    "5月",
+                                    "6月",
+                                    "7月",
+                                    "8月",
+                                    "9月",
+                                    "10月",
+                                    "11月",
+                                    "12月"
+                                  ]
+                                },
+                                "yAxis": {
+                                  "type": "value"
+                                },
+                                "series": [
+                                  {
+                                    "name": "日活跃用户",
+                                    "type": "line",
+                                    "data": [
+                                      200,
+                                      230,
+                                      201,
+                                      254,
+                                      290,
+                                      330,
+                                      310,
+                                      320,
+                                      332,
+                                      301,
+                                      334,
+                                      390
+                                    ],
+                                    "markLine": {
+                                      "data": [
+                                        {
+                                          "type": "average",
+                                          "name": "平均值"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "name": "周活跃用户",
+                                    "type": "line",
+                                    "data": [
+                                      150,
+                                      230,
+                                      200,
+                                      235,
+                                      270,
+                                      310,
+                                      300,
+                                      310,
+                                      320,
+                                      330,
+                                      340,
+                                      350
+                                    ],
+                                    "markLine": {
+                                      "data": [
+                                        {
+                                          "type": "average",
+                                          "name": "平均值"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "title": "漏斗图",
+                          "icon": "fas fa-filter",
+                          "tab": [
+                            {
+                              "type": "chart",
+                              "config": {
+                                "title": {
+                                  "text": "营销转化漏斗",
+                                  "left": "center"
+                                },
+                                "tooltip": {
+                                  "trigger": "item",
+                                  "formatter": "{a} <br/>{b} : {c}%"
+                                },
+                                "legend": {
+                                  "orient": "vertical",
+                                  "left": "left",
+                                  "data": [
+                                    "访问",
+                                    "咨询",
+                                    "下单",
+                                    "支付",
+                                    "完成"
+                                  ]
+                                },
+                                "series": [
+                                  {
+                                    "name": "转化率",
+                                    "type": "funnel",
+                                    "left": "10%",
+                                    "top": 60,
+                                    "bottom": 60,
+                                    "width": "80%",
+                                    "height": "50%",
+                                    "size": [
+                                      "60%",
+                                      "80%"
+                                    ],
+                                    "sort": "descending",
+                                    "gap": 2,
+                                    "label": {
+                                      "show": true,
+                                      "position": "inside"
+                                    },
+                                    "labelLine": {
+                                      "length": 10,
+                                      "lineStyle": {
+                                        "width": 1,
+                                        "type": "solid"
+                                      }
+                                    },
+                                    "itemStyle": {
+                                      "borderColor": "#fff",
+                                      "borderWidth": 1
+                                    },
+                                    "emphasis": {
+                                      "label": {
+                                        "fontSize": 20
+                                      }
+                                    },
+                                    "data": [
+                                      {
+                                        "value": 100,
+                                        "name": "访问"
+                                      },
+                                      {
+                                        "value": 80,
+                                        "name": "咨询"
+                                      },
+                                      {
+                                        "value": 60,
+                                        "name": "下单"
+                                      },
+                                      {
+                                        "value": 40,
+                                        "name": "支付"
+                                      },
+                                      {
+                                        "value": 20,
+                                        "name": "完成"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "title": "地图分布",
+                          "icon": "fas fa-map",
+                          "tab": [
+                            {
+                              "type": "chart",
+                              "mapURL": "/zenvis/api/v1/config/operation/get?file_name=china.json",
+                              "mapName": "china",
+                              "height": 600,
+                              "config": {
+                                "title": {
+                                  "text": "全国分布"
+                                },
+                                "tooltip": {
+                                  "trigger": "item",
+                                  "formatter": "{b}<br/>{c}"
+                                },
+                                "toolbox": {
+                                  "show": true,
+                                  "orient": "vertical",
+                                  "left": "right",
+                                  "top": "center",
+                                  "feature": {
+                                    "dataView": {
+                                      "readOnly": false
+                                    },
+                                    "restore": {},
+                                    "saveAsImage": {}
+                                  }
+                                },
+                                "visualMap": {
+                                  "min": 800,
+                                  "max": 50000,
+                                  "text": [
+                                    "High",
+                                    "Low"
+                                  ],
+                                  "realtime": false,
+                                  "calculable": true,
+                                  "inRange": {
+                                    "color": [
+                                      "lightskyblue",
+                                      "yellow",
+                                      "orangered"
+                                    ]
+                                  }
+                                },
+                                "series": [
+                                  {
+                                    "name": "用户分布",
+                                    "type": "map",
+                                    "map": "china",
+                                    "label": {
+                                      "show": true
+                                    },
+                                    "data": [
+                                      {
+                                        "name": "北京",
+                                        "value": 20057.34
+                                      },
+                                      {
+                                        "name": "上海",
+                                        "value": 15477.48
+                                      },
+                                      {
+                                        "name": "广东",
+                                        "value": 31686.1
+                                      },
+                                      {
+                                        "name": "河南",
+                                        "value": 6992.6
+                                      },
+                                      {
+                                        "name": "河北",
+                                        "value": 44045.49
+                                      },
+                                      {
+                                        "name": "天津",
+                                        "value": 40689.64
+                                      },
+                                      {
+                                        "name": "四川",
+                                        "value": 37659.78
+                                      },
+                                      {
+                                        "name": "湖北",
+                                        "value": 45180.97
+                                      },
+                                      {
+                                        "name": "安徽",
+                                        "value": 55204.26
+                                      },
+                                      {
+                                        "name": "吉林",
+                                        "value": 21900.9
+                                      },
+                                      {
+                                        "name": "黑龙江",
+                                        "value": 4918.26
+                                      },
+                                      {
+                                        "name": "福建",
+                                        "value": 5881.84
+                                      },
+                                      {
+                                        "name": "广西",
+                                        "value": 4178.01
+                                      },
+                                      {
+                                        "name": "西藏",
+                                        "value": 2227.92
+                                      },
+                                      {
+                                        "name": "新疆",
+                                        "value": 2180.98
+                                      },
+                                      {
+                                        "name": "湖南",
+                                        "value": 9172.94
+                                      },
+                                      {
+                                        "name": "江西",
+                                        "value": 3368
+                                      },
+                                      {
+                                        "name": "香港",
+                                        "value": 806.98
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
