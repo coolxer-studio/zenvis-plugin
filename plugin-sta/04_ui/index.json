@@ -1,0 +1,291 @@
+{
+  "type": "page",
+  "title": "STA日志概览",
+  "body": [
+    {
+      "type": "service",
+      "api": "/zenvis/api/v1/entity/count?entities=netflow,ip_stat,tcp_flow,udp_flow,ftp,http_session,waf,ips,utm,pvs",
+      "body": {
+        "type": "panel",
+        "body": {
+          "type": "flex",
+          "justify": "space-evenly",
+          "items": [
+            {
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='font-weight: bold;font-size: 12px;'>网络流量日志</div><div style='text-align: center; font-size: 20px; color: #B0E0E6; font-weight: bold;'>${netflow}</div></div>"
+            },{
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='font-weight: bold;font-size: 12px;'>IP访问日志</div><div style='text-align: center; font-size: 20px; color: #B0E0E6; font-weight: bold;'>${ip_stat}</div></div>"
+            },{
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='font-weight: bold;font-size: 12px;'>TCP访问日志</div><div style='text-align: center; font-size: 20px; color: #B0E0E6; font-weight: bold;'>${tcp_flow}</div></div>"
+            },{
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='font-weight: bold;font-size: 12px;'>UDP访问日志</div><div style='text-align: center; font-size: 20px; color: #B0E0E6; font-weight: bold;'>${udp_flow}</div></div>"
+            },{
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='font-weight: bold;font-size: 12px;'>FTP协议审计日志</div><div style='text-align: center; font-size: 20px; color: #B0E0E6; font-weight: bold;'>${ftp}</div></div>"
+            },{
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='font-weight: bold;font-size: 12px;'>HTTP协议审计日志</div><div style='text-align: center; font-size: 20px; color: #B0E0E6; font-weight: bold;'>${http_session}</div></div>"
+            },{
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='font-weight: bold;font-size: 12px;'>WAF安全日志</div><div style='text-align: center; font-size: 20px; color: #B0E0E6; font-weight: bold;'>${waf}</div></div>"
+            },{
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='font-weight: bold;font-size: 12px;'>IPS安全日志</div><div style='text-align: center; font-size: 20px; color: #B0E0E6; font-weight: bold;'>${ips}</div></div>"
+            },{
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='font-weight: bold;font-size: 12px;'>UTM安全日志</div><div style='text-align: center; font-size: 20px; color: #B0E0E6; font-weight: bold;'>${utm}</div></div>"
+            },{
+              "style": {
+                "padding": "10px 5px",
+                "margin": "5px",
+                "borderRadius": "14px",
+                "border": "1px solid #f0f0f0",
+                "backgroundColor": "#ffffff"
+              },
+              "type": "tpl",
+              "tpl": "<div style='display: flex;'><div style='display: flex;justify-content: center;align-items: center;'></div><div style='flex: 1;display: flex;flex-direction: column;justify-content: center;padding: 0 16px;'><div style='font-weight: bold;font-size: 12px;'>PVS安全日志</div><div style='text-align: center; font-size: 20px; color: #B0E0E6; font-weight: bold;'>${pvs}</div></div>"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "panel",
+      "body": [
+        {
+          "type": "chart",
+          "api": "/zenvis/api/v1/entity/trend?entities=netflow,ip_stat,tcp_flow,udp_flow,ftp,http_session,waf,ips,utm,pvs",
+          "style": {
+            "margin": "5px",
+            "backgroundColor": "#f5f5f5"
+          },
+          "config": {
+            "title": {
+              "text": "日志上报趋势",
+              "textStyle": {
+                "fontSize": 14
+              }
+            },
+            "tooltip": {
+              "trigger": "axis",
+              "axisPointer": {
+                "type": "cross",
+                "label": {
+                  "backgroundColor": "#6a7985"
+                }
+              }
+            },
+            "legend": {
+              "data": "${legend_data || []}"
+            },
+            "toolbox": {
+              "feature": {
+                "saveAsImage": {}
+              }
+            },
+            "grid": {
+              "left": "3%",
+              "right": "4%",
+              "bottom": "3%",
+              "containLabel": true
+            },
+            "xAxis": [
+              {
+                "type": "category",
+                "boundaryGap": false,
+                "data": "${xaxis_data || []}"
+              }
+            ],
+            "yAxis": [
+              {
+                "type": "value"
+              }
+            ],
+            "series": [
+              {
+                "name": "网络流量日志",
+                "type": "line",
+                "stack": "Total",
+                "areaStyle": {},
+                "emphasis": {
+                  "focus": "series"
+                },
+                "data": "${series_data_netflow || []}"
+              },
+              {
+                "name": "IP日志",
+                "type": "line",
+                "stack": "Total",
+                "areaStyle": {},
+                "emphasis": {
+                  "focus": "series"
+                },
+                "data": "${series_data_ip_stat || []}"
+              }
+            ]
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "flex",
+          "justify": "space-evenly",
+          "items": [
+            {
+              "type": "page",
+              "style": {
+                "margin": "5px",
+                "backgroundColor": "#f5f5f5"
+              },
+              "body": [
+                {
+                  "type": "chart",
+                  "api": "/zenvis/api/v1/entity/statistics?entities=waf,ips,utm,pvs&field=level",
+                  "config": {
+                    "title": {
+                      "text": "风险等级总览",
+                      "textStyle": {
+                        "fontSize": 14
+                      }
+                    },
+                    "tooltip": {
+                      "trigger": "axis",
+                      "axisPointer": {
+                        "type": "shadow"
+                      }
+                    },
+                    "legend": {},
+                    "toolbox": {
+                      "feature": {
+                        "saveAsImage": {}
+                      }
+                    },
+                    "grid": {
+                      "left": "3%",
+                      "right": "4%",
+                      "bottom": "3%",
+                      "containLabel": true
+                    },
+                    "xAxis": {
+                      "type": "value"
+                    },
+                    "yAxis": {
+                      "type": "category",
+                      "data": "${yaxis_data || []}"
+                    },
+                    "series": [
+                      {
+                        "name": "高风险等级",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_1 || []}"
+                      },
+                      {
+                        "name": "中风险等级",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_2 || []}"
+                      },
+                      {
+                        "name": "低风险等级",
+                        "type": "bar",
+                        "stack": "total",
+                        "label": {
+                          "show": true
+                        },
+                        "emphasis": {
+                          "focus": "series"
+                        },
+                        "data": "${series_data_3 || []}"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

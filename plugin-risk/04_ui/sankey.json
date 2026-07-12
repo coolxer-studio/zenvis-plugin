@@ -1,0 +1,645 @@
+{
+    "data": {
+        "data": [
+            {
+                "name": "脆弱性"
+            },
+            {
+                "name": "威胁"
+            },
+            {
+                "name": "漏洞"
+            },
+            {
+                "name": "弱口令"
+            },
+            {
+                "name": "基线问题"
+            },
+            {
+                "name": "数据窃改"
+            },
+            {
+                "name": "恶意攻击"
+            },
+            {
+                "name": "服务器"
+            },
+            {
+                "name": "移动设备"
+            },
+            {
+                "name": "PC电脑"
+            },
+            {
+                "name": "智能终端"
+            },
+            {
+                "name": "探针软件"
+            },
+            {
+                "name": "应用程序"
+            },
+            {
+                "name": "系统服务"
+            },
+            {
+                "name": "API接口"
+            },
+            {
+                "name": "日志数据"
+            },
+            {
+                "name": "文件数据"
+            },
+            {
+                "name": "操作系统漏洞利用风险"
+            },
+            {
+                "name": "拒绝服务攻击"
+            },
+            {
+                "name": "未认证的Nginx端口"
+            },
+            {
+                "name": "通信劫持风险"
+            },
+            {
+                "name": "设备越狱/Root风险"
+            },
+            {
+                "name": "函数劫持注入风险"
+            },
+            {
+                "name": "恶意软件感染风险"
+            },
+            {
+                "name": "防火墙绕过风险"
+            },
+            {
+                "name": "疑似劫持风险"
+            },
+            {
+                "name": "异常调试风险"
+            },
+            {
+                "name": "固件被拷贝风险"
+            },
+            {
+                "name": "设备被破解风险"
+            },
+            {
+                "name": "探针被剥离风险"
+            },
+            {
+                "name": "探针通信异常风险"
+            },
+            {
+                "name": "应用被破解风险"
+            },
+            {
+                "name": "代码注入风险"
+            },
+            {
+                "name": "未授权的服务配置"
+            },
+            {
+                "name": "版本存在漏洞风险"
+            },
+            {
+                "name": "服务异常用户启动风险"
+            },
+            {
+                "name": "API未授权访问风险"
+            },
+            {
+                "name": "疑似BOT访问风险"
+            },
+            {
+                "name": "日志泄露敏感信息风险"
+            },
+            {
+                "name": "文件泄露风险"
+            },
+            {
+                "name": "非授权文件访问"
+            },
+            {
+                "name": "极高风险"
+            },
+            {
+                "name": "高风险"
+            },
+            {
+                "name": "中风险"
+            },
+            {
+                "name": "低风险"
+            }
+        ],
+        "links": [
+            {
+                "source": "脆弱性",
+                "target": "漏洞",
+                "value": 124.729
+            },
+            {
+                "source": "脆弱性",
+                "target": "弱口令",
+                "value": 0.597
+            },
+            {
+                "source": "脆弱性",
+                "target": "基线问题",
+                "value": 26.862
+            },
+            {
+                "source": "威胁",
+                "target": "数据窃改",
+                "value": 280.322
+            },
+            {
+                "source": "威胁",
+                "target": "恶意攻击",
+                "value": 81.144
+            },
+            {
+                "source": "漏洞",
+                "target": "操作系统漏洞利用风险",
+                "value": 35
+            },
+            {
+                "source": "漏洞",
+                "target": "版本存在漏洞风险",
+                "value": 35
+            },
+            {
+                "source": "弱口令",
+                "target": "API未授权访问风险",
+                "value": 35
+            },
+            {
+                "source": "基线问题",
+                "target": "未认证的Nginx端口",
+                "value": 35
+            },
+            {
+                "source": "基线问题",
+                "target": "防火墙绕过风险",
+                "value": 35
+            },
+            {
+                "source": "基线问题",
+                "target": "未授权的服务配置",
+                "value": 35
+            },
+            {
+                "source": "基线问题",
+                "target": "非授权文件访问",
+                "value": 35
+            },
+            {
+                "source": "基线问题",
+                "target": "防火墙绕过风险",
+                "value": 35
+            },
+            {
+                "source": "数据窃改",
+                "target": "通信劫持风险",
+                "value": 35
+            },
+            {
+                "source": "数据窃改",
+                "target": "固件被拷贝风险",
+                "value": 35
+            },
+            {
+                "source": "数据窃改",
+                "target": "疑似BOT访问风险",
+                "value": 35
+            },
+            {
+                "source": "数据窃改",
+                "target": "日志泄露敏感信息风险",
+                "value": 35
+            },
+            {
+                "source": "数据窃改",
+                "target": "文件泄露风险",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "拒绝服务攻击",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "设备越狱/Root风险",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "函数劫持注入风险",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "恶意软件感染风险",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "疑似劫持风险",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "异常调试风险",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "设备被破解风险",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "探针被剥离风险",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "应用被破解风险",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "代码注入风险",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "服务异常用户启动风险",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "API未授权访问风险",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "非授权文件访问",
+                "value": 35
+            },
+            {
+                "source": "恶意攻击",
+                "target": "疑似BOT访问风险",
+                "value": 35
+            },
+            {
+                "source": "操作系统漏洞利用风险",
+                "target": "服务器",
+                "value": 35
+            },
+            {
+                "source": "版本存在漏洞风险",
+                "target": "应用程序",
+                "value": 35
+            },
+            {
+                "source": "API未授权访问风险",
+                "target": "API接口",
+                "value": 35
+            },
+            {
+                "source": "未认证的Nginx端口",
+                "target": "系统服务",
+                "value": 35
+            },
+            {
+                "source": "防火墙绕过风险",
+                "target": "服务器",
+                "value": 35
+            },
+            {
+                "source": "未授权的服务配置",
+                "target": "系统服务",
+                "value": 35
+            },
+            {
+                "source": "非授权文件访问",
+                "target": "文件数据",
+                "value": 35
+            },
+            {
+                "source": "通信劫持风险",
+                "target": "移动设备",
+                "value": 35
+            },
+            {
+                "source": "固件被拷贝风险",
+                "target": "智能终端",
+                "value": 35
+            },
+            {
+                "source": "日志泄露敏感信息风险",
+                "target": "日志数据",
+                "value": 35
+            },
+            {
+                "source": "文件泄露风险",
+                "target": "文件数据",
+                "value": 35
+            },
+            {
+                "source": "拒绝服务攻击",
+                "target": "服务器",
+                "value": 35
+            },
+            {
+                "source": "设备越狱/Root风险",
+                "target": "移动设备",
+                "value": 35
+            },
+            {
+                "source": "函数劫持注入风险",
+                "target": "应用程序",
+                "value": 35
+            },
+            {
+                "source": "恶意软件感染风险",
+                "target": "PC电脑",
+                "value": 35
+            },
+            {
+                "source": "疑似劫持风险",
+                "target": "PC电脑",
+                "value": 35
+            },
+            {
+                "source": "异常调试风险",
+                "target": "智能终端",
+                "value": 35
+            },
+            {
+                "source": "设备被破解风险",
+                "target": "智能终端",
+                "value": 35
+            },
+            {
+                "source": "探针被剥离风险",
+                "target": "探针软件",
+                "value": 35
+            },
+            {
+                "source": "应用被破解风险",
+                "target": "应用程序",
+                "value": 35
+            },
+            {
+                "source": "代码注入风险",
+                "target": "应用程序",
+                "value": 35
+            },
+            {
+                "source": "服务异常用户启动风险",
+                "target": "系统服务",
+                "value": 35
+            },
+            {
+                "source": "API未授权访问风险",
+                "target": "API接口",
+                "value": 35
+            },
+            {
+                "source": "非授权文件访问",
+                "target": "文件数据",
+                "value": 35
+            },
+            {
+                "source": "疑似BOT访问风险",
+                "target": "API接口",
+                "value": 35
+            },
+            {
+                "source": "操作系统漏洞利用风险",
+                "target": "中风险",
+                "value": 35
+            },
+            {
+                "source": "版本存在漏洞风险",
+                "target": "中风险",
+                "value": 35
+            },
+            {
+                "source": "API未授权访问风险",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "未认证的Nginx端口",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "防火墙绕过风险",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "未授权的服务配置",
+                "target": "低风险",
+                "value": 35
+            },
+            {
+                "source": "非授权文件访问",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "通信劫持风险",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "固件被拷贝风险",
+                "target": "极高风险",
+                "value": 35
+            },
+            {
+                "source": "日志泄露敏感信息风险",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "文件泄露风险",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "拒绝服务攻击",
+                "target": "极高风险",
+                "value": 35
+            },
+            {
+                "source": "设备越狱/Root风险",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "函数劫持注入风险",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "恶意软件感染风险",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "疑似劫持风险",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "异常调试风险",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "设备被破解风险",
+                "target": "极高风险",
+                "value": 35
+            },
+            {
+                "source": "探针被剥离风险",
+                "target": "极高风险",
+                "value": 35
+            },
+            {
+                "source": "应用被破解风险",
+                "target": "极高风险",
+                "value": 35
+            },
+            {
+                "source": "代码注入风险",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "服务异常用户启动风险",
+                "target": "低风险",
+                "value": 35
+            },
+            {
+                "source": "API未授权访问风险",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "非授权文件访问",
+                "target": "高风险",
+                "value": 35
+            },
+            {
+                "source": "疑似BOT访问风险",
+                "target": "低风险",
+                "value": 35
+            },
+            {
+                "source": "极高风险",
+                "target": "服务器",
+                "value": 6
+            },
+            {
+                "source": "极高风险",
+                "target": "应用程序",
+                "value": 6
+            },
+            {
+                "source": "极高风险",
+                "target": "系统服务",
+                "value": 6
+            },
+            {
+                "source": "极高风险",
+                "target": "API接口",
+                "value": 6
+            },
+            {
+                "source": "高风险",
+                "target": "服务器",
+                "value": 6
+            },
+            {
+                "source": "高风险",
+                "target": "移动设备",
+                "value": 6
+            },
+            {
+                "source": "高风险",
+                "target": "智能终端",
+                "value": 6
+            },
+            {
+                "source": "高风险",
+                "target": "探针软件",
+                "value": 6
+            },
+            {
+                "source": "高风险",
+                "target": "应用程序",
+                "value": 6
+            },
+            {
+                "source": "高风险",
+                "target": "系统服务",
+                "value": 6
+            },
+            {
+                "source": "高风险",
+                "target": "API接口",
+                "value": 6
+            },
+            {
+                "source": "高风险",
+                "target": "文件数据",
+                "value": 6
+            },
+            {
+                "source": "中风险",
+                "target": "PC电脑",
+                "value": 6
+            },
+            {
+                "source": "中风险",
+                "target": "智能终端",
+                "value": 6
+            },
+            {
+                "source": "中风险",
+                "target": "API接口",
+                "value": 6
+            },
+            {
+                "source": "低风险",
+                "target": "智能终端",
+                "value": 6
+            },
+            {
+                "source": "低风险",
+                "target": "文件数据",
+                "value": 6
+            },
+            {
+                "source": "低风险",
+                "target": "日志数据",
+                "value": 6
+            }
+        ]
+    },
+    "msg": "请求成功",
+    "status": 0
+}

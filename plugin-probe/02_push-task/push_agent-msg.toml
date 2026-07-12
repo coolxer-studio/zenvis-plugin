@@ -1,0 +1,81 @@
+# 输入源配置
+[sources.source_kafka_msg]
+type = "kafka"
+bootstrap_servers = "kafka-service:9092"
+auto_offset_reset = "earliest"
+group_id = "kafka_source"
+topics = [ "android_fact_start","android_fact_device","android_fact_net","android_fact_self-app","android_fact_file","android_fact_runtime","android_fact_app","android_fact_location","android_fact_inject","android_fact_event","android_fact_java","android_fact_native","android_fact_anr","android_fact_activity","android_fact_url","android_fact_user","android_fact_privacy","h5_fact_start","h5_fact_device","h5_fact_self_app","h5_fact_runtime","h5_fact_location","h5_fact_event","h5_fact_error","h5_fact_dev_tool","h5_fact_debug","h5_fact_user","ios_fact_start","ios_fact_device","ios_fact_net","ios_fact_self-app","ios_fact_file","ios_fact_runtime","ios_fact_app","ios_fact_location","ios_fact_inject","ios_fact_view","ios_fact_signal","ios_fact_objc","ios_fact_user","host_fact_start","host_fact_event" ,"host_fact_device","host_fact_file","host_fact_net","host_fact_runtime","wechat_fact_start","wechat_fact_device","wechat_fact_user" ]
+
+[transforms.parse_json]
+  inputs        = ["source_kafka_msg"]
+  type          = "remap"
+  drop_on_error = false
+  source        = '''
+      . = parse_json!(string!(.message))
+      .user_id = .fact.common.user_id
+      .app_id = .fact.common.app_id
+      .app_name = .fact.common.app_name
+      .app_package = .fact.common.app_package
+      .app_version = .fact.common.app_version
+      .sdk_version = .fact.common.sdk_version
+      .client_time = .fact.common.client_time
+      .guid = .fact.common.guid
+      .lan_ip = .fact.common.lan_ip
+      .latitude = .fact.common.latitude
+      .country = .fact.common.country
+      .province = .fact.common.province
+      .city = .fact.common.city
+      .county = .fact.common.county
+      .thoroughfare = .fact.common.thoroughfare
+      .longitude = .fact.common.longitude
+      .manufacturer = .fact.common.manufacturer
+      .model = .fact.common.model
+      .net_type = .fact.common.net_type
+      .platform = .fact.common.platform
+      .start_id = .fact.common.start_id
+      .system_name = .fact.common.system
+      .system_version = .fact.common.system_version
+      .wan_ip = .fact.common.wan_ip
+      del(.fact.common)
+      .fact_type = .fact.type
+      .agenda_tags = []
+      .agendas_tmp = []
+      for_each(array!(.agendas)) -> |_index, value| {
+      .agenda_tags = push(.agenda_tags,join!([value.tag, value.level], separator: ":"))
+      .agendas_tmp = push(.agendas_tmp,encode_json(value))
+      }
+      .agendas = .agendas_tmp
+      del(.agendas_tmp)
+      .punish_types = []
+      .punishes_tmp = []
+      for_each(array!(.punishes)) -> |_index, value| {
+      .punish_types = push(.punish_types,value.action.type)
+      .punishes_tmp = push(.punishes_tmp,encode_json(value))
+      }
+      .punishes = .punishes_tmp
+      del(.punishes_tmp)
+  '''
+
+# 定义 route区分异常数据
+[transforms.route]
+type = "route"
+inputs = ["parse_json"]
+route."non_empty_or_blank" = 'exists(.guid) && .guid != "" && exists(.start_id) && .start_id != ""' # 判断字段不为空且不为空字符串
+
+# 输出目标配置
+[sinks.my_clickhouse_sink]
+type = "clickhouse"
+inputs = ["route.non_empty_or_blank"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "msg"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出数据到日志
+[sinks.console]
+inputs = ["route._unmatched"]
+type = "console"
+encoding.codec = "json"

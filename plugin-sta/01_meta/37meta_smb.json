@@ -1,0 +1,259 @@
+{
+  "entity": [
+    {
+      "id": 37,
+      "name": "smb",
+      "label": "SMB_CMD审计",
+      "description": "SMB_CMD审计，记录SMB协议命令执行情况",
+      "table_name": "zenvis.t_sta_smb",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "uid"
+        ],
+        "partition_by": "uid"
+      }
+    }
+  ],
+  "attribute": [
+    {
+      "id": 37001,
+      "entity": "smb",
+      "name": "uid",
+      "label": "会话唯一ID",
+      "description": "会话唯一ID",
+      "column_name": "uid",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37002,
+      "entity": "smb",
+      "name": "ts",
+      "label": "时间戳",
+      "description": "时间戳",
+      "column_name": "ts",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37003,
+      "entity": "smb",
+      "name": "src_ip",
+      "label": "源IP",
+      "description": "源IP",
+      "column_name": "src_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37004,
+      "entity": "smb",
+      "name": "src_port",
+      "label": "源端口",
+      "description": "源端口",
+      "column_name": "src_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37005,
+      "entity": "smb",
+      "name": "dst_ip",
+      "label": "目的IP",
+      "description": "目的IP",
+      "column_name": "dst_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37006,
+      "entity": "smb",
+      "name": "dst_port",
+      "label": "目的端口",
+      "description": "目的端口",
+      "column_name": "dst_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37007,
+      "entity": "smb",
+      "name": "logtype",
+      "label": "日志类型",
+      "description": "日志类型，smb",
+      "column_name": "logtype",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37008,
+      "entity": "smb",
+      "name": "devname",
+      "label": "设备名称",
+      "description": "设备名称",
+      "column_name": "devname",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37009,
+      "entity": "smb",
+      "name": "ds",
+      "label": "年月日",
+      "description": "年月日",
+      "column_name": "ds",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37010,
+      "entity": "smb",
+      "name": "hh",
+      "label": "小时",
+      "description": "小时",
+      "column_name": "hh",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37011,
+      "entity": "smb",
+      "name": "vendor",
+      "label": "厂商",
+      "description": "厂商，sangfor",
+      "column_name": "vendor",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37012,
+      "entity": "smb",
+      "name": "logid",
+      "label": "日志ID",
+      "description": "日志ID",
+      "column_name": "logid",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37013,
+      "entity": "smb",
+      "name": "iptype",
+      "label": "IP类型",
+      "description": "IP类型，4表示ipv4，6表示ipv6",
+      "column_name": "iptype",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37014,
+      "entity": "smb",
+      "name": "appproto",
+      "label": "应用层协议",
+      "description": "应用层协议",
+      "column_name": "appproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37015,
+      "entity": "smb",
+      "name": "transproto",
+      "label": "传输层协议",
+      "description": "传输层协议",
+      "column_name": "transproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 37016,
+      "entity": "smb",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    }
+  ]
+}

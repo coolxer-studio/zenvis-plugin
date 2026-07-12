@@ -1,0 +1,8 @@
+{
+	"name":"运营分析",
+	"package_name":"com.coolxer.plugin.operation",
+	"version":"1.0.0",
+	"description":"通过收集用户行为数据为数字化运营分析提供数据支撑。",
+	"author":"CoolXer",
+	"icon":"icon.png"
+}

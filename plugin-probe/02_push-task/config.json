@@ -1,0 +1,17 @@
+[
+  {
+    "name": "探针日志收集",
+    "description": "继承了探针的应用和终端会上报采集日志到kafka队列，当前服务作为消费端实现数据解析存储。",
+    "config": "push_agent-msg.toml"
+  },
+  {
+    "name": "网关日志收集",
+    "description": "通过开放syslog接口用于接收网关日志，需要在网关配置中主动配置。",
+    "config": "push_gateway-msg.toml"
+  },
+  {
+    "name": "业务日志收集",
+    "description": "以文件日志作为数据源，收集业务日志。",
+    "config": "push_log-msg.toml"
+  }
+]

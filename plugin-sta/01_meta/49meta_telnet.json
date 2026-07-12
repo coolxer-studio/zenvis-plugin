@@ -1,0 +1,301 @@
+{
+  "entity": [
+    {
+      "id": 49,
+      "name": "telnet",
+      "label": "TELNET命令审计",
+      "description": "TELNET命令审计，记录TELNET协议通信情况",
+      "table_name": "zenvis.t_sta_telnet",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "uid"
+        ],
+        "partition_by": "uid"
+      }
+    }
+  ],
+  "attribute": [
+    {
+      "id": 49001,
+      "entity": "telnet",
+      "name": "uid",
+      "label": "会话唯一ID",
+      "description": "会话唯一ID",
+      "column_name": "uid",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49002,
+      "entity": "telnet",
+      "name": "ts",
+      "label": "时间戳",
+      "description": "时间戳",
+      "column_name": "ts",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49003,
+      "entity": "telnet",
+      "name": "src_ip",
+      "label": "源IP",
+      "description": "源IP地址",
+      "column_name": "src_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49004,
+      "entity": "telnet",
+      "name": "src_port",
+      "label": "源端口",
+      "description": "源端口",
+      "column_name": "src_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49005,
+      "entity": "telnet",
+      "name": "dst_ip",
+      "label": "目的IP",
+      "description": "目的IP地址",
+      "column_name": "dst_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49006,
+      "entity": "telnet",
+      "name": "dst_port",
+      "label": "目的端口",
+      "description": "目的端口",
+      "column_name": "dst_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49007,
+      "entity": "telnet",
+      "name": "user",
+      "label": "命令执行者",
+      "description": "命令执行者（连接建立时的认证用户）",
+      "column_name": "user",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49008,
+      "entity": "telnet",
+      "name": "input",
+      "label": "命令输入",
+      "description": "命令输入（可能为空）",
+      "column_name": "input",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49009,
+      "entity": "telnet",
+      "name": "output",
+      "label": "命令输出",
+      "description": "命令输出（超过缓冲区部分可能被截断）",
+      "column_name": "output",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49010,
+      "entity": "telnet",
+      "name": "logtype",
+      "label": "日志类型",
+      "description": "日志类型，telnet",
+      "column_name": "logtype",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49011,
+      "entity": "telnet",
+      "name": "devname",
+      "label": "设备名称",
+      "description": "设备名称",
+      "column_name": "devname",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49012,
+      "entity": "telnet",
+      "name": "ds",
+      "label": "年月日",
+      "description": "年月日",
+      "column_name": "ds",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49013,
+      "entity": "telnet",
+      "name": "hh",
+      "label": "小时",
+      "description": "小时",
+      "column_name": "hh",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49014,
+      "entity": "telnet",
+      "name": "vendor",
+      "label": "厂商",
+      "description": "厂商，sangfor",
+      "column_name": "vendor",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49015,
+      "entity": "telnet",
+      "name": "logid",
+      "label": "日志ID",
+      "description": "日志ID",
+      "column_name": "logid",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49016,
+      "entity": "telnet",
+      "name": "iptype",
+      "label": "IP类型",
+      "description": "IP类型，4表示ipv4，6表示ipv6",
+      "column_name": "iptype",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49017,
+      "entity": "telnet",
+      "name": "appproto",
+      "label": "应用层协议",
+      "description": "应用层协议",
+      "column_name": "appproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49018,
+      "entity": "telnet",
+      "name": "transproto",
+      "label": "传输层协议",
+      "description": "传输层协议",
+      "column_name": "transproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 49019,
+      "entity": "telnet",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    }
+  ]
+}

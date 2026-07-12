@@ -1,0 +1,415 @@
+{
+  "entity": [
+    {
+      "id": 54,
+      "name": "utm",
+      "label": "UTM安全日志",
+      "description": "UTM安全日志，统一威胁管理安全事件",
+      "table_name": "zenvis.t_sta_utm",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "uid"
+        ],
+        "partition_by": "uid"
+      }
+    }
+  ],
+  "attribute": [
+    {
+      "id": 54001,
+      "entity": "utm",
+      "name": "ts",
+      "label": "时间戳",
+      "description": "时间戳",
+      "column_name": "ts",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54002,
+      "entity": "utm",
+      "name": "uid",
+      "label": "会话唯一ID",
+      "description": "会话唯一ID",
+      "column_name": "uid",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54003,
+      "entity": "utm",
+      "name": "logtype",
+      "label": "日志类型",
+      "description": "日志类型，utm",
+      "column_name": "logtype",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54004,
+      "entity": "utm",
+      "name": "devname",
+      "label": "设备名称",
+      "description": "设备名称",
+      "column_name": "devname",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54005,
+      "entity": "utm",
+      "name": "ds",
+      "label": "年月日",
+      "description": "年月日",
+      "column_name": "ds",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54006,
+      "entity": "utm",
+      "name": "hh",
+      "label": "小时",
+      "description": "小时",
+      "column_name": "hh",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54007,
+      "entity": "utm",
+      "name": "vendor",
+      "label": "厂商",
+      "description": "厂商，sangfor",
+      "column_name": "vendor",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54008,
+      "entity": "utm",
+      "name": "appproto",
+      "label": "应用层协议",
+      "description": "应用层协议",
+      "column_name": "appproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54009,
+      "entity": "utm",
+      "name": "transproto",
+      "label": "传输层协议",
+      "description": "传输层协议",
+      "column_name": "transproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54010,
+      "entity": "utm",
+      "name": "logid",
+      "label": "日志ID",
+      "description": "日志ID",
+      "column_name": "logid",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54011,
+      "entity": "utm",
+      "name": "src_ip",
+      "label": "源IP",
+      "description": "源IP地址",
+      "column_name": "src_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54012,
+      "entity": "utm",
+      "name": "dst_ip",
+      "label": "目的IP",
+      "description": "目的IP地址",
+      "column_name": "dst_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54013,
+      "entity": "utm",
+      "name": "iptype",
+      "label": "IP类型",
+      "description": "IP类型，4表示ipv4，6表示ipv6",
+      "column_name": "iptype",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54014,
+      "entity": "utm",
+      "name": "src_port",
+      "label": "源端口",
+      "description": "源端口，赋予默认值0",
+      "column_name": "src_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54015,
+      "entity": "utm",
+      "name": "dst_port",
+      "label": "目的端口",
+      "description": "目的端口，赋予默认值0",
+      "column_name": "dst_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54016,
+      "entity": "utm",
+      "name": "nsid",
+      "label": "规则ID",
+      "description": "规则ID",
+      "column_name": "nsid",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54017,
+      "entity": "utm",
+      "name": "level",
+      "label": "严重等级",
+      "description": "严重等级(1: 高; 2: 中 3: 低)",
+      "column_name": "level",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54018,
+      "entity": "utm",
+      "name": "nnetaction",
+      "label": "动作",
+      "description": "动作(1: 被记录; 2: 拒绝)",
+      "column_name": "nnetaction",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54019,
+      "entity": "utm",
+      "name": "nattacktype",
+      "label": "攻击类型",
+      "description": "攻击类型",
+      "column_name": "nattacktype",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54020,
+      "entity": "utm",
+      "name": "nsubattacktype",
+      "label": "攻击子类型",
+      "description": "攻击子类型",
+      "column_name": "nsubattacktype",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54021,
+      "entity": "utm",
+      "name": "npolicyid",
+      "label": "策略ID",
+      "description": "策略ID",
+      "column_name": "npolicyid",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54022,
+      "entity": "utm",
+      "name": "nattackcount",
+      "label": "攻击计数",
+      "description": "攻击计数",
+      "column_name": "nattackcount",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54023,
+      "entity": "utm",
+      "name": "nlen",
+      "label": "result长度",
+      "description": "result长度",
+      "column_name": "nlen",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54024,
+      "entity": "utm",
+      "name": "szrecordtime",
+      "label": "日志记录时间",
+      "description": "日志记录时间",
+      "column_name": "szrecordtime",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54025,
+      "entity": "utm",
+      "name": "szresult",
+      "label": "结果",
+      "description": "存储日志数据包或描述，xml格式",
+      "column_name": "szresult",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 54026,
+      "entity": "utm",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    }
+  ]
+}

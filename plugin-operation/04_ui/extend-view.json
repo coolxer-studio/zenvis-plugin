@@ -1,0 +1,12 @@
+{
+  "type": "page",
+  "title": "ID:${params.id}",
+  "remark": null,
+  "body": [
+    {
+      "type": "alert",
+      "level": "warning",
+      "body": "请开通权限后使用"
+    }
+  ]
+}

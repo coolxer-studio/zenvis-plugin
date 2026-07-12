@@ -1,0 +1,8 @@
+{
+  "name": "STA插件",
+  "package_name": "com.coolxer.plugin.sta",
+  "version": "1.0.0",
+  "description": "STA插件",
+  "author": "CoolXer",
+  "icon": "icon.png"
+}

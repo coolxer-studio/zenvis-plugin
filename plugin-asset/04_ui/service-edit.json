@@ -1,0 +1,20 @@
+{
+  "type": "page",
+  "title": "修改 ${params.ip}",
+  "remark": null,
+  "toolbar": [
+    {
+      "type": "button",
+      "actionType": "link",
+      "link": "/software/service/list",
+      "label": "返回列表"
+    }
+  ],
+  "body": [
+    {
+      "type": "alert",
+      "level": "warning",
+      "body": "请开通权限后使用"
+    }
+  ]
+}

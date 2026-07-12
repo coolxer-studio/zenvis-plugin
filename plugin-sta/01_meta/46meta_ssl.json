@@ -1,0 +1,259 @@
+{
+  "entity": [
+    {
+      "id": 46,
+      "name": "ssl",
+      "label": "SSL协议审计",
+      "description": "SSL协议审计，记录SSL/TLS协议通信情况",
+      "table_name": "zenvis.t_sta_ssl",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "uid"
+        ],
+        "partition_by": "uid"
+      }
+    }
+  ],
+  "attribute": [
+    {
+      "id": 46001,
+      "entity": "ssl",
+      "name": "uid",
+      "label": "会话唯一ID",
+      "description": "会话唯一ID",
+      "column_name": "uid",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46002,
+      "entity": "ssl",
+      "name": "ts",
+      "label": "时间戳",
+      "description": "时间戳",
+      "column_name": "ts",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46003,
+      "entity": "ssl",
+      "name": "src_ip",
+      "label": "源IP",
+      "description": "源IP",
+      "column_name": "src_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46004,
+      "entity": "ssl",
+      "name": "src_port",
+      "label": "源端口",
+      "description": "源端口",
+      "column_name": "src_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46005,
+      "entity": "ssl",
+      "name": "dst_ip",
+      "label": "目的IP",
+      "description": "目的IP",
+      "column_name": "dst_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46006,
+      "entity": "ssl",
+      "name": "dst_port",
+      "label": "目的端口",
+      "description": "目的端口",
+      "column_name": "dst_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46007,
+      "entity": "ssl",
+      "name": "logtype",
+      "label": "日志类型",
+      "description": "日志类型，ssl",
+      "column_name": "logtype",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46008,
+      "entity": "ssl",
+      "name": "devname",
+      "label": "设备名称",
+      "description": "设备名称",
+      "column_name": "devname",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46009,
+      "entity": "ssl",
+      "name": "ds",
+      "label": "年月日",
+      "description": "年月日",
+      "column_name": "ds",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46010,
+      "entity": "ssl",
+      "name": "hh",
+      "label": "小时",
+      "description": "小时",
+      "column_name": "hh",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46011,
+      "entity": "ssl",
+      "name": "vendor",
+      "label": "厂商",
+      "description": "厂商，sangfor",
+      "column_name": "vendor",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46012,
+      "entity": "ssl",
+      "name": "logid",
+      "label": "日志ID",
+      "description": "日志ID",
+      "column_name": "logid",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46013,
+      "entity": "ssl",
+      "name": "iptype",
+      "label": "IP类型",
+      "description": "IP类型，4表示ipv4，6表示ipv6",
+      "column_name": "iptype",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46014,
+      "entity": "ssl",
+      "name": "appproto",
+      "label": "应用层协议",
+      "description": "应用层协议",
+      "column_name": "appproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46015,
+      "entity": "ssl",
+      "name": "transproto",
+      "label": "传输层协议",
+      "description": "传输层协议",
+      "column_name": "transproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 46016,
+      "entity": "ssl",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    }
+  ]
+}

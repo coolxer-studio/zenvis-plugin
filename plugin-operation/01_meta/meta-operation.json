@@ -1,0 +1,3548 @@
+{
+  "entity": [
+    {
+      "id": 1,
+      "name": "operation_start_event",
+      "label": "启动事件",
+      "description": "启动事件表，记录用户启动应用的相关信息",
+      "table_name": "zenvis.operation_start_event",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "id"
+        ],
+        "partition_by": "id"
+      }
+    },
+    {
+      "id": 2,
+      "name": "operation_click_event",
+      "label": "点击事件",
+      "description": "点击事件表，记录用户在应用内点击组件的详细行为数据",
+      "table_name": "zenvis.operation_click_event",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "id"
+        ],
+        "partition_by": "id"
+      }
+    },
+    {
+      "id": 3,
+      "name": "operation_page_event",
+      "label": "页面访问事件",
+      "description": "页面访问事件表（zenvis.operation_page_event）",
+      "table_name": "zenvis.operation_page_event",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "id"
+        ],
+        "partition_by": "id"
+      }
+    },
+    {
+      "id": 4,
+      "name": "operation_api_call_event",
+      "label": "函数调用事件",
+      "description": "函数调用事件表，记录应用内函数调用的详细行为数据",
+      "table_name": "zenvis.operation_api_call_event",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "id"
+        ],
+        "partition_by": "id"
+      }
+    },
+    {
+      "id": 5,
+      "name": "operation_network_event",
+      "label": "网络请求事件",
+      "description": "网络请求事件表（zenvis.operation_network_event）",
+      "table_name": "zenvis.operation_network_event",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "id"
+        ],
+        "partition_by": "id"
+      }
+    },
+    {
+      "id": 6,
+      "name": "operation_extend_event",
+      "label": "用户拓展事件",
+      "description": "用户拓展事件表，记录扩展消息及关联位置信息",
+      "table_name": "zenvis.operation_extend_event",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "id"
+        ],
+        "partition_by": "id"
+      }
+    },
+    {
+      "id": 7,
+      "name": "operation_performance_event",
+      "label": "资源利用状态",
+      "description": "资源利用状态表，记录设备性能及资源使用情况",
+      "table_name": "zenvis.operation_performance_event",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "id"
+        ],
+        "partition_by": "id"
+      }
+    },
+    {
+      "id": 8,
+      "name": "operation_location_event",
+      "label": "位置信息状态",
+      "description": "位置信息状态表，记录设备实时地理位置",
+      "table_name": "zenvis.operation_location_event",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "id"
+        ],
+        "partition_by": "id"
+      }
+    },
+    {
+      "id": 9,
+      "name": "operation_crash_event",
+      "label": "崩溃事件",
+      "description": "崩溃事件表，记录应用崩溃信息及堆栈",
+      "table_name": "zenvis.operation_crash_event",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "id"
+        ],
+        "partition_by": "id"
+      }
+    },
+    {
+      "id": 10,
+      "name": "operation_anr_event",
+      "label": "无响应事件",
+      "description": "无响应事件表，记录应用无响应（ANR）详情",
+      "table_name": "zenvis.operation_anr_event",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "id"
+        ],
+        "partition_by": "id"
+      }
+    }
+  ],
+  "attribute": [
+    {
+      "id": 101,
+      "entity": "operation_start_event",
+      "name": "id",
+      "label": "事件唯一编号",
+      "description": "事件唯一编号",
+      "column_name": "id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 102,
+      "entity": "operation_start_event",
+      "name": "user_id",
+      "label": "用户ID",
+      "description": "用户ID",
+      "column_name": "user_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 103,
+      "entity": "operation_start_event",
+      "name": "device_id",
+      "label": "设备ID",
+      "description": "设备ID",
+      "column_name": "device_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 104,
+      "entity": "operation_start_event",
+      "name": "device_model",
+      "label": "设备型号",
+      "description": "设备型号",
+      "column_name": "device_model",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 105,
+      "entity": "operation_start_event",
+      "name": "device_os",
+      "label": "设备系统",
+      "description": "设备系统",
+      "column_name": "device_os",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 106,
+      "entity": "operation_start_event",
+      "name": "app_id",
+      "label": "应用ID",
+      "description": "应用ID",
+      "column_name": "app_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 107,
+      "entity": "operation_start_event",
+      "name": "app_name",
+      "label": "应用名称",
+      "description": "应用名称",
+      "column_name": "app_name",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 108,
+      "entity": "operation_start_event",
+      "name": "package_name",
+      "label": "应用包名",
+      "description": "应用包名",
+      "column_name": "package_name",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 109,
+      "entity": "operation_start_event",
+      "name": "longitude",
+      "label": "经度",
+      "description": "经度",
+      "column_name": "longitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 110,
+      "entity": "operation_start_event",
+      "name": "latitude",
+      "label": "纬度",
+      "description": "纬度",
+      "column_name": "latitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 111,
+      "entity": "operation_start_event",
+      "name": "country",
+      "label": "国家",
+      "description": "国家",
+      "column_name": "country",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 112,
+      "entity": "operation_start_event",
+      "name": "province",
+      "label": "省份",
+      "description": "省份",
+      "column_name": "province",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 113,
+      "entity": "operation_start_event",
+      "name": "city",
+      "label": "城市",
+      "description": "城市",
+      "column_name": "city",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 114,
+      "entity": "operation_start_event",
+      "name": "county",
+      "label": "区县",
+      "description": "区县",
+      "column_name": "county",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 115,
+      "entity": "operation_start_event",
+      "name": "net_type",
+      "label": "网络类型",
+      "description": "网络类型",
+      "column_name": "net_type",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 116,
+      "entity": "operation_start_event",
+      "name": "lan_ip",
+      "label": "局域网IP",
+      "description": "局域网IP",
+      "column_name": "lan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 117,
+      "entity": "operation_start_event",
+      "name": "wan_ip",
+      "label": "因特网IP",
+      "description": "因特网IP",
+      "column_name": "wan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 118,
+      "entity": "operation_start_event",
+      "name": "update_time",
+      "label": "更新时间",
+      "description": "更新时间",
+      "column_name": "update_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 119,
+      "entity": "operation_start_event",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 120,
+      "entity": "operation_start_event",
+      "name": "event_time",
+      "label": "事件发生时间",
+      "description": "事件发生时间",
+      "column_name": "event_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 201,
+      "entity": "operation_click_event",
+      "name": "id",
+      "label": "事件唯一标识",
+      "description": "事件唯一标识",
+      "column_name": "id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 202,
+      "entity": "operation_click_event",
+      "name": "user_id",
+      "label": "用户ID",
+      "description": "用户ID",
+      "column_name": "user_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 203,
+      "entity": "operation_click_event",
+      "name": "start_id",
+      "label": "启动ID",
+      "description": "启动ID",
+      "column_name": "start_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 204,
+      "entity": "operation_click_event",
+      "name": "click_x",
+      "label": "点击坐标x",
+      "description": "点击坐标x",
+      "column_name": "click_x",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 205,
+      "entity": "operation_click_event",
+      "name": "click_y",
+      "label": "点击坐标y",
+      "description": "点击坐标y",
+      "column_name": "click_y",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 206,
+      "entity": "operation_click_event",
+      "name": "component_type",
+      "label": "点击组件类型",
+      "description": "点击组件类型",
+      "column_name": "component_type",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 207,
+      "entity": "operation_click_event",
+      "name": "component_name",
+      "label": "组件名称",
+      "description": "组件名称",
+      "column_name": "component_name",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 208,
+      "entity": "operation_click_event",
+      "name": "page_path",
+      "label": "所属页面路径",
+      "description": "所属页面路径",
+      "column_name": "page_path",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 209,
+      "entity": "operation_click_event",
+      "name": "page_name",
+      "label": "所属页面名称",
+      "description": "所属页面名称",
+      "column_name": "page_name",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 210,
+      "entity": "operation_click_event",
+      "name": "longitude",
+      "label": "经度",
+      "description": "经度",
+      "column_name": "longitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 211,
+      "entity": "operation_click_event",
+      "name": "latitude",
+      "label": "纬度",
+      "description": "纬度",
+      "column_name": "latitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 212,
+      "entity": "operation_click_event",
+      "name": "country",
+      "label": "国家",
+      "description": "国家",
+      "column_name": "country",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 213,
+      "entity": "operation_click_event",
+      "name": "province",
+      "label": "省份",
+      "description": "省份",
+      "column_name": "province",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 214,
+      "entity": "operation_click_event",
+      "name": "city",
+      "label": "城市",
+      "description": "城市",
+      "column_name": "city",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 215,
+      "entity": "operation_click_event",
+      "name": "county",
+      "label": "区县",
+      "description": "区县",
+      "column_name": "county",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 216,
+      "entity": "operation_click_event",
+      "name": "net_type",
+      "label": "网络类型",
+      "description": "网络类型",
+      "column_name": "net_type",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 217,
+      "entity": "operation_click_event",
+      "name": "lan_ip",
+      "label": "局域网IP",
+      "description": "局域网IP",
+      "column_name": "lan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 218,
+      "entity": "operation_click_event",
+      "name": "wan_ip",
+      "label": "因特网IP",
+      "description": "因特网IP",
+      "column_name": "wan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 219,
+      "entity": "operation_click_event",
+      "name": "update_time",
+      "label": "更新时间",
+      "description": "更新时间",
+      "column_name": "update_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 220,
+      "entity": "operation_click_event",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 221,
+      "entity": "operation_click_event",
+      "name": "event_time",
+      "label": "事件发生时间",
+      "description": "事件发生时间",
+      "column_name": "event_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 301,
+      "entity": "operation_page_event",
+      "name": "id",
+      "label": "事件ID",
+      "description": "事件唯一标识",
+      "column_name": "id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 302,
+      "entity": "operation_page_event",
+      "name": "user_id",
+      "label": "用户ID",
+      "description": "用户ID",
+      "column_name": "user_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 303,
+      "entity": "operation_page_event",
+      "name": "start_id",
+      "label": "启动ID",
+      "description": "启动会话ID",
+      "column_name": "start_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": false
+    },
+    {
+      "id": 304,
+      "entity": "operation_page_event",
+      "name": "page_path",
+      "label": "页面路径",
+      "description": "页面路由路径",
+      "column_name": "page_path",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 305,
+      "entity": "operation_page_event",
+      "name": "page_name",
+      "label": "页面名称",
+      "description": "页面中文/英文名称",
+      "column_name": "page_name",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 306,
+      "entity": "operation_page_event",
+      "name": "referrer",
+      "label": "跳转来源",
+      "description": "上一跳来源URL/页面",
+      "column_name": "referrer",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 307,
+      "entity": "operation_page_event",
+      "name": "longitude",
+      "label": "经度",
+      "description": "事件发生地经度",
+      "column_name": "longitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 308,
+      "entity": "operation_page_event",
+      "name": "latitude",
+      "label": "纬度",
+      "description": "事件发生地纬度",
+      "column_name": "latitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 309,
+      "entity": "operation_page_event",
+      "name": "country",
+      "label": "国家",
+      "description": "国家",
+      "column_name": "country",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 310,
+      "entity": "operation_page_event",
+      "name": "province",
+      "label": "省份",
+      "description": "省份/州",
+      "column_name": "province",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 311,
+      "entity": "operation_page_event",
+      "name": "city",
+      "label": "城市",
+      "description": "城市",
+      "column_name": "city",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 312,
+      "entity": "operation_page_event",
+      "name": "county",
+      "label": "区县",
+      "description": "区县",
+      "column_name": "county",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": false
+    },
+    {
+      "id": 313,
+      "entity": "operation_page_event",
+      "name": "net_type",
+      "label": "网络类型",
+      "description": "网络类型",
+      "column_name": "net_type",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 314,
+      "entity": "operation_page_event",
+      "name": "lan_ip",
+      "label": "局域网IP",
+      "description": "局域网IP地址",
+      "column_name": "lan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 315,
+      "entity": "operation_page_event",
+      "name": "wan_ip",
+      "label": "因特网IP",
+      "description": "公网IP地址",
+      "column_name": "wan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 316,
+      "entity": "operation_page_event",
+      "name": "update_time",
+      "label": "更新时间",
+      "description": "记录更新时间",
+      "column_name": "update_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 317,
+      "entity": "operation_page_event",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "记录入库时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": false
+    },
+    {
+      "id": 318,
+      "entity": "operation_page_event",
+      "name": "event_time",
+      "label": "事件发生时间",
+      "description": "客户端事件发生时间",
+      "column_name": "event_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 401,
+      "entity": "operation_api_call_event",
+      "name": "id",
+      "label": "事件唯一标识",
+      "description": "事件唯一标识",
+      "column_name": "id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 402,
+      "entity": "operation_api_call_event",
+      "name": "user_id",
+      "label": "用户ID",
+      "description": "用户ID",
+      "column_name": "user_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 403,
+      "entity": "operation_api_call_event",
+      "name": "start_id",
+      "label": "启动ID",
+      "description": "启动ID",
+      "column_name": "start_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 404,
+      "entity": "operation_api_call_event",
+      "name": "caller",
+      "label": "调用对象",
+      "description": "调用对象",
+      "column_name": "caller",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 405,
+      "entity": "operation_api_call_event",
+      "name": "callee",
+      "label": "被调用对象",
+      "description": "被调用对象",
+      "column_name": "callee",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 406,
+      "entity": "operation_api_call_event",
+      "name": "function_name",
+      "label": "函数名",
+      "description": "函数名",
+      "column_name": "function_name",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 407,
+      "entity": "operation_api_call_event",
+      "name": "function_params",
+      "label": "函数传参",
+      "description": "函数传参",
+      "column_name": "function_params",
+      "column_type": "json",
+      "display_type": "json",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 408,
+      "entity": "operation_api_call_event",
+      "name": "function_return",
+      "label": "函数返回值",
+      "description": "函数返回值",
+      "column_name": "function_return",
+      "column_type": "json",
+      "display_type": "json",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 409,
+      "entity": "operation_api_call_event",
+      "name": "longitude",
+      "label": "经度",
+      "description": "经度",
+      "column_name": "longitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 410,
+      "entity": "operation_api_call_event",
+      "name": "latitude",
+      "label": "纬度",
+      "description": "纬度",
+      "column_name": "latitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 411,
+      "entity": "operation_api_call_event",
+      "name": "country",
+      "label": "国家",
+      "description": "国家",
+      "column_name": "country",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 412,
+      "entity": "operation_api_call_event",
+      "name": "province",
+      "label": "省份",
+      "description": "省份",
+      "column_name": "province",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 413,
+      "entity": "operation_api_call_event",
+      "name": "city",
+      "label": "城市",
+      "description": "城市",
+      "column_name": "city",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 414,
+      "entity": "operation_api_call_event",
+      "name": "county",
+      "label": "区县",
+      "description": "区县",
+      "column_name": "county",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 415,
+      "entity": "operation_api_call_event",
+      "name": "net_type",
+      "label": "网络类型",
+      "description": "网络类型",
+      "column_name": "net_type",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 416,
+      "entity": "operation_api_call_event",
+      "name": "lan_ip",
+      "label": "局域网IP",
+      "description": "局域网IP",
+      "column_name": "lan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 417,
+      "entity": "operation_api_call_event",
+      "name": "wan_ip",
+      "label": "因特网IP",
+      "description": "因特网IP",
+      "column_name": "wan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 418,
+      "entity": "operation_api_call_event",
+      "name": "update_time",
+      "label": "更新时间",
+      "description": "更新时间",
+      "column_name": "update_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 419,
+      "entity": "operation_api_call_event",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 420,
+      "entity": "operation_api_call_event",
+      "name": "event_time",
+      "label": "事件发生时间",
+      "description": "事件发生时间",
+      "column_name": "event_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 501,
+      "entity": "operation_network_event",
+      "name": "id",
+      "label": "事件ID",
+      "description": "事件唯一标识",
+      "column_name": "id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 502,
+      "entity": "operation_network_event",
+      "name": "user_id",
+      "label": "用户ID",
+      "description": "用户ID",
+      "column_name": "user_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 503,
+      "entity": "operation_network_event",
+      "name": "start_id",
+      "label": "启动ID",
+      "description": "启动会话ID",
+      "column_name": "start_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": false
+    },
+    {
+      "id": 504,
+      "entity": "operation_network_event",
+      "name": "source_ip",
+      "label": "源IP",
+      "description": "源IP地址",
+      "column_name": "source_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 505,
+      "entity": "operation_network_event",
+      "name": "source_port",
+      "label": "源端口",
+      "description": "源端口号",
+      "column_name": "source_port",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": false
+    },
+    {
+      "id": 506,
+      "entity": "operation_network_event",
+      "name": "target_ip",
+      "label": "目标IP",
+      "description": "目标IP地址",
+      "column_name": "target_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 507,
+      "entity": "operation_network_event",
+      "name": "target_port",
+      "label": "目标端口",
+      "description": "目标端口号",
+      "column_name": "target_port",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": false
+    },
+    {
+      "id": 508,
+      "entity": "operation_network_event",
+      "name": "protocol",
+      "label": "协议",
+      "description": "通信协议（如TCP/UDP/HTTP）",
+      "column_name": "protocol",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 509,
+      "entity": "operation_network_event",
+      "name": "request_time",
+      "label": "请求时间",
+      "description": "请求时间",
+      "column_name": "request_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 510,
+      "entity": "operation_network_event",
+      "name": "response_time",
+      "label": "响应时间",
+      "description": "响应时间",
+      "column_name": "response_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 511,
+      "entity": "operation_network_event",
+      "name": "request_content",
+      "label": "请求内容",
+      "description": "请求内容（JSON或文本）",
+      "column_name": "request_content",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": false
+    },
+    {
+      "id": 512,
+      "entity": "operation_network_event",
+      "name": "response_content",
+      "label": "响应内容",
+      "description": "响应内容（JSON或文本）",
+      "column_name": "response_content",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": false
+    },
+    {
+      "id": 513,
+      "entity": "operation_network_event",
+      "name": "longitude",
+      "label": "经度",
+      "description": "事件发生地经度",
+      "column_name": "longitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 514,
+      "entity": "operation_network_event",
+      "name": "latitude",
+      "label": "纬度",
+      "description": "事件发生地纬度",
+      "column_name": "latitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 515,
+      "entity": "operation_network_event",
+      "name": "country",
+      "label": "国家",
+      "description": "国家",
+      "column_name": "country",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 516,
+      "entity": "operation_network_event",
+      "name": "province",
+      "label": "省份",
+      "description": "省份/州",
+      "column_name": "province",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 517,
+      "entity": "operation_network_event",
+      "name": "city",
+      "label": "城市",
+      "description": "城市",
+      "column_name": "city",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 518,
+      "entity": "operation_network_event",
+      "name": "county",
+      "label": "区县",
+      "description": "区县",
+      "column_name": "county",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": false
+    },
+    {
+      "id": 519,
+      "entity": "operation_network_event",
+      "name": "net_type",
+      "label": "网络类型",
+      "description": "网络类型",
+      "column_name": "net_type",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 520,
+      "entity": "operation_network_event",
+      "name": "lan_ip",
+      "label": "局域网IP",
+      "description": "局域网IP",
+      "column_name": "lan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 521,
+      "entity": "operation_network_event",
+      "name": "wan_ip",
+      "label": "因特网IP",
+      "description": "公网IP",
+      "column_name": "wan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 522,
+      "entity": "operation_network_event",
+      "name": "update_time",
+      "label": "更新时间",
+      "description": "记录更新时间",
+      "column_name": "update_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 523,
+      "entity": "operation_network_event",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "记录入库时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": false
+    },
+    {
+      "id": 524,
+      "entity": "operation_network_event",
+      "name": "event_time",
+      "label": "事件发生时间",
+      "description": "客户端事件发生时间",
+      "column_name": "event_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 601,
+      "entity": "operation_extend_event",
+      "name": "id",
+      "label": "事件唯一标识",
+      "description": "事件唯一标识",
+      "column_name": "id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 602,
+      "entity": "operation_extend_event",
+      "name": "user_id",
+      "label": "用户ID",
+      "description": "用户ID",
+      "column_name": "user_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 603,
+      "entity": "operation_extend_event",
+      "name": "start_id",
+      "label": "启动ID",
+      "description": "启动ID",
+      "column_name": "start_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 604,
+      "entity": "operation_extend_event",
+      "name": "extend",
+      "label": "扩展消息",
+      "description": "扩展消息",
+      "column_name": "extend",
+      "column_type": "json",
+      "display_type": "json",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 605,
+      "entity": "operation_extend_event",
+      "name": "longitude",
+      "label": "经度",
+      "description": "经度",
+      "column_name": "longitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 606,
+      "entity": "operation_extend_event",
+      "name": "latitude",
+      "label": "纬度",
+      "description": "纬度",
+      "column_name": "latitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 607,
+      "entity": "operation_extend_event",
+      "name": "country",
+      "label": "国家",
+      "description": "国家",
+      "column_name": "country",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 608,
+      "entity": "operation_extend_event",
+      "name": "province",
+      "label": "省份",
+      "description": "省份",
+      "column_name": "province",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 609,
+      "entity": "operation_extend_event",
+      "name": "city",
+      "label": "城市",
+      "description": "城市",
+      "column_name": "city",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 610,
+      "entity": "operation_extend_event",
+      "name": "county",
+      "label": "区县",
+      "description": "区县",
+      "column_name": "county",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 611,
+      "entity": "operation_extend_event",
+      "name": "net_type",
+      "label": "网络类型",
+      "description": "网络类型",
+      "column_name": "net_type",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 612,
+      "entity": "operation_extend_event",
+      "name": "lan_ip",
+      "label": "局域网IP",
+      "description": "局域网IP",
+      "column_name": "lan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 613,
+      "entity": "operation_extend_event",
+      "name": "wan_ip",
+      "label": "因特网IP",
+      "description": "因特网IP",
+      "column_name": "wan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 614,
+      "entity": "operation_extend_event",
+      "name": "update_time",
+      "label": "更新时间",
+      "description": "更新时间",
+      "column_name": "update_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 615,
+      "entity": "operation_extend_event",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 616,
+      "entity": "operation_extend_event",
+      "name": "event_time",
+      "label": "事件发生时间",
+      "description": "事件发生时间",
+      "column_name": "event_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 701,
+      "entity": "operation_performance_event",
+      "name": "id",
+      "label": "事件唯一标识",
+      "description": "事件唯一标识",
+      "column_name": "id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 702,
+      "entity": "operation_performance_event",
+      "name": "user_id",
+      "label": "用户ID",
+      "description": "用户ID",
+      "column_name": "user_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 703,
+      "entity": "operation_performance_event",
+      "name": "start_id",
+      "label": "启动ID",
+      "description": "启动ID",
+      "column_name": "start_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 704,
+      "entity": "operation_performance_event",
+      "name": "cpu_usage",
+      "label": "CPU总利用率",
+      "description": "CPU总利用率",
+      "column_name": "cpu_usage",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 705,
+      "entity": "operation_performance_event",
+      "name": "cpu_user",
+      "label": "CPU用户态利用率",
+      "description": "CPU用户态利用率",
+      "column_name": "cpu_user",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 706,
+      "entity": "operation_performance_event",
+      "name": "cpu_system",
+      "label": "CPU系统态利用率",
+      "description": "CPU系统态利用率",
+      "column_name": "cpu_system",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 707,
+      "entity": "operation_performance_event",
+      "name": "cpu_idle",
+      "label": "CPU空闲率",
+      "description": "CPU空闲率",
+      "column_name": "cpu_idle",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 708,
+      "entity": "operation_performance_event",
+      "name": "memory_total",
+      "label": "物理内存总量(KB)",
+      "description": "物理内存总量(KB)",
+      "column_name": "memory_total",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 709,
+      "entity": "operation_performance_event",
+      "name": "memory_used",
+      "label": "物理内存使用量(KB)",
+      "description": "物理内存使用量(KB)",
+      "column_name": "memory_used",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 710,
+      "entity": "operation_performance_event",
+      "name": "memory_usage",
+      "label": "物理内存利用率",
+      "description": "物理内存利用率",
+      "column_name": "memory_usage",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 711,
+      "entity": "operation_performance_event",
+      "name": "virtual_memory_total",
+      "label": "虚拟内存总量(KB)",
+      "description": "虚拟内存总量(KB)",
+      "column_name": "virtual_memory_total",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 712,
+      "entity": "operation_performance_event",
+      "name": "virtual_memory_used",
+      "label": "虚拟内存使用量(KB)",
+      "description": "虚拟内存使用量(KB)",
+      "column_name": "virtual_memory_used",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 713,
+      "entity": "operation_performance_event",
+      "name": "swap_total",
+      "label": "交换空间总量(KB)",
+      "description": "交换空间总量(KB)",
+      "column_name": "swap_total",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 714,
+      "entity": "operation_performance_event",
+      "name": "swap_used",
+      "label": "交换空间使用量(KB)",
+      "description": "交换空间使用量(KB)",
+      "column_name": "swap_used",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 715,
+      "entity": "operation_performance_event",
+      "name": "disk_read_speed",
+      "label": "磁盘读取速度(KB/s)",
+      "description": "磁盘读取速度(KB/s)",
+      "column_name": "disk_read_speed",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 716,
+      "entity": "operation_performance_event",
+      "name": "disk_write_speed",
+      "label": "磁盘写入速度(KB/s)",
+      "description": "磁盘写入速度(KB/s)",
+      "column_name": "disk_write_speed",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 717,
+      "entity": "operation_performance_event",
+      "name": "disk_throughput",
+      "label": "磁盘总吞吐量(KB/s)",
+      "description": "磁盘总吞吐量(KB/s)",
+      "column_name": "disk_throughput",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 718,
+      "entity": "operation_performance_event",
+      "name": "disk_iops",
+      "label": "磁盘IOPS",
+      "description": "磁盘IOPS",
+      "column_name": "disk_iops",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 719,
+      "entity": "operation_performance_event",
+      "name": "network_send_rate",
+      "label": "网络发送速率(KB/s)",
+      "description": "网络发送速率(KB/s)",
+      "column_name": "network_send_rate",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 720,
+      "entity": "operation_performance_event",
+      "name": "network_receive_rate",
+      "label": "网络接收速率(KB/s)",
+      "description": "网络接收速率(KB/s)",
+      "column_name": "network_receive_rate",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 721,
+      "entity": "operation_performance_event",
+      "name": "network_packet_loss",
+      "label": "网络丢包率",
+      "description": "网络丢包率",
+      "column_name": "network_packet_loss",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 722,
+      "entity": "operation_performance_event",
+      "name": "network_latency",
+      "label": "网络延迟(ms)",
+      "description": "网络延迟(ms)",
+      "column_name": "network_latency",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 723,
+      "entity": "operation_performance_event",
+      "name": "longitude",
+      "label": "经度",
+      "description": "经度",
+      "column_name": "longitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 724,
+      "entity": "operation_performance_event",
+      "name": "latitude",
+      "label": "纬度",
+      "description": "纬度",
+      "column_name": "latitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 725,
+      "entity": "operation_performance_event",
+      "name": "country",
+      "label": "国家",
+      "description": "国家",
+      "column_name": "country",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 726,
+      "entity": "operation_performance_event",
+      "name": "province",
+      "label": "省份",
+      "description": "省份",
+      "column_name": "province",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 727,
+      "entity": "operation_performance_event",
+      "name": "city",
+      "label": "城市",
+      "description": "城市",
+      "column_name": "city",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 728,
+      "entity": "operation_performance_event",
+      "name": "county",
+      "label": "区县",
+      "description": "区县",
+      "column_name": "county",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 729,
+      "entity": "operation_performance_event",
+      "name": "net_type",
+      "label": "网络类型",
+      "description": "网络类型",
+      "column_name": "net_type",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 730,
+      "entity": "operation_performance_event",
+      "name": "lan_ip",
+      "label": "局域网IP",
+      "description": "局域网IP",
+      "column_name": "lan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 731,
+      "entity": "operation_performance_event",
+      "name": "wan_ip",
+      "label": "因特网IP",
+      "description": "因特网IP",
+      "column_name": "wan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 732,
+      "entity": "operation_performance_event",
+      "name": "update_time",
+      "label": "更新时间",
+      "description": "更新时间",
+      "column_name": "update_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 733,
+      "entity": "operation_performance_event",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 734,
+      "entity": "operation_performance_event",
+      "name": "event_time",
+      "label": "事件发生时间",
+      "description": "事件发生时间",
+      "column_name": "event_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 801,
+      "entity": "operation_location_event",
+      "name": "id",
+      "label": "事件唯一标识",
+      "description": "事件唯一标识",
+      "column_name": "id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 802,
+      "entity": "operation_location_event",
+      "name": "user_id",
+      "label": "用户ID",
+      "description": "用户ID",
+      "column_name": "user_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 803,
+      "entity": "operation_location_event",
+      "name": "start_id",
+      "label": "启动ID",
+      "description": "启动ID",
+      "column_name": "start_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 804,
+      "entity": "operation_location_event",
+      "name": "longitude",
+      "label": "经度",
+      "description": "经度",
+      "column_name": "longitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 805,
+      "entity": "operation_location_event",
+      "name": "latitude",
+      "label": "纬度",
+      "description": "纬度",
+      "column_name": "latitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 806,
+      "entity": "operation_location_event",
+      "name": "country",
+      "label": "国家",
+      "description": "国家",
+      "column_name": "country",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 807,
+      "entity": "operation_location_event",
+      "name": "province",
+      "label": "省份",
+      "description": "省份",
+      "column_name": "province",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 808,
+      "entity": "operation_location_event",
+      "name": "city",
+      "label": "城市",
+      "description": "城市",
+      "column_name": "city",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 809,
+      "entity": "operation_location_event",
+      "name": "county",
+      "label": "区县",
+      "description": "区县",
+      "column_name": "county",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 810,
+      "entity": "operation_location_event",
+      "name": "net_type",
+      "label": "网络类型",
+      "description": "网络类型",
+      "column_name": "net_type",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 811,
+      "entity": "operation_location_event",
+      "name": "lan_ip",
+      "label": "局域网IP",
+      "description": "局域网IP",
+      "column_name": "lan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 812,
+      "entity": "operation_location_event",
+      "name": "wan_ip",
+      "label": "因特网IP",
+      "description": "因特网IP",
+      "column_name": "wan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 813,
+      "entity": "operation_location_event",
+      "name": "update_time",
+      "label": "更新时间",
+      "description": "更新时间",
+      "column_name": "update_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 814,
+      "entity": "operation_location_event",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 815,
+      "entity": "operation_location_event",
+      "name": "event_time",
+      "label": "事件发生时间",
+      "description": "事件发生时间",
+      "column_name": "event_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 901,
+      "entity": "operation_crash_event",
+      "name": "id",
+      "label": "事件唯一标识",
+      "description": "事件唯一标识",
+      "column_name": "id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 902,
+      "entity": "operation_crash_event",
+      "name": "user_id",
+      "label": "用户ID",
+      "description": "用户ID",
+      "column_name": "user_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 903,
+      "entity": "operation_crash_event",
+      "name": "start_id",
+      "label": "启动ID",
+      "description": "启动ID",
+      "column_name": "start_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 904,
+      "entity": "operation_crash_event",
+      "name": "message",
+      "label": "崩溃信息",
+      "description": "崩溃信息",
+      "column_name": "message",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 905,
+      "entity": "operation_crash_event",
+      "name": "stack_trace",
+      "label": "堆栈",
+      "description": "堆栈",
+      "column_name": "stack_trace",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 906,
+      "entity": "operation_crash_event",
+      "name": "longitude",
+      "label": "经度",
+      "description": "经度",
+      "column_name": "longitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 907,
+      "entity": "operation_crash_event",
+      "name": "latitude",
+      "label": "纬度",
+      "description": "纬度",
+      "column_name": "latitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 908,
+      "entity": "operation_crash_event",
+      "name": "country",
+      "label": "国家",
+      "description": "国家",
+      "column_name": "country",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 909,
+      "entity": "operation_crash_event",
+      "name": "province",
+      "label": "省份",
+      "description": "省份",
+      "column_name": "province",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 910,
+      "entity": "operation_crash_event",
+      "name": "city",
+      "label": "城市",
+      "description": "城市",
+      "column_name": "city",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 911,
+      "entity": "operation_crash_event",
+      "name": "county",
+      "label": "区县",
+      "description": "区县",
+      "column_name": "county",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 912,
+      "entity": "operation_crash_event",
+      "name": "net_type",
+      "label": "网络类型",
+      "description": "网络类型",
+      "column_name": "net_type",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 913,
+      "entity": "operation_crash_event",
+      "name": "lan_ip",
+      "label": "局域网IP",
+      "description": "局域网IP",
+      "column_name": "lan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 914,
+      "entity": "operation_crash_event",
+      "name": "wan_ip",
+      "label": "因特网IP",
+      "description": "因特网IP",
+      "column_name": "wan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 915,
+      "entity": "operation_crash_event",
+      "name": "update_time",
+      "label": "更新时间",
+      "description": "更新时间",
+      "column_name": "update_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 916,
+      "entity": "operation_crash_event",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 917,
+      "entity": "operation_crash_event",
+      "name": "event_time",
+      "label": "事件发生时间",
+      "description": "事件发生时间",
+      "column_name": "event_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1001,
+      "entity": "operation_anr_event",
+      "name": "id",
+      "label": "事件唯一标识",
+      "description": "事件唯一标识",
+      "column_name": "id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1002,
+      "entity": "operation_anr_event",
+      "name": "user_id",
+      "label": "用户ID",
+      "description": "用户ID",
+      "column_name": "user_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1003,
+      "entity": "operation_anr_event",
+      "name": "start_id",
+      "label": "启动ID",
+      "description": "启动ID",
+      "column_name": "start_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1004,
+      "entity": "operation_anr_event",
+      "name": "page_path",
+      "label": "页面路径",
+      "description": "页面路径",
+      "column_name": "page_path",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1005,
+      "entity": "operation_anr_event",
+      "name": "page_name",
+      "label": "页面名称",
+      "description": "页面名称",
+      "column_name": "page_name",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1006,
+      "entity": "operation_anr_event",
+      "name": "anr_gap",
+      "label": "无响应时长",
+      "description": "无响应时长",
+      "column_name": "anr_gap",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1007,
+      "entity": "operation_anr_event",
+      "name": "longitude",
+      "label": "经度",
+      "description": "经度",
+      "column_name": "longitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1008,
+      "entity": "operation_anr_event",
+      "name": "latitude",
+      "label": "纬度",
+      "description": "纬度",
+      "column_name": "latitude",
+      "column_type": "Float64",
+      "operators": [
+        "equal",
+        "notequal",
+        "in",
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1009,
+      "entity": "operation_anr_event",
+      "name": "country",
+      "label": "国家",
+      "description": "国家",
+      "column_name": "country",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1010,
+      "entity": "operation_anr_event",
+      "name": "province",
+      "label": "省份",
+      "description": "省份",
+      "column_name": "province",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1011,
+      "entity": "operation_anr_event",
+      "name": "city",
+      "label": "城市",
+      "description": "城市",
+      "column_name": "city",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1012,
+      "entity": "operation_anr_event",
+      "name": "county",
+      "label": "区县",
+      "description": "区县",
+      "column_name": "county",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1013,
+      "entity": "operation_anr_event",
+      "name": "net_type",
+      "label": "网络类型",
+      "description": "网络类型",
+      "column_name": "net_type",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1014,
+      "entity": "operation_anr_event",
+      "name": "lan_ip",
+      "label": "局域网IP",
+      "description": "局域网IP",
+      "column_name": "lan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1015,
+      "entity": "operation_anr_event",
+      "name": "wan_ip",
+      "label": "因特网IP",
+      "description": "因特网IP",
+      "column_name": "wan_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal",
+        "in"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1016,
+      "entity": "operation_anr_event",
+      "name": "update_time",
+      "label": "更新时间",
+      "description": "更新时间",
+      "column_name": "update_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1017,
+      "entity": "operation_anr_event",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1018,
+      "entity": "operation_anr_event",
+      "name": "event_time",
+      "label": "事件发生时间",
+      "description": "事件发生时间",
+      "column_name": "event_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    }
+  ],
+  "operator": [
+    {
+      "id": 1,
+      "name": "equal",
+      "label": "等于"
+    },
+    {
+      "id": 2,
+      "name": "notequal",
+      "label": "不等于"
+    },
+    {
+      "id": 3,
+      "name": "greatthan",
+      "label": "大于"
+    },
+    {
+      "id": 4,
+      "name": "lessthan",
+      "label": "小于"
+    },
+    {
+      "id": 5,
+      "name": "greatequalthan",
+      "label": "大于等于"
+    },
+    {
+      "id": 6,
+      "name": "lessequalthan",
+      "label": "小于等于"
+    },
+    {
+      "id": 7,
+      "name": "between",
+      "label": "之间"
+    },
+    {
+      "id": 8,
+      "name": "in",
+      "label": "包扩"
+    }
+  ]
+}

@@ -1,0 +1,448 @@
+{
+  "entity": [
+    {
+      "id": 8,
+      "name": "dhcp",
+      "label": "DHCP协议审计",
+      "description": "DHCP协议审计，记录DHCP协议通信情况",
+      "table_name": "zenvis.t_sta_dhcp",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "uid"
+        ],
+        "partition_by": "uid"
+      }
+    }
+  ],
+  "attribute": [
+    {
+      "id": 8001,
+      "entity": "dhcp",
+      "name": "uid",
+      "label": "会话唯一ID",
+      "description": "会话唯一ID",
+      "column_name": "uid",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8002,
+      "entity": "dhcp",
+      "name": "ts",
+      "label": "时间戳",
+      "description": "时间戳",
+      "column_name": "ts",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8003,
+      "entity": "dhcp",
+      "name": "src_ip",
+      "label": "源IP",
+      "description": "源IP",
+      "column_name": "src_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8004,
+      "entity": "dhcp",
+      "name": "src_port",
+      "label": "源端口",
+      "description": "源端口",
+      "column_name": "src_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8005,
+      "entity": "dhcp",
+      "name": "dst_ip",
+      "label": "目的IP",
+      "description": "目的IP",
+      "column_name": "dst_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8006,
+      "entity": "dhcp",
+      "name": "dst_port",
+      "label": "目的端口",
+      "description": "目的端口",
+      "column_name": "dst_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8007,
+      "entity": "dhcp",
+      "name": "op",
+      "label": "报文操作类型",
+      "description": "报文操作类型：1为请求报文，2为响应报文",
+      "column_name": "op",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8008,
+      "entity": "dhcp",
+      "name": "mac",
+      "label": "客户端硬件地址",
+      "description": "客户端硬件地址",
+      "column_name": "mac",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8009,
+      "entity": "dhcp",
+      "name": "trans_id",
+      "label": "事务ID",
+      "description": "事务ID，客户端第一次发送报文时生成的随机数",
+      "column_name": "trans_id",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8010,
+      "entity": "dhcp",
+      "name": "type",
+      "label": "报文类型",
+      "description": "报文类型：1=Discover,2=Offer,3=Request,4=Decline,5=ACK,6=NAK,7=Release,8=Inform",
+      "column_name": "type",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8011,
+      "entity": "dhcp",
+      "name": "assigned_ip",
+      "label": "分配IP",
+      "description": "DHCP服务器给客户端分配的IP地址",
+      "column_name": "assigned_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8012,
+      "entity": "dhcp",
+      "name": "host_name",
+      "label": "主机名",
+      "description": "主机名",
+      "column_name": "host_name",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8013,
+      "entity": "dhcp",
+      "name": "req_addr",
+      "label": "请求IP",
+      "description": "客户端请求IP",
+      "column_name": "req_addr",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8014,
+      "entity": "dhcp",
+      "name": "mask",
+      "label": "子网掩码",
+      "description": "子网掩码",
+      "column_name": "mask",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8015,
+      "entity": "dhcp",
+      "name": "router_list",
+      "label": "默认网关",
+      "description": "默认网关列表",
+      "column_name": "router_list",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8016,
+      "entity": "dhcp",
+      "name": "lease_time",
+      "label": "租约期",
+      "description": "有效租约期",
+      "column_name": "lease_time",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8017,
+      "entity": "dhcp",
+      "name": "serv_addr",
+      "label": "服务器地址",
+      "description": "服务器标识",
+      "column_name": "serv_addr",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8018,
+      "entity": "dhcp",
+      "name": "param_req_list",
+      "label": "请求参数列表",
+      "description": "请求参数列表",
+      "column_name": "param_req_list",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8019,
+      "entity": "dhcp",
+      "name": "vendor_class_id",
+      "label": "厂商分类信息",
+      "description": "厂商分类信息选项",
+      "column_name": "vendor_class_id",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8020,
+      "entity": "dhcp",
+      "name": "logtype",
+      "label": "日志类型",
+      "description": "日志类型，dhcp",
+      "column_name": "logtype",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8021,
+      "entity": "dhcp",
+      "name": "devname",
+      "label": "设备名称",
+      "description": "设备名称",
+      "column_name": "devname",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8022,
+      "entity": "dhcp",
+      "name": "ds",
+      "label": "年月日",
+      "description": "年月日",
+      "column_name": "ds",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8023,
+      "entity": "dhcp",
+      "name": "hh",
+      "label": "小时",
+      "description": "小时",
+      "column_name": "hh",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8024,
+      "entity": "dhcp",
+      "name": "vendor",
+      "label": "厂商",
+      "description": "厂商，sangfor",
+      "column_name": "vendor",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8025,
+      "entity": "dhcp",
+      "name": "logid",
+      "label": "日志ID",
+      "description": "日志ID",
+      "column_name": "logid",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8026,
+      "entity": "dhcp",
+      "name": "iptype",
+      "label": "IP类型",
+      "description": "IP类型，4表示ipv4，6表示ipv6",
+      "column_name": "iptype",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8027,
+      "entity": "dhcp",
+      "name": "appproto",
+      "label": "应用层协议",
+      "description": "应用层协议",
+      "column_name": "appproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 8028,
+      "entity": "dhcp",
+      "name": "transproto",
+      "label": "传输层协议",
+      "description": "传输层协议",
+      "column_name": "transproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },{
+      "id": 8029,
+      "entity": "dhcp",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    }
+  ]
+}

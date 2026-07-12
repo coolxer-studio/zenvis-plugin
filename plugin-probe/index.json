@@ -1,0 +1,8 @@
+{
+  "name": "数据采集插件",
+  "package_name": "com.coolxer.plugin.probe",
+  "version": "1.0.0",
+  "description": "用于接收多源异构数据，当前数据源包含探针（agent）、网关（syslog）、日志文件等，接收结果存储到数据库",
+  "author": "CoolXer",
+  "icon": "icon.png"
+}

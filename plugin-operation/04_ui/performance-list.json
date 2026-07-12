@@ -1,0 +1,250 @@
+{
+  "type": "page",
+  "title": "列表",
+  "remark": null,
+  "name": "page-performance",
+  "body": [
+    {
+      "type": "crud",
+      "name": "sample",
+      "api": "/zenvis/api/v1/entity/operation_performance_event/list",
+      "quickSaveItemApi": "/zenvis/api/v1/entity/operation_performance_event/$id/update",
+      "autoGenerateFilter": true,
+      "defaultParams": {
+        "orderBy": "update_time",
+        "orderDir": "desc"
+      },
+      "bulkActions": [
+        {
+          "label": "批量标记",
+          "type": "button",
+          "actionType": "dialog",
+          "level": "light",
+          "dialog": {
+            "title": "批量标记",
+            "name": "sample-bulk-edit",
+            "body": {
+              "type": "form",
+              "api": "/zenvis/api/v1/entity/operation_performance_event/$ids/bulk_update",
+              "controls": [
+                {
+                  "type": "input-tag",
+                  "name": "label",
+                  "searchable": true,
+                  "clearable": true,
+                  "source": "/zenvis/api/v1/entity/operation_performance_event/label/list"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "columns": [
+        {
+          "type": "link",
+          "href": "/#/device/index?id=${id}",
+          "body": {
+            "type": "tpl",
+            "tpl": "${id|truncate:14}"
+          },
+          "name": "id",
+          "label": "事件ID",
+          "copyable": true
+        },
+        {
+          "name": "event_time",
+          "label": "发生时间",
+          "sortable": true,
+          "searchable": {
+            "type": "input-datetime-range",
+            "name": "eventTime"
+          }
+        },
+        {
+          "name": "cpu_usage",
+          "label": "CPU总体利用率"
+        },
+        {
+          "name": "cpu_user",
+          "label": "CPU用户态利用率",
+          "toggled": false
+        },
+        {
+          "name": "cpu_system",
+          "label": "CPU系统态利用率",
+          "toggled": false
+        },
+        {
+          "name": "cpu_idle",
+          "label": "CPU空闲率",
+          "toggled": false
+        },
+        {
+          "name": "memory_total",
+          "label": "物理内存总量",
+          "toggled": false
+        },
+        {
+          "name": "memory_used",
+          "label": "物理内存使用量",
+          "toggled": false
+        },
+        {
+          "name": "memory_usage",
+          "label": "物理内存利用率"
+        },
+        {
+          "name": "virtual_memory_total",
+          "label": "虚拟内存总量"
+        },
+        {
+          "name": "virtual_memory_used",
+          "label": "虚拟内存使用量"
+        },
+        {
+          "name": "swap_total",
+          "label": "交换空间总量"
+        },
+        {
+          "name": "swap_used",
+          "label": "交换空间使用量"
+        },
+        {
+          "name": "disk_read_speed",
+          "label": "磁盘读取速度",
+          "toggled": false
+        },
+        {
+          "name": "disk_write_speed",
+          "label": "磁盘写入速度",
+          "toggled": false
+        },
+        {
+          "name": "disk_throughput",
+          "label": "磁盘总吞吐量",
+          "toggled": false
+        },
+        {
+          "name": "disk_iops",
+          "label": "磁盘IOPS"
+        },
+        {
+          "name": "network_send_rate",
+          "label": "网络发送速率",
+          "toggled": false
+        },
+        {
+          "name": "network_receive_rate",
+          "label": "网络接收速率",
+          "toggled": false
+        },
+        {
+          "name": "network_packet_loss",
+          "label": "网络丢包率"
+        },
+        {
+          "name": "network_latency",
+          "label": "网络延迟(ms)"
+        },
+        {
+          "type": "link",
+          "href": "/#/device/index?id=${user_id}",
+          "body": {
+            "type": "tpl",
+            "tpl": "${user_id|truncate:14}"
+          },
+          "name": "user_id",
+          "label": "用户ID",
+          "copyable": true
+        },
+        {
+          "type": "link",
+          "href": "/#/device/index?id=${app_id}",
+          "body": {
+            "type": "tpl",
+            "tpl": "${app_id|truncate:14}"
+          },
+          "name": "app_id",
+          "label": "应用ID",
+          "copyable": true
+        },
+        {
+          "name": "location",
+          "label": "位置",
+          "searchable": {
+            "name": "areaCode",
+            "type": "input-city",
+            "itemClassName": "min-w-xs",
+            "size": "full",
+            "searchable": true
+          }
+        },
+        {
+          "name": "wan_ip",
+          "label": "外网IP",
+          "copyable": true,
+          "searchable": true
+        },
+        {
+          "name": "lan_ip",
+          "label": "内网IP",
+          "copyable": true,
+          "searchable": true
+        },
+        {
+          "name": "net_type",
+          "label": "网络类型",
+          "toggled": false
+        },
+        {
+          "name": "insert_time",
+          "label": "入库时间",
+          "searchable": {
+            "type": "input-datetime-range",
+            "name": "insertTime"
+          },
+          "toggled": false
+        },
+        {
+          "name": "update_time",
+          "label": "活跃时间",
+          "sortable": true,
+          "searchable": {
+            "type": "input-datetime-range",
+            "name": "updateTime"
+          },
+          "toggled": false
+        },
+        {
+          "type": "operation",
+          "label": "操作",
+          "width": "",
+          "buttons": [
+            {
+              "type": "button-group",
+              "buttons": [
+                {
+                  "type": "button",
+                  "icon": "fa fa-eye",
+                  "actionType": "link",
+                  "link": "/performance/${id}"
+                }
+              ]
+            }
+          ],
+          "placeholder": "-",
+          "fixed": "right"
+        }
+      ],
+      "affixHeader": true,
+      "columnsTogglable": "auto",
+      "placeholder": "暂无数据",
+      "tableClassName": "table-db table-striped",
+      "headerClassName": "crud-table-header",
+      "footerClassName": "crud-table-footer",
+      "toolbarClassName": "crud-table-toolbar",
+      "combineNum": 0,
+      "bodyClassName": "panel-default"
+    }
+  ]
+}

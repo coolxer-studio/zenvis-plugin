@@ -1,0 +1,508 @@
+{
+  "entity": [
+    {
+      "id": 3,
+      "name": "tcp_flow",
+      "label": "TCP日志",
+      "description": "TCP日志，记录TCP流量详细信息",
+      "table_name": "zenvis.t_sta_tcp_flow",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "uid"
+        ],
+        "partition_by": "uid"
+      }
+    }
+  ],
+  "attribute": [
+    {
+      "id": 3001,
+      "entity": "tcp_flow",
+      "name": "uid",
+      "label": "会话唯一ID",
+      "description": "会话唯一ID",
+      "column_name": "uid",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3002,
+      "entity": "tcp_flow",
+      "name": "ts",
+      "label": "时间戳",
+      "description": "时间戳",
+      "column_name": "ts",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3003,
+      "entity": "tcp_flow",
+      "name": "src_ip",
+      "label": "源IP",
+      "description": "源IP",
+      "column_name": "src_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3004,
+      "entity": "tcp_flow",
+      "name": "dst_ip",
+      "label": "目的IP",
+      "description": "目的IP",
+      "column_name": "dst_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3005,
+      "entity": "tcp_flow",
+      "name": "src_port",
+      "label": "源端口",
+      "description": "源端口",
+      "column_name": "src_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3006,
+      "entity": "tcp_flow",
+      "name": "dst_port",
+      "label": "目的端口",
+      "description": "目的端口",
+      "column_name": "dst_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3007,
+      "entity": "tcp_flow",
+      "name": "logtype",
+      "label": "日志类型",
+      "description": "日志类型",
+      "column_name": "logtype",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3008,
+      "entity": "tcp_flow",
+      "name": "iptype",
+      "label": "IP类型",
+      "description": "IP类型",
+      "column_name": "iptype",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3009,
+      "entity": "tcp_flow",
+      "name": "devname",
+      "label": "设备名称",
+      "description": "设备名称",
+      "column_name": "devname",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3010,
+      "entity": "tcp_flow",
+      "name": "ds",
+      "label": "年月日",
+      "description": "年月日",
+      "column_name": "ds",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3011,
+      "entity": "tcp_flow",
+      "name": "hh",
+      "label": "小时",
+      "description": "小时",
+      "column_name": "hh",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3012,
+      "entity": "tcp_flow",
+      "name": "appproto",
+      "label": "应用层协议",
+      "description": "应用层协议",
+      "column_name": "appproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3013,
+      "entity": "tcp_flow",
+      "name": "transproto",
+      "label": "传输层协议",
+      "description": "传输层协议",
+      "column_name": "transproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3014,
+      "entity": "tcp_flow",
+      "name": "vendor",
+      "label": "厂商",
+      "description": "厂商",
+      "column_name": "vendor",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3015,
+      "entity": "tcp_flow",
+      "name": "logid",
+      "label": "日志ID",
+      "description": "日志ID",
+      "column_name": "logid",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3016,
+      "entity": "tcp_flow",
+      "name": "top_protocol",
+      "label": "Top协议",
+      "description": "Top应用层协议",
+      "column_name": "top_protocol",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3017,
+      "entity": "tcp_flow",
+      "name": "request_flow",
+      "label": "请求大小",
+      "description": "请求大小(字节)",
+      "column_name": "request_flow",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3018,
+      "entity": "tcp_flow",
+      "name": "request_pack",
+      "label": "请求包数",
+      "description": "请求包个数",
+      "column_name": "request_pack",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3019,
+      "entity": "tcp_flow",
+      "name": "response_flow",
+      "label": "响应大小",
+      "description": "响应大小(字节)",
+      "column_name": "response_flow",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3020,
+      "entity": "tcp_flow",
+      "name": "response_pack",
+      "label": "响应包数",
+      "description": "响应包个数",
+      "column_name": "response_pack",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3021,
+      "entity": "tcp_flow",
+      "name": "session_state",
+      "label": "会话状态",
+      "description": "会话状态",
+      "column_name": "session_state",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3022,
+      "entity": "tcp_flow",
+      "name": "send_start_time",
+      "label": "发送开始时间",
+      "description": "发送开始时间戳",
+      "column_name": "send_start_time",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3023,
+      "entity": "tcp_flow",
+      "name": "recv_start_time",
+      "label": "接收开始时间",
+      "description": "接收开始时间戳",
+      "column_name": "recv_start_time",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3024,
+      "entity": "tcp_flow",
+      "name": "session_time",
+      "label": "会话持续时长",
+      "description": "会话持续时长(秒)",
+      "column_name": "session_time",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3025,
+      "entity": "tcp_flow",
+      "name": "send_stop_time",
+      "label": "发送结束时间",
+      "description": "发送结束时间戳",
+      "column_name": "send_stop_time",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3026,
+      "entity": "tcp_flow",
+      "name": "recv_stop_time",
+      "label": "接收结束时间",
+      "description": "接收结束时间戳",
+      "column_name": "recv_stop_time",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3027,
+      "entity": "tcp_flow",
+      "name": "syn_count",
+      "label": "SYN包数",
+      "description": "SYN包数量",
+      "column_name": "syn_count",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3028,
+      "entity": "tcp_flow",
+      "name": "synack_count",
+      "label": "SYNACK包数",
+      "description": "SYNACK包数量",
+      "column_name": "synack_count",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3029,
+      "entity": "tcp_flow",
+      "name": "rst_count",
+      "label": "RST包数",
+      "description": "RST包数量",
+      "column_name": "rst_count",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3030,
+      "entity": "tcp_flow",
+      "name": "fin_count",
+      "label": "FIN包数",
+      "description": "FIN包数量",
+      "column_name": "fin_count",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 3031,
+      "entity": "tcp_flow",
+      "name": "direction",
+      "label": "流量方向",
+      "description": "流量方向",
+      "column_name": "direction",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },{
+      "id": 3032,
+      "entity": "tcp_flow",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    }
+  ]
+}

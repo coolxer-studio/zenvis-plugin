@@ -1,0 +1,47 @@
+[sources.source_log_file]
+type = "file"
+data_dir = "/vector/log_file_checkpoint"
+include = [ "/risk-service/logs/info.log" ]
+
+[transforms.transform_filter]
+type = "filter"
+inputs = [ "source_log_file" ]
+condition = { type = "vrl", source = '''
+contains(string!(.message),"DeviceIndexController - system_log:")
+''' }
+
+[transforms.parse_json]
+  inputs        = ["transform_filter"]
+  type          = "remap"
+  drop_on_error = false
+  source        = '''
+      .fact = del(.)
+      .system_log_array, err = split(.fact.message, "system_log:")
+      .log_array, err = split(.system_log_array[1], ",")
+      .app_id = .log_array[0]
+      .guid = .log_array[1]
+      .start_id = .log_array[2]
+      .platform = .log_array[3]
+      .user_id = .log_array[4]
+      .fact_type = "system_log"
+      del(.system_log_array)
+      del(.log_array)
+  '''
+
+# 输出目标配置
+[sinks.my_clickhouse_sink]
+type = "clickhouse"
+inputs = ["parse_json"]
+endpoint = "http://clickhouse-service:8123"
+database = "zenvis"
+table = "msg"
+auth.strategy = "basic"
+auth.user = "default"
+auth.password = "SFGEfSVVMcUHCBCjKmzJ"
+skip_unknown_fields = true
+
+# 输出数据到日志
+[sinks.console]
+inputs = ["parse_json"]
+type = "console"
+encoding.codec = "json"

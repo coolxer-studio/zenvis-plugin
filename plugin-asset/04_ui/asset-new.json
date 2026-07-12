@@ -1,0 +1,444 @@
+{
+  "type": "page",
+  "body": [
+    {
+      "type": "tabs",
+      "tabs": [
+        {
+          "title": "服务器设备资产",
+          "icon": "fa-solid fa-server",
+          "body": {
+            "type": "form",
+            "api": "/zenvis/api/v1/asset/host/add",
+            "redirect": "/hardware/host/list",
+            "title": "服务器资产信息收集表",
+            "mode": "horizontal",
+            "autoFocus": true,
+            "body": [
+              {
+                "type": "tpl",
+                "tpl": "<p>基础信息</p>"
+              },
+              {
+                "type": "input-text",
+                "name": "id",
+                "placeholder": "需要UUID格式，不填写默认分配uuid值",
+                "label": "资产唯一标识",
+                "size": "full"
+              },
+              {
+                "type": "group",
+                "body": [
+                  {
+                    "type": "select",
+                    "name": "level",
+                    "label": "资产等级",
+                    "searchable": true,
+                    "required": true,
+                    "source": "/zenvis/api/v1/asset/level/list"
+                  },
+                  {
+                    "type": "select",
+                    "name": "type",
+                    "label": "资产类型",
+                    "searchable": true,
+                    "required": true,
+                    "source": "/zenvis/api/v1/asset/type/list"
+                  },
+                  {
+                    "type": "select",
+                    "name": "owner",
+                    "label": "资产归属",
+                    "searchable": true,
+                    "required": true,
+                    "source": "/zenvis/api/v1/asset/owner/list"
+                  },
+                  {
+                    "type": "select",
+                    "name": "status",
+                    "label": "状态",
+                    "searchable": true,
+                    "required": true,
+                    "source": "/zenvis/api/v1/asset/status/list"
+                  },
+                  {
+                    "type": "switch",
+                    "name": "access",
+                    "value": true,
+                    "label": "是否可见"
+                  }
+                ]
+              },
+              {
+                "type": "divider"
+              },
+              {
+                "type": "tpl",
+                "tpl": "<p>位置信息</p>"
+              },
+              {
+                "name": "city_info",
+                "type": "input-city",
+                "label": "位置",
+                "required": true,
+                "itemClassName": "min-w-xs",
+                "searchable": true,
+                "extractValue": false,
+                "size": "full"
+              },
+              {
+                "type": "group",
+                "body": [
+                  {
+                    "type": "input-text",
+                    "name": "room",
+                    "required": true,
+                    "label": "机房"
+                  },
+                  {
+                    "type": "input-text",
+                    "name": "cabinet_no",
+                    "required": true,
+                    "label": "机柜号"
+                  },
+                  {
+                    "type": "input-text",
+                    "name": "position_no",
+                    "required": true,
+                    "label": "机位号"
+                  }
+                ]
+              },
+              {
+                "type": "divider"
+              },
+              {
+                "type": "tpl",
+                "tpl": "<p>设备信息</p>"
+              },
+              {
+                "type": "group",
+                "body": [
+                  {
+                    "type": "input-text",
+                    "name": "manufacturer",
+                    "required": true,
+                    "autoComplete": "/zenvis/api/v1/asset/host/auto_complete/manufacturer?term=$term",
+                    "label": "厂商"
+                  },
+                  {
+                    "type": "input-text",
+                    "name": "model",
+                    "required": true,
+                    "autoComplete": "/zenvis/api/v1/asset/host/auto_complete/model?term=$term",
+                    "label": "型号"
+                  },
+                  {
+                    "type": "input-text",
+                    "name": "architecture",
+                    "autoComplete": "/zenvis/api/v1/asset/host/auto_complete/architecture?term=$term",
+                    "required": true,
+                    "label": "架构"
+                  }
+                ]
+              },
+              {
+                "type": "group",
+                "body": [
+                  {
+                    "type": "input-text",
+                    "name": "system_name",
+                    "required": true,
+                    "autoComplete": "/zenvis/api/v1/asset/host/auto_complete/system_name?term=$term",
+                    "label": "系统名称"
+                  },
+                  {
+                    "type": "input-text",
+                    "name": "system_version",
+                    "required": true,
+                    "autoComplete": "/zenvis/api/v1/asset/host/auto_complete/system_version?term=$term",
+                    "label": "系统版本"
+                  }
+                ]
+              },
+              {
+                "type": "group",
+                "body": [
+                  {
+                    "type": "input-text",
+                    "name": "cpu_model",
+                    "required": true,
+                    "label": "CPU型号"
+                  },
+                  {
+                    "type": "input-text",
+                    "name": "cpu_cores",
+                    "required": true,
+                    "label": "CPU核心数"
+                  }
+                ]
+              },
+              {
+                "type": "input-text",
+                "name": "memory_size",
+                "required": true,
+                "label": "内存大小"
+              },
+              {
+                "type": "input-text",
+                "name": "disk_size",
+                "required": true,
+                "label": "磁盘空间"
+              },
+              {
+                "type": "input-text",
+                "name": "lan_ip",
+                "required": true,
+                "label": "局域网IP"
+              },
+              {
+                "type": "input-text",
+                "name": "wan_ip",
+                "required": true,
+                "label": "外网IP"
+              }
+            ]
+          }
+        },
+        {
+          "title": "移动端设备资产",
+          "icon": "fa-solid fa-mobile",
+          "body": {
+            "type": "alert",
+            "level": "warning",
+            "body": "请开通权限后使用"
+          }
+        },
+        {
+          "title": "PC端设备资产",
+          "icon": "fa-solid fa-laptop",
+          "body": {
+            "type": "alert",
+            "level": "warning",
+            "body": "请开通权限后使用"
+          }
+        },
+        {
+          "title": "IOT设备资产",
+          "icon": "fa-solid fa-vector-square",
+          "body": {
+            "type": "alert",
+            "level": "warning",
+            "body": "请开通权限后使用"
+          }
+        },
+        {
+          "title": "探针资产",
+          "icon": "fa-solid fa-atom",
+          "body": {
+            "type": "alert",
+            "level": "warning",
+            "body": "请开通权限后使用"
+          }
+        },
+        {
+          "title": "应用资产",
+          "icon": "fa-brands fa-dropbox",
+          "body": {
+            "type": "alert",
+            "level": "warning",
+            "body": "请开通权限后使用"
+          }
+        },
+        {
+          "title": "服务资产",
+          "icon": "fa-solid fa-layer-group",
+          "body": {
+            "type": "alert",
+            "level": "warning",
+            "body": "请开通权限后使用"
+          }
+        },
+        {
+          "title": "API资产",
+          "icon": "fa-solid fa-shuffle",
+          "body": {
+            "type": "form",
+            "api": "/zenvis/api/v1/asset/api/add",
+            "redirect": "/hardware/api/list",
+            "title": "API资产信息收集表",
+            "mode": "horizontal",
+            "autoFocus": true,
+            "body": [
+              {
+                "type": "tpl",
+                "tpl": "<p>基础信息</p>"
+              },
+              {
+                "type": "input-text",
+                "name": "id",
+                "placeholder": "需要UUID格式，不填写默认分配uuid值",
+                "label": "资产唯一标识",
+                "size": "full"
+              },
+              {
+                "type": "group",
+                "body": [
+                  {
+                    "type": "select",
+                    "name": "level",
+                    "label": "资产等级",
+                    "searchable": true,
+                    "required": true,
+                    "source": "/zenvis/api/v1/asset/level/list"
+                  },
+                  {
+                    "type": "select",
+                    "name": "type",
+                    "label": "资产类型",
+                    "searchable": true,
+                    "required": true,
+                    "source": "/zenvis/api/v1/asset/type/list"
+                  },
+                  {
+                    "type": "select",
+                    "name": "owner",
+                    "label": "资产归属",
+                    "searchable": true,
+                    "required": true,
+                    "source": "/zenvis/api/v1/asset/owner/list"
+                  },
+                  {
+                    "type": "select",
+                    "name": "status",
+                    "label": "状态",
+                    "searchable": true,
+                    "required": true,
+                    "source": "/zenvis/api/v1/asset/status/list"
+                  },
+                  {
+                    "type": "switch",
+                    "name": "access",
+                    "value": true,
+                    "label": "是否可见"
+                  }
+                ]
+              },
+              {
+                "type": "divider"
+              },
+              {
+                "type": "tpl",
+                "tpl": "<p>API信息</p>"
+              },
+              {
+                "type": "group",
+                "body": [
+                  {
+                    "type": "input-text",
+                    "name": "api_name",
+                    "required": true,
+                    "autoComplete": "/zenvis/api/v1/asset/host/auto_complete/api_name?term=$term",
+                    "label": "API名称"
+                  },
+                  {
+                    "type": "input-text",
+                    "name": "api_version",
+                    "required": true,
+                    "autoComplete": "/zenvis/api/v1/asset/host/auto_complete/api_version?term=$term",
+                    "label": "API版本"
+                  },
+                  {
+                    "type": "input-text",
+                    "name": "api_path",
+                    "autoComplete": "/zenvis/api/v1/asset/host/auto_complete/api_path?term=$term",
+                    "required": true,
+                    "label": "API路径"
+                  }
+                ]
+              },
+              {
+                "type": "group",
+                "body": [
+                  {
+                    "type": "input-text",
+                    "name": "http_method",
+                    "required": true,
+                    "autoComplete": "/zenvis/api/v1/asset/host/auto_complete/http_method?term=$term",
+                    "label": "HTTP方法"
+                  },
+                  {
+                    "type": "input-text",
+                    "name": "content_type",
+                    "required": true,
+                    "autoComplete": "/zenvis/api/v1/asset/host/auto_complete/content_type?term=$term",
+                    "label": "内容类型"
+                  }
+                ]
+              },
+              {
+                "type": "group",
+                "body": [
+                  {
+                    "type": "input-text",
+                    "name": "request_parameters",
+                    "required": true,
+                    "label": "请求参数"
+                  },
+                  {
+                    "type": "input-text",
+                    "name": "response_format",
+                    "required": true,
+                    "label": "响应格式"
+                  }
+                ]
+              },
+              {
+                "type": "input-text",
+                "name": "authentication_type",
+                "required": true,
+                "label": "认证类型"
+              },
+              {
+                "type": "input-text",
+                "name": "rate_limit",
+                "required": true,
+                "label": "速率限制"
+              },
+              {
+                "type": "input-text",
+                "name": "documentation_url",
+                "required": true,
+                "label": "文档URL"
+              },
+              {
+                "type": "input-text",
+                "name": "service_id",
+                "required": true,
+                "label": "所属服务ID"
+              }
+            ]
+          }
+        },
+        {
+          "title": "日志资产",
+          "icon": "fa-regular fa-file-lines",
+          "body": {
+            "type": "alert",
+            "level": "warning",
+            "body": "请开通权限后使用"
+          }
+        },
+        {
+          "title": "文件资产",
+          "icon": "fa-regular fa-file",
+          "body": {
+            "type": "alert",
+            "level": "warning",
+            "body": "请开通权限后使用"
+          }
+        }
+      ]
+    }
+  ]
+}

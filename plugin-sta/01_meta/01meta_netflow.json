@@ -1,0 +1,528 @@
+{
+  "entity": [
+    {
+      "id": 1,
+      "name": "netflow",
+      "label": "网络流量日志",
+      "description": "网络流量日志，记录会话的网络流量信息",
+      "table_name": "zenvis.t_sta_netflow",
+      "data_source": "clickhouse",
+      "auto_create": {
+        "engine": "MergeTree()",
+        "order_by": [
+          "uid"
+        ],
+        "partition_by": "uid"
+      }
+    }
+  ],
+  "attribute": [
+    {
+      "id": 1001,
+      "entity": "netflow",
+      "name": "uid",
+      "label": "会话唯一ID",
+      "description": "会话唯一ID",
+      "column_name": "uid",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1002,
+      "entity": "netflow",
+      "name": "ts",
+      "label": "时间戳",
+      "description": "时间戳",
+      "column_name": "ts",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1003,
+      "entity": "netflow",
+      "name": "src_ip",
+      "label": "源IP",
+      "description": "源IP",
+      "column_name": "src_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1004,
+      "entity": "netflow",
+      "name": "dst_ip",
+      "label": "目的IP",
+      "description": "目的IP",
+      "column_name": "dst_ip",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1005,
+      "entity": "netflow",
+      "name": "src_port",
+      "label": "源端口",
+      "description": "源端口",
+      "column_name": "src_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1006,
+      "entity": "netflow",
+      "name": "dst_port",
+      "label": "目的端口",
+      "description": "目的端口",
+      "column_name": "dst_port",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1007,
+      "entity": "netflow",
+      "name": "logtype",
+      "label": "日志类型",
+      "description": "日志类型",
+      "column_name": "logtype",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1008,
+      "entity": "netflow",
+      "name": "iptype",
+      "label": "IP类型",
+      "description": "IP类型",
+      "column_name": "iptype",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1009,
+      "entity": "netflow",
+      "name": "devname",
+      "label": "设备名称",
+      "description": "设备名称",
+      "column_name": "devname",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1010,
+      "entity": "netflow",
+      "name": "ds",
+      "label": "年月日",
+      "description": "年月日",
+      "column_name": "ds",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1011,
+      "entity": "netflow",
+      "name": "hh",
+      "label": "小时",
+      "description": "小时",
+      "column_name": "hh",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1012,
+      "entity": "netflow",
+      "name": "appproto",
+      "label": "应用层协议",
+      "description": "应用层协议",
+      "column_name": "appproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1013,
+      "entity": "netflow",
+      "name": "transproto",
+      "label": "传输层协议",
+      "description": "传输层协议",
+      "column_name": "transproto",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1014,
+      "entity": "netflow",
+      "name": "vendor",
+      "label": "厂商",
+      "description": "厂商",
+      "column_name": "vendor",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1015,
+      "entity": "netflow",
+      "name": "logid",
+      "label": "日志ID",
+      "description": "日志ID",
+      "column_name": "logid",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1016,
+      "entity": "netflow",
+      "name": "nprotocol",
+      "label": "协议",
+      "description": "协议",
+      "column_name": "nprotocol",
+      "column_type": "String",
+      "operators": [
+        "equal",
+        "notequal"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1017,
+      "entity": "netflow",
+      "name": "nprivatetype",
+      "label": "私有类型",
+      "description": "私有类型:50=服务控制,51=应用控制,52=防火墙联动",
+      "column_name": "nprivatetype",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1018,
+      "entity": "netflow",
+      "name": "nnetaction",
+      "label": "网络动作",
+      "description": "网络动作:1=允许,2=拒绝",
+      "column_name": "nnetaction",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1019,
+      "entity": "netflow",
+      "name": "l3proto",
+      "label": "三层协议ID",
+      "description": "三层协议ID",
+      "column_name": "l3proto",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1020,
+      "entity": "netflow",
+      "name": "nservcrc",
+      "label": "服务CRC",
+      "description": "服务控制场景下应用名称CRC值",
+      "column_name": "nservcrc",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1021,
+      "entity": "netflow",
+      "name": "ntype",
+      "label": "访问类型",
+      "description": "访问类型:0=正常,1=风险,2=违规",
+      "column_name": "ntype",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1022,
+      "entity": "netflow",
+      "name": "npolicyid",
+      "label": "策略ID",
+      "description": "策略名称CRC值",
+      "column_name": "npolicyid",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1023,
+      "entity": "netflow",
+      "name": "nappcrc",
+      "label": "应用CRC",
+      "description": "应用名称CRC",
+      "column_name": "nappcrc",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1024,
+      "entity": "netflow",
+      "name": "request_flow",
+      "label": "请求大小",
+      "description": "请求大小(字节)",
+      "column_name": "request_flow",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1025,
+      "entity": "netflow",
+      "name": "request_pack",
+      "label": "请求包数",
+      "description": "请求包个数",
+      "column_name": "request_pack",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1026,
+      "entity": "netflow",
+      "name": "response_flow",
+      "label": "响应大小",
+      "description": "响应大小(字节)",
+      "column_name": "response_flow",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1027,
+      "entity": "netflow",
+      "name": "response_pack",
+      "label": "响应包数",
+      "description": "响应包个数",
+      "column_name": "response_pack",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1028,
+      "entity": "netflow",
+      "name": "session_start",
+      "label": "会话开始时间",
+      "description": "会话开始时间戳",
+      "column_name": "session_start",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1029,
+      "entity": "netflow",
+      "name": "session_time",
+      "label": "会话持续时长",
+      "description": "会话持续时长(秒)",
+      "column_name": "session_time",
+      "column_type": "Int64",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1030,
+      "entity": "netflow",
+      "name": "attack_count",
+      "label": "归并次数",
+      "description": "日志归并次数",
+      "column_name": "attack_count",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1031,
+      "entity": "netflow",
+      "name": "l7proto",
+      "label": "应用层协议ID",
+      "description": "应用层协议ID",
+      "column_name": "l7proto",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },
+    {
+      "id": 1032,
+      "entity": "netflow",
+      "name": "session_state",
+      "label": "会话状态",
+      "description": "会话状态:0=未知,1=发起握手,2=响应握手,3=握手成功,4=正常结束,5=reset",
+      "column_name": "session_state",
+      "column_type": "Int32",
+      "operators": [
+        "equal",
+        "notequal",
+        "greatthan",
+        "lessthan"
+      ],
+      "display_selected": true
+    },{
+      "id": 1033,
+      "entity": "netflow",
+      "name": "insert_time",
+      "label": "创建时间",
+      "description": "创建时间",
+      "column_name": "insert_time",
+      "column_type": "DateTime64(3)",
+      "search_type": "date",
+      "operators": [
+        "greatthan",
+        "lessthan",
+        "greatequalthan",
+        "lessequalthan",
+        "between"
+      ],
+      "display_selected": true
+    }
+  ]
+}
