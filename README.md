@@ -27,7 +27,8 @@ plugin-xxx/
 ├── 03_api/
 ├── 04_ui/
 ├── 05_dashboard/
-│   └── config.json
+│   ├── config.json
+│   └── html-page/
 ├── 06_mcp/
 │   └── config.json
 ├── 07_skill/
@@ -35,7 +36,7 @@ plugin-xxx/
     └── config.json
 ```
 
-- `05_dashboard/config.json` 当前为空数组，表示插件暂未内置数据看板；后续可按 `DashboardDto` 数组补充。
+- `05_dashboard/config.json` 可按 `DashboardDto` 数组补充内置数据看板；HTML 看板页面放在 `05_dashboard/html-page/` 下。
 - `06_mcp/config.json` 当前为空数组，表示插件暂未内置 MCP 服务；后续可按 `McpServerDto` 数组补充。
 - `07_skill/` 当前仅保留目录占位；后续可放入一个或多个 Skill 目录。
 - `08_menu/config.json` 为菜单配置，安装生命周期中最后写入。

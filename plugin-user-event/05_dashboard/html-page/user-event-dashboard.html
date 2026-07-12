@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户事件大屏看板</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07100f;
+      --panel: rgba(17, 26, 24, 0.86);
+      --panel-strong: rgba(22, 34, 30, 0.94);
+      --line: rgba(127, 230, 205, 0.25);
+      --text: #ecfff9;
+      --muted: #8db1aa;
+      --teal: #38f4c4;
+      --cyan: #46c7ff;
+      --amber: #ffd166;
+      --rose: #ff6b8a;
+      --lime: #a8ff78;
+      --violet: #b38cff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      min-width: 1280px;
+      min-height: 720px;
+      overflow: hidden;
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(56, 244, 196, 0.05) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(56, 244, 196, 0.04) 1px, transparent 1px),
+        linear-gradient(115deg, transparent 0%, rgba(56, 244, 196, 0.12) 34%, transparent 35%, transparent 100%),
+        linear-gradient(245deg, transparent 0%, rgba(255, 209, 102, 0.1) 18%, transparent 19%, transparent 100%),
+        linear-gradient(135deg, #050908 0%, #0b1916 48%, #12100c 100%);
+      background-size: 40px 40px, 40px 40px, auto, auto, auto;
+      color: var(--text);
+    }
+
+    .screen {
+      width: 100vw;
+      height: 100vh;
+      min-width: 1280px;
+      min-height: 720px;
+      padding: 20px 24px 24px;
+      display: grid;
+      grid-template-rows: 74px 126px 1fr;
+      gap: 16px;
+      position: relative;
+    }
+
+    .screen::before,
+    .screen::after {
+      content: "";
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(56, 244, 196, 0.7), transparent);
+      pointer-events: none;
+    }
+
+    .screen::before {
+      top: 98px;
+    }
+
+    .screen::after {
+      bottom: 20px;
+      opacity: 0.45;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 360px 1fr 360px;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand,
+    .clock {
+      height: 54px;
+      border: 1px solid rgba(56, 244, 196, 0.28);
+      background: linear-gradient(90deg, rgba(20, 44, 39, 0.88), rgba(20, 28, 26, 0.72));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      border-radius: 4px;
+      box-shadow: inset 0 0 28px rgba(56, 244, 196, 0.08);
+    }
+
+    .brand-label,
+    .clock-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .brand-value,
+    .clock-value {
+      font-family: "DIN Alternate", "Arial Narrow", Arial, sans-serif;
+      color: var(--teal);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .title-wrap {
+      text-align: center;
+      position: relative;
+    }
+
+    .title-wrap h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 42px;
+      font-weight: 800;
+      text-shadow: 0 0 18px rgba(56, 244, 196, 0.42);
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .kpi,
+    .panel {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel-strong), var(--panel));
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.25), inset 0 0 36px rgba(56, 244, 196, 0.05);
+    }
+
+    .kpi::before,
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.13);
+      pointer-events: none;
+    }
+
+    .kpi {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .kpi-name {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .kpi-main {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .kpi-value {
+      font-family: "DIN Alternate", "Arial Narrow", Arial, sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .kpi-unit {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .kpi-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .delta {
+      color: var(--lime);
+    }
+
+    .delta.warn {
+      color: var(--amber);
+    }
+
+    .main-grid {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 1.08fr 1.58fr 1.08fr;
+      grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .panel {
+      padding: 16px;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel.wide {
+      grid-row: span 2;
+    }
+
+    .panel-head {
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex: 0 0 auto;
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-title::before {
+      content: "";
+      width: 4px;
+      height: 16px;
+      background: var(--teal);
+      box-shadow: 0 0 14px rgba(56, 244, 196, 0.8);
+    }
+
+    .panel-tag {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .chart {
+      width: 100%;
+      height: 100%;
+      flex: 1 1 auto;
+      min-height: 0;
+      display: block;
+    }
+
+    .center-panel {
+      display: grid;
+      grid-template-rows: 30px 1fr 150px;
+      gap: 14px;
+    }
+
+    .center-panel .panel-head {
+      margin: 0;
+    }
+
+    .heat-map {
+      min-height: 0;
+      position: relative;
+      border: 1px solid rgba(70, 199, 255, 0.18);
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04), transparent 18%, transparent 82%, rgba(255, 255, 255, 0.04)),
+        rgba(4, 14, 13, 0.48);
+      overflow: hidden;
+    }
+
+    .heat-map canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .live-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .live-card {
+      border: 1px solid rgba(141, 177, 170, 0.22);
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 4px;
+      padding: 12px;
+      overflow: hidden;
+    }
+
+    .live-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .live-value {
+      margin-top: 8px;
+      font-family: "DIN Alternate", "Arial Narrow", Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .live-card:nth-child(1) .live-value {
+      color: var(--teal);
+    }
+
+    .live-card:nth-child(2) .live-value {
+      color: var(--cyan);
+    }
+
+    .live-card:nth-child(3) .live-value {
+      color: var(--amber);
+    }
+
+    .live-card:nth-child(4) .live-value {
+      color: var(--rose);
+    }
+
+    .event-list {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      padding: 9px 8px;
+      border-bottom: 1px solid rgba(141, 177, 170, 0.13);
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    th {
+      color: var(--muted);
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    td {
+      color: #d9fff5;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      height: 22px;
+      padding: 0 8px;
+      border-radius: 3px;
+      font-size: 12px;
+      color: #06110f;
+      font-weight: 700;
+    }
+
+    .badge.ok {
+      background: var(--teal);
+    }
+
+    .badge.mid {
+      background: var(--amber);
+    }
+
+    .badge.high {
+      background: var(--rose);
+      color: #fff;
+    }
+
+    .rank-list {
+      flex: 1 1 auto;
+      display: grid;
+      grid-template-rows: repeat(6, 1fr);
+      gap: 8px;
+      min-height: 0;
+    }
+
+    .rank-item {
+      display: grid;
+      grid-template-columns: 24px 1fr 70px;
+      align-items: center;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .rank-no {
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      border-radius: 3px;
+      background: rgba(70, 199, 255, 0.16);
+      color: var(--cyan);
+      font-family: "DIN Alternate", "Arial Narrow", Arial, sans-serif;
+      font-weight: 700;
+    }
+
+    .rank-name {
+      color: #d7fff6;
+      font-size: 13px;
+    }
+
+    .bar {
+      height: 8px;
+      margin-top: 6px;
+      background: rgba(141, 177, 170, 0.14);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--amber));
+    }
+
+    .rank-value {
+      font-family: "DIN Alternate", "Arial Narrow", Arial, sans-serif;
+      color: var(--text);
+      font-size: 18px;
+      text-align: right;
+    }
+
+    @media (max-width: 1440px) {
+      .screen {
+        padding: 14px;
+        gap: 12px;
+        grid-template-rows: 64px 112px 1fr;
+      }
+
+      .topbar {
+        grid-template-columns: 300px 1fr 300px;
+      }
+
+      .title-wrap h1 {
+        font-size: 28px;
+        line-height: 34px;
+      }
+
+      .kpi-value {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="screen">
+    <header class="topbar">
+      <section class="brand">
+        <span class="brand-label">数据域</span>
+        <span class="brand-value">User Event</span>
+      </section>
+      <section class="title-wrap">
+        <h1>用户事件实时态势大屏</h1>
+        <div class="subtitle">登录、点击、访问、异常与风险行为综合监测</div>
+      </section>
+      <section class="clock">
+        <span class="clock-label">当前时间</span>
+        <span class="clock-value" id="clock">--:--:--</span>
+      </section>
+    </header>
+
+    <section class="kpis" id="kpis"></section>
+
+    <section class="main-grid">
+      <article class="panel">
+        <div class="panel-head">
+          <div class="panel-title">事件类型分布</div>
+          <div class="panel-tag">今日占比</div>
+        </div>
+        <canvas class="chart" id="typeChart"></canvas>
+      </article>
+
+      <article class="panel wide center-panel">
+        <div class="panel-head">
+          <div class="panel-title">用户行为热力态势</div>
+          <div class="panel-tag">模拟 32 个业务区域</div>
+        </div>
+        <div class="heat-map">
+          <canvas id="heatCanvas"></canvas>
+        </div>
+        <div class="live-strip" id="liveStrip"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div class="panel-title">终端来源</div>
+          <div class="panel-tag">设备画像</div>
+        </div>
+        <canvas class="chart" id="deviceChart"></canvas>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div class="panel-title">近 24 小时趋势</div>
+          <div class="panel-tag">每小时事件量</div>
+        </div>
+        <canvas class="chart" id="trendChart"></canvas>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div class="panel-title">风险能力雷达</div>
+          <div class="panel-tag">实时评分</div>
+        </div>
+        <canvas class="chart" id="radarChart"></canvas>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div class="panel-title">高频页面排行</div>
+          <div class="panel-tag">TOP 6</div>
+        </div>
+        <div class="rank-list" id="rankList"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div class="panel-title">实时事件流水</div>
+          <div class="panel-tag">滚动刷新</div>
+        </div>
+        <div class="event-list">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 25%;">时间</th>
+                <th style="width: 24%;">用户</th>
+                <th style="width: 26%;">事件</th>
+                <th style="width: 25%;">级别</th>
+              </tr>
+            </thead>
+            <tbody id="eventTable"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const palette = {
+      teal: '#38f4c4',
+      cyan: '#46c7ff',
+      amber: '#ffd166',
+      rose: '#ff6b8a',
+      lime: '#a8ff78',
+      violet: '#b38cff',
+      muted: '#8db1aa',
+      text: '#ecfff9',
+      grid: 'rgba(141, 177, 170, 0.16)'
+    };
+
+    const kpiData = [
+      ['今日事件', 183642, '条', '+12.8%', '较昨日'],
+      ['活跃用户', 24876, '人', '+8.1%', '在线波动'],
+      ['异常行为', 326, '起', '+3.4%', '需关注'],
+      ['风险拦截', 98.7, '%', '+1.6%', '策略命中'],
+      ['平均响应', 42, 'ms', '-6.2%', '链路耗时'],
+      ['核心页面', 36, '个', '+4', '持续监测']
+    ];
+
+    const typeData = [
+      ['登录', 28, palette.teal],
+      ['页面访问', 34, palette.cyan],
+      ['点击', 22, palette.amber],
+      ['接口调用', 11, palette.violet],
+      ['异常', 5, palette.rose]
+    ];
+
+    const deviceData = [
+      ['Web', 42, palette.teal],
+      ['iOS', 23, palette.cyan],
+      ['Android', 27, palette.amber],
+      ['小程序', 8, palette.rose]
+    ];
+
+    const rankData = [
+      ['数据检索 / aggregate', 9842],
+      ['智能问答 / chatgpt', 8567],
+      ['用户登录 / login', 7921],
+      ['看板总览 / dashboard', 6840],
+      ['策略配置 / policy', 5233],
+      ['事件详情 / detail', 4681]
+    ];
+
+    const events = [
+      ['13:46:18', 'chen.yu', '登录成功', 'ok'],
+      ['13:45:52', 'li.ming', '高频点击', 'mid'],
+      ['13:45:09', 'wang.lei', '跨域访问', 'high'],
+      ['13:44:33', 'zhao.lin', '接口调用', 'ok'],
+      ['13:43:58', 'sun.qi', '权限变更', 'mid'],
+      ['13:43:21', 'he.nan', '异常重试', 'high'],
+      ['13:42:44', 'xu.wei', '页面访问', 'ok'],
+      ['13:42:10', 'zhou.rui', '批量导出', 'mid']
+    ];
+
+    const liveData = [
+      ['每分钟事件', '3,826'],
+      ['峰值并发', '12,430'],
+      ['风险会话', '216'],
+      ['异常终端', '47']
+    ];
+
+    const trendData = Array.from({ length: 24 }, (_, index) => {
+      const base = 4200 + Math.sin(index / 2.1) * 1500 + Math.cos(index / 3.3) * 850;
+      return Math.round(base + (index > 17 ? 1800 : 0) + Math.random() * 620);
+    });
+
+    const heatPoints = Array.from({ length: 32 }, (_, index) => ({
+      x: 0.08 + (index % 8) * 0.12 + Math.random() * 0.045,
+      y: 0.14 + Math.floor(index / 8) * 0.2 + Math.random() * 0.07,
+      v: 32 + Math.random() * 68
+    }));
+
+    function fitCanvas(canvas) {
+      const rect = canvas.getBoundingClientRect();
+      const ratio = window.devicePixelRatio || 1;
+      const width = Math.max(1, rect.width || canvas.clientWidth || canvas.parentElement?.clientWidth || 320);
+      const height = Math.max(1, rect.height || canvas.clientHeight || canvas.parentElement?.clientHeight || 180);
+      canvas.width = Math.floor(width * ratio);
+      canvas.height = Math.floor(height * ratio);
+      const ctx = canvas.getContext('2d');
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      return { ctx, width, height };
+    }
+
+    function drawGrid(ctx, width, height) {
+      ctx.strokeStyle = palette.grid;
+      ctx.lineWidth = 1;
+      for (let i = 1; i < 5; i += 1) {
+        const y = (height / 5) * i;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+    }
+
+    function drawDonut(canvas, data, label) {
+      const { ctx, width, height } = fitCanvas(canvas);
+      const radius = Math.min(width, height) * 0.31;
+      const cx = width * 0.38;
+      const cy = height * 0.52;
+      const total = data.reduce((sum, item) => sum + item[1], 0);
+      let start = -Math.PI / 2;
+      ctx.clearRect(0, 0, width, height);
+      data.forEach(item => {
+        const angle = Math.PI * 2 * item[1] / total;
+        ctx.beginPath();
+        ctx.strokeStyle = item[2];
+        ctx.lineWidth = 18;
+        ctx.arc(cx, cy, radius, start, start + angle);
+        ctx.stroke();
+        start += angle;
+      });
+      ctx.fillStyle = palette.text;
+      ctx.font = '700 26px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText(label, cx, cy - 2);
+      ctx.fillStyle = palette.muted;
+      ctx.font = '12px Arial';
+      ctx.fillText('事件占比', cx, cy + 18);
+      data.forEach((item, index) => {
+        const x = width * 0.68;
+        const y = height * 0.22 + index * 25;
+        ctx.fillStyle = item[2];
+        ctx.fillRect(x, y - 9, 10, 10);
+        ctx.fillStyle = palette.text;
+        ctx.font = '13px Arial';
+        ctx.textAlign = 'left';
+        ctx.fillText(`${item[0]} ${item[1]}%`, x + 18, y);
+      });
+    }
+
+    function drawBar(canvas, data) {
+      const { ctx, width, height } = fitCanvas(canvas);
+      const max = Math.max(...data.map(item => item[1]));
+      const padding = { top: 18, right: 16, bottom: 34, left: 38 };
+      const chartW = width - padding.left - padding.right;
+      const chartH = height - padding.top - padding.bottom;
+      const barW = chartW / data.length * 0.46;
+      ctx.clearRect(0, 0, width, height);
+      drawGrid(ctx, width, height - padding.bottom);
+      data.forEach((item, index) => {
+        const x = padding.left + index * (chartW / data.length) + chartW / data.length * 0.27;
+        const barH = chartH * item[1] / max;
+        const y = padding.top + chartH - barH;
+        const grad = ctx.createLinearGradient(0, y, 0, y + barH);
+        grad.addColorStop(0, item[2]);
+        grad.addColorStop(1, 'rgba(255,255,255,0.08)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(x, y, barW, barH);
+        ctx.fillStyle = palette.text;
+        ctx.font = '700 14px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(`${item[1]}%`, x + barW / 2, y - 8);
+        ctx.fillStyle = palette.muted;
+        ctx.font = '12px Arial';
+        ctx.fillText(item[0], x + barW / 2, height - 12);
+      });
+    }
+
+    function drawLine(canvas, values) {
+      const { ctx, width, height } = fitCanvas(canvas);
+      const padding = { top: 18, right: 16, bottom: 30, left: 38 };
+      const chartW = width - padding.left - padding.right;
+      const chartH = height - padding.top - padding.bottom;
+      const max = Math.max(...values) * 1.12;
+      const min = Math.min(...values) * 0.78;
+      ctx.clearRect(0, 0, width, height);
+      drawGrid(ctx, width, height - padding.bottom);
+      const points = values.map((value, index) => ({
+        x: padding.left + chartW * index / (values.length - 1),
+        y: padding.top + chartH - ((value - min) / (max - min)) * chartH
+      }));
+      ctx.beginPath();
+      points.forEach((point, index) => {
+        if (index === 0) ctx.moveTo(point.x, point.y);
+        else ctx.lineTo(point.x, point.y);
+      });
+      ctx.strokeStyle = palette.teal;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      ctx.lineTo(points[points.length - 1].x, padding.top + chartH);
+      ctx.lineTo(points[0].x, padding.top + chartH);
+      ctx.closePath();
+      const fill = ctx.createLinearGradient(0, padding.top, 0, padding.top + chartH);
+      fill.addColorStop(0, 'rgba(56, 244, 196, 0.34)');
+      fill.addColorStop(1, 'rgba(56, 244, 196, 0.02)');
+      ctx.fillStyle = fill;
+      ctx.fill();
+      points.forEach((point, index) => {
+        if (index % 4 === 0) {
+          ctx.fillStyle = palette.amber;
+          ctx.beginPath();
+          ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+      ctx.fillStyle = palette.muted;
+      ctx.font = '12px Arial';
+      ctx.textAlign = 'center';
+      ['00', '06', '12', '18', '24'].forEach((tick, index) => {
+        ctx.fillText(tick, padding.left + chartW * index / 4, height - 10);
+      });
+    }
+
+    function drawRadar(canvas) {
+      const { ctx, width, height } = fitCanvas(canvas);
+      const labels = ['识别', '拦截', '审计', '画像', '溯源', '响应'];
+      const values = [92, 87, 76, 84, 69, 81];
+      const cx = width / 2;
+      const cy = height / 2 + 6;
+      const radius = Math.min(width, height) * 0.32;
+      ctx.clearRect(0, 0, width, height);
+      for (let level = 5; level >= 1; level -= 1) {
+        ctx.beginPath();
+        labels.forEach((_, index) => {
+          const angle = -Math.PI / 2 + index * Math.PI * 2 / labels.length;
+          const r = radius * level / 5;
+          const x = cx + Math.cos(angle) * r;
+          const y = cy + Math.sin(angle) * r;
+          if (index === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.closePath();
+        ctx.strokeStyle = `rgba(141, 177, 170, ${0.08 + level * 0.03})`;
+        ctx.stroke();
+      }
+      ctx.beginPath();
+      values.forEach((value, index) => {
+        const angle = -Math.PI / 2 + index * Math.PI * 2 / labels.length;
+        const r = radius * value / 100;
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r;
+        if (index === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(70, 199, 255, 0.22)';
+      ctx.strokeStyle = palette.cyan;
+      ctx.lineWidth = 2;
+      ctx.fill();
+      ctx.stroke();
+      labels.forEach((label, index) => {
+        const angle = -Math.PI / 2 + index * Math.PI * 2 / labels.length;
+        ctx.fillStyle = palette.text;
+        ctx.font = '13px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(label, cx + Math.cos(angle) * (radius + 24), cy + Math.sin(angle) * (radius + 24) + 4);
+      });
+    }
+
+    function drawHeat() {
+      const canvas = document.getElementById('heatCanvas');
+      const { ctx, width, height } = fitCanvas(canvas);
+      ctx.clearRect(0, 0, width, height);
+      ctx.strokeStyle = 'rgba(70, 199, 255, 0.14)';
+      ctx.lineWidth = 1;
+      for (let index = 0; index <= 8; index += 1) {
+        const x = width * index / 8;
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let index = 0; index <= 4; index += 1) {
+        const y = height * index / 4;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+      heatPoints.forEach(point => {
+        point.v = Math.max(22, Math.min(100, point.v + (Math.random() - 0.5) * 10));
+        const x = point.x * width;
+        const y = point.y * height;
+        const r = 16 + point.v * 0.42;
+        const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+        grad.addColorStop(0, point.v > 76 ? 'rgba(255, 107, 138, 0.82)' : 'rgba(56, 244, 196, 0.78)');
+        grad.addColorStop(0.45, point.v > 76 ? 'rgba(255, 209, 102, 0.28)' : 'rgba(70, 199, 255, 0.22)');
+        grad.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.fillStyle = 'rgba(236, 255, 249, 0.74)';
+      ctx.font = '13px Arial';
+      ctx.fillText('业务域 A', width * 0.08, height * 0.16);
+      ctx.fillText('业务域 B', width * 0.62, height * 0.31);
+      ctx.fillText('业务域 C', width * 0.32, height * 0.72);
+      ctx.fillText('风险密集区', width * 0.73, height * 0.67);
+    }
+
+    function renderKpis() {
+      document.getElementById('kpis').innerHTML = kpiData.map(item => `
+        <div class="kpi">
+          <div class="kpi-name">${item[0]}</div>
+          <div class="kpi-main">
+            <span class="kpi-value" data-target="${item[1]}">0</span>
+            <span class="kpi-unit">${item[2]}</span>
+          </div>
+          <div class="kpi-foot">
+            <span>${item[4]}</span>
+            <span class="delta ${String(item[3]).startsWith('-') ? 'warn' : ''}">${item[3]}</span>
+          </div>
+        </div>
+      `).join('');
+      animateNumbers();
+    }
+
+    function animateNumbers() {
+      document.querySelectorAll('.kpi-value').forEach(node => {
+        const target = Number(node.dataset.target);
+        let current = 0;
+        const steps = 42;
+        const timer = setInterval(() => {
+          current += target / steps;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          node.textContent = target % 1 === 0 ? Math.round(current).toLocaleString('zh-CN') : current.toFixed(1);
+        }, 24);
+      });
+    }
+
+    function renderLive() {
+      document.getElementById('liveStrip').innerHTML = liveData.map(item => `
+        <div class="live-card">
+          <div class="live-label">${item[0]}</div>
+          <div class="live-value">${item[1]}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderRanks() {
+      const max = Math.max(...rankData.map(item => item[1]));
+      document.getElementById('rankList').innerHTML = rankData.map((item, index) => `
+        <div class="rank-item">
+          <div class="rank-no">${index + 1}</div>
+          <div>
+            <div class="rank-name">${item[0]}</div>
+            <div class="bar"><span style="width:${Math.round(item[1] / max * 100)}%"></span></div>
+          </div>
+          <div class="rank-value">${item[1].toLocaleString('zh-CN')}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderEvents() {
+      document.getElementById('eventTable').innerHTML = events.map(item => {
+        const label = item[3] === 'ok' ? '正常' : item[3] === 'mid' ? '关注' : '高危';
+        return `
+          <tr>
+            <td>${item[0]}</td>
+            <td>${item[1]}</td>
+            <td>${item[2]}</td>
+            <td><span class="badge ${item[3]}">${label}</span></td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function refreshEvents() {
+      const names = ['chen.yu', 'li.ming', 'wang.lei', 'zhao.lin', 'sun.qi', 'he.nan', 'xu.wei', 'zhou.rui'];
+      const actions = ['登录成功', '页面访问', '接口调用', '权限校验', '高频点击', '异常重试', '批量导出', '跨域访问'];
+      const levels = ['ok', 'ok', 'ok', 'mid', 'mid', 'high'];
+      const now = new Date();
+      events.unshift([
+        now.toTimeString().slice(0, 8),
+        names[Math.floor(Math.random() * names.length)],
+        actions[Math.floor(Math.random() * actions.length)],
+        levels[Math.floor(Math.random() * levels.length)]
+      ]);
+      events.length = 8;
+      renderEvents();
+    }
+
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock').textContent = now.toLocaleString('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+    }
+
+    function drawAll() {
+      drawDonut(document.getElementById('typeChart'), typeData, '100%');
+      drawBar(document.getElementById('deviceChart'), deviceData);
+      drawLine(document.getElementById('trendChart'), trendData);
+      drawRadar(document.getElementById('radarChart'));
+      drawHeat();
+    }
+
+    renderKpis();
+    renderLive();
+    renderRanks();
+    renderEvents();
+    updateClock();
+    drawAll();
+    setInterval(updateClock, 1000);
+    setInterval(refreshEvents, 2800);
+    setInterval(drawHeat, 1800);
+    window.addEventListener('resize', drawAll);
+  </script>
+</body>
+</html>

@@ -149,7 +149,7 @@ curl http://localhost:8080/plugin/user/list?page=1&perPage=5
 02_push-task/    数推任务配置
 03_api/          API Jar，可为空
 04_ui/           低代码 UI 配置
-05_dashboard/    数据看板配置，当前 config.json 为空数组
+05_dashboard/    数据看板配置，内置用户事件 HTML 大屏看板
 06_mcp/          MCP 服务配置，当前 config.json 为空数组
 07_skill/        Skill 目录，当前为空能力占位
 08_menu/         菜单配置，安装流程最后写入
